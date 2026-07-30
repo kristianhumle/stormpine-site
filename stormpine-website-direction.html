@@ -1,0 +1,583 @@
+<meta charset="utf-8">
+<title>Stormpine — Website Direction</title>
+<style>
+  :root{
+    /* LIGHT (variant) — base tokens */
+    --bg:#fbfbfd; --surface:#ffffff; --elevated:#f4f5f8; --border:#e7e8ee;
+    --text:#16171b; --muted:#6b6e78; --faint:#9a9da6;
+    --accent:#5662f2; --accent-weak:#ecebfb; --lilac:#7c5cf0;
+    --amber:#a86e17; --coral:#cf4636; --good:#2e9e6b;
+    --shadow:0 1px 2px rgba(16,17,27,.06),0 12px 40px rgba(16,17,27,.08);
+    --radius:12px;
+    --maxw:1060px;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#08090c; --surface:#0e0f12; --elevated:#1b1c1f; --border:#25262a;
+      --text:#ebedf1; --muted:#979a9f; --faint:#6b6e75;
+      --accent:#5662f2; --accent-weak:#191a2e; --lilac:#d1b3f8;
+      --amber:#cd9a50; --coral:#e5634d; --good:#4ec08a;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 20px 60px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfbfd; --surface:#ffffff; --elevated:#f4f5f8; --border:#e7e8ee;
+    --text:#16171b; --muted:#6b6e78; --faint:#9a9da6;
+    --accent:#5662f2; --accent-weak:#ecebfb; --lilac:#7c5cf0;
+    --amber:#a86e17; --coral:#cf4636; --good:#2e9e6b;
+    --shadow:0 1px 2px rgba(16,17,27,.06),0 12px 40px rgba(16,17,27,.08);
+  }
+  :root[data-theme="dark"]{
+    --bg:#08090c; --surface:#0e0f12; --elevated:#1b1c1f; --border:#25262a;
+    --text:#ebedf1; --muted:#979a9f; --faint:#6b6e75;
+    --accent:#5662f2; --accent-weak:#191a2e; --lilac:#d1b3f8;
+    --amber:#cd9a50; --coral:#e5634d; --good:#4ec08a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 20px 60px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.55;letter-spacing:-.006em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit}
+
+  /* type */
+  .eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;
+    color:var(--muted);font-weight:600}
+  h1{font-size:clamp(2.1rem,5.4vw,3.35rem);line-height:1.02;letter-spacing:-.03em;
+    font-weight:640;margin:.5rem 0 0;text-wrap:balance}
+  h2{font-size:clamp(1.15rem,2.4vw,1.42rem);letter-spacing:-.02em;font-weight:620;margin:0}
+  h3{font-size:1rem;letter-spacing:-.01em;font-weight:600;margin:0}
+  p{margin:0}
+  .lead{font-size:1.12rem;color:var(--muted);max-width:60ch;margin-top:1.1rem}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+  /* top bar */
+  header.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);
+    background:color-mix(in srgb,var(--bg) 82%,transparent);
+    border-bottom:1px solid var(--border)}
+  .topinner{max-width:var(--maxw);margin:0 auto;padding:12px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:620;letter-spacing:-.02em}
+  .glyph{width:22px;height:22px;border-radius:7px;background:var(--accent);
+    display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:700;
+    box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 60%,transparent),
+      0 6px 18px color-mix(in srgb,var(--accent) 45%,transparent)}
+  .topmeta{font-size:.78rem;color:var(--muted)}
+  .topmeta b{color:var(--text);font-weight:600}
+  .themebtn{font:inherit;font-size:.78rem;font-weight:600;color:var(--text);cursor:pointer;
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 11px;
+    display:inline-flex;align-items:center;gap:7px;transition:border-color .15s}
+  .themebtn:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+  .themebtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .themebtn span:first-child{font-size:.9rem;line-height:1}
+
+  /* sections */
+  section{padding:64px 0;border-bottom:1px solid var(--border)}
+  section:last-of-type{border-bottom:0}
+  .sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sechead .num{font-family:var(--mono);font-size:.74rem;color:var(--accent);
+    font-weight:600;padding-top:.2rem}
+  .sechead .sub{color:var(--muted);font-size:.9rem;margin-left:auto;max-width:34ch;text-align:right}
+
+  /* hero */
+  .hero{padding:70px 0 60px}
+  .metarow{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;font-size:.8rem;color:var(--muted)}
+  .metarow span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+
+  /* callout */
+  .callout{margin-top:30px;border:1px solid var(--border);border-radius:var(--radius);
+    background:var(--surface);padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+  .callout .k{width:3px;align-self:stretch;border-radius:3px;background:var(--accent);flex:none}
+  .callout p{font-size:.96rem;color:var(--muted)}
+  .callout b{color:var(--text);font-weight:600}
+
+  /* palette */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .sw{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface)}
+  .sw .chip{height:66px}
+  .sw .meta{padding:9px 11px}
+  .sw .role{font-size:.72rem;color:var(--muted);margin-top:2px}
+  .sw .hex{font-family:var(--mono);font-size:.76rem;font-weight:600}
+  .palgroup{margin-top:8px}
+  .palgroup h3{margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .tag{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;
+    padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+  .tag.pri{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,var(--border))}
+
+  /* type specimen */
+  .specimen{display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:start}
+  .scale > div{display:flex;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--border)}
+  .scale > div:last-child{border-bottom:0}
+  .scale .lbl{font-family:var(--mono);font-size:.72rem;color:var(--muted);width:64px;flex:none}
+  .scale .sample{letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .typecard{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:22px}
+  .typecard .big{font-size:3.4rem;line-height:1;font-weight:640;letter-spacing:-.03em}
+  .typecard .row{display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem;
+    padding-top:14px;margin-top:16px;border-top:1px solid var(--border)}
+
+  /* dual showcase */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .frameLabel{font-size:.74rem;color:var(--muted);margin-bottom:9px;display:flex;gap:8px;align-items:center}
+
+  /* app frame (self-contained, hard-coded per theme) */
+  .app{border-radius:14px;overflow:hidden;border:1px solid;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:112px 1fr;min-height:250px;font-size:12px}
+  .app.dark{background:#0e0f12;border-color:#25262a;color:#ebedf1}
+  .app.light{background:#ffffff;border-color:#e7e8ee;color:#16171b}
+  .app .rail{padding:12px 10px;border-right:1px solid}
+  .app.dark .rail{border-color:#25262a;background:#0b0c0f}
+  .app.light .rail{border-color:#eef0f4;background:#fafbfd}
+  .app .u{display:flex;align-items:center;gap:7px;font-weight:600;font-size:11px;margin-bottom:14px}
+  .app .ua{width:18px;height:18px;border-radius:6px;background:#5662f2;color:#fff;display:grid;place-items:center;font-size:9px;font-weight:700}
+  .app .nav{display:flex;flex-direction:column;gap:3px}
+  .app .nav i{font-style:normal;padding:5px 8px;border-radius:6px;color:inherit;opacity:.7;font-size:11px}
+  .app.dark .nav i.on{background:#1b1c1f;opacity:1}
+  .app.light .nav i.on{background:#eef0f4;opacity:1}
+  .app .main{padding:14px 15px}
+  .app .h{font-weight:640;font-size:14px;letter-spacing:-.01em}
+  .app .date{font-weight:640;font-size:15px;margin:9px 0 2px}
+  .app .od{float:right;color:#e5634d;font-weight:600;font-size:11px}
+  .app.light .od{color:#cf4636}
+  .app .band{margin:12px 0 8px;padding:7px 10px;border-radius:8px;font-weight:600;font-size:11px;display:flex;gap:8px;align-items:center}
+  .app.dark .band{background:#161719}
+  .app.light .band{background:#f4f5f8}
+  .app .band .pip{width:6px;height:6px;border-radius:50%;background:#e5634d}
+  .app .task{display:flex;justify-content:space-between;padding:8px 2px;border-bottom:1px solid;gap:10px}
+  .app.dark .task{border-color:#1e1f22}
+  .app.light .task{border-color:#eef0f4}
+  .app .task b{font-weight:600}
+  .app .task .sub{color:#979a9f}
+  .app.light .task .sub{color:#8a8d95}
+  .app .late{color:#e5634d;font-weight:600;white-space:nowrap}
+  .app.light .late{color:#cf4636}
+
+  /* website hero mock atop the frame */
+  .sitehero{border:1px solid var(--border);border-radius:16px;background:
+      radial-gradient(120% 100% at 50% -10%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 60%),
+      var(--surface);
+    padding:40px 34px 0;overflow:hidden;box-shadow:var(--shadow)}
+  .sitehero .nav{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--muted);margin-bottom:38px}
+  .sitehero .navr{display:flex;gap:18px;align-items:center}
+  .btn{font:inherit;font-size:.82rem;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text);cursor:pointer}
+  .btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;
+    box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 40%,transparent)}
+  .sitehero h1{font-size:clamp(1.8rem,3.4vw,2.5rem);max-width:20ch}
+  .sitehero .hlead{color:var(--muted);max-width:52ch;margin:16px auto 0}
+  .heroctas{display:flex;gap:12px;justify-content:center;margin-top:22px}
+  .heroctr{text-align:center;padding-bottom:34px}
+  .peek{margin:0 auto;max-width:640px;transform:translateY(10px)}
+
+  /* pillars */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pill{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:22px}
+  .pill .n{font-family:var(--mono);font-size:.72rem;color:var(--accent);font-weight:600}
+  .pill h3{margin:12px 0 8px}
+  .pill p{color:var(--muted);font-size:.9rem}
+  .pill .pp{margin-top:14px;padding-top:13px;border-top:1px solid var(--border);
+    font-size:.8rem;color:var(--faint);display:flex;flex-direction:column;gap:6px}
+  .pill .pp span{display:flex;gap:8px;align-items:flex-start}
+  .pill .pp b{color:var(--muted);font-weight:600}
+
+  /* ui kit strip */
+  .kit{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .kitcard{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:18px}
+  .kitcard .cap{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-bottom:14px}
+  .rowwrap{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+  .pillbtn{font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--border);color:var(--muted);background:transparent;display:inline-flex;gap:7px;align-items:center}
+  .stage{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;color:var(--muted)}
+  .sdot{width:8px;height:8px;border-radius:50%}
+  .av{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:.7rem;font-weight:700;color:#fff}
+  .aicard{border:1px solid var(--border);border-radius:10px;background:var(--elevated);padding:14px}
+  .aihead{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+  .aibtn{width:100%;text-align:left;font:inherit;font-size:.85rem;font-weight:600;color:var(--text);
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 12px;cursor:pointer;
+    display:flex;gap:9px;align-items:center}
+
+  /* references */
+  .refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .ref{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:18px;
+    display:flex;flex-direction:column;gap:10px;text-decoration:none;transition:border-color .15s,transform .15s}
+  .ref:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));transform:translateY(-2px)}
+  .ref .top{display:flex;align-items:center;gap:10px}
+  .ref .fav{width:26px;height:26px;border-radius:7px;flex:none}
+  .ref .nm{font-weight:620}
+  .ref .kind{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--muted);margin-left:auto}
+  .ref .steal{font-size:.85rem;color:var(--muted)}
+  .ref .steal b{color:var(--text);font-weight:600}
+
+  /* guardrails */
+  .rails{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .rail2{border:1px solid var(--border);border-radius:var(--radius);padding:20px;background:var(--surface)}
+  .rail2 h3{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  .rail2 ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .rail2 li{font-size:.9rem;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
+  .mk{flex:none;font-weight:700;line-height:1.4}
+  .mk.y{color:var(--good)} .mk.n{color:var(--coral)}
+
+  footer{padding:44px 0 70px;color:var(--muted);font-size:.86rem}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600}
+  .next{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+
+  .fade{opacity:0;transform:translateY(10px);animation:fade .7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes fade{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.fade{animation:none;opacity:1;transform:none}}
+
+  @media (max-width:760px){
+    .specimen,.duo,.pillars,.rails{grid-template-columns:1fr}
+    .sechead .sub{display:none}
+    section{padding:48px 0}
+  }
+</style>
+
+<header class="top">
+  <div class="topinner">
+    <div class="brand"><span class="glyph">S</span> Stormpine</div>
+    <nav style="display:flex;gap:3px;align-items:center;flex-wrap:wrap;font-size:.78rem;font-weight:600">
+      <span style="color:var(--muted);margin-right:6px;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em">Materials</span>
+      <a href="index.html" style="padding:5px 10px;border-radius:7px;color:var(--muted);text-decoration:none">Live site ↗</a>
+      <a href="stormpine-website-direction.html" style="padding:5px 10px;border-radius:7px;color:var(--text);background:var(--surface);border:1px solid var(--border);text-decoration:none">Moodboard</a>
+      <a href="stormpine-hero-concepts.html" style="padding:5px 10px;border-radius:7px;color:var(--muted);text-decoration:none">Hero concepts</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="topmeta"><b>Website Direction</b> &nbsp;·&nbsp; Moodboard</div>
+      <button class="themebtn" id="themeToggle" type="button" aria-label="Toggle light or dark theme">
+        <span id="themeIcon" aria-hidden="true">☾</span><span id="themeLabel">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero fade" style="border-bottom:1px solid var(--border)">
+    <p class="eyebrow">Marketing site · v0 direction</p>
+    <h1>One system, from the homepage<br>into the product.</h1>
+    <p class="lead">The Stormpine website inherits the live app's design language 1:1 — same near‑black ground, same periwinkle accent, same Inter, same restraint — so a prospect who clicks “Sign in” feels no seam. Tone is understated and discreet; the product is the proof.</p>
+    <div class="metarow">
+      <span><i class="dot"></i> Dark‑first, light variant</span>
+      <span><i class="dot"></i> Hybrid hero (brand + real UI)</span>
+      <span><i class="dot"></i> Understated &amp; discreet</span>
+      <span><i class="dot"></i> Tokens sampled from app · 2026‑07‑29</span>
+    </div>
+    <div class="callout">
+      <div class="k"></div>
+      <p><b>Guiding principle.</b> The site doesn't invent a brand — it extends the one the product already has. Tokens and tone are locked to the app; the website may lead polish by a half‑step (a cleaner screenshot, a more refined empty state) that the product then catches up to.</p>
+    </div>
+  </section>
+
+  <!-- PALETTE -->
+  <section class="fade">
+    <div class="sechead"><span class="num">01</span><h2>Palette</h2>
+      <span class="sub">The real product tokens. The indigo accent is the one bold move — everything around it stays quiet.</span></div>
+
+    <div class="palgroup">
+      <h3>Dark <span class="tag pri">primary / hero</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#08090c;border-bottom:1px solid #25262a"></div><div class="meta"><div class="hex">#08090C</div><div class="role">Base ground</div></div></div>
+        <div class="sw"><div class="chip" style="background:#0e0f12;border-bottom:1px solid #25262a"></div><div class="meta"><div class="hex">#0E0F12</div><div class="role">Surface</div></div></div>
+        <div class="sw"><div class="chip" style="background:#1b1c1f"></div><div class="meta"><div class="hex">#1B1C1F</div><div class="role">Elevated</div></div></div>
+        <div class="sw"><div class="chip" style="background:#25262a"></div><div class="meta"><div class="hex">#25262A</div><div class="role">Hairline border</div></div></div>
+        <div class="sw"><div class="chip" style="background:#5662f2"></div><div class="meta"><div class="hex">#5662F2</div><div class="role">Brand accent</div></div></div>
+        <div class="sw"><div class="chip" style="background:#d1b3f8"></div><div class="meta"><div class="hex">#D1B3F8</div><div class="role">Lilac / focus</div></div></div>
+        <div class="sw"><div class="chip" style="background:#cd9a50"></div><div class="meta"><div class="hex">#CD9A50</div><div class="role">Amber signal</div></div></div>
+        <div class="sw"><div class="chip" style="background:#e5634d"></div><div class="meta"><div class="hex">#E5634D</div><div class="role">Coral / overdue</div></div></div>
+        <div class="sw"><div class="chip" style="background:#ebedf1"></div><div class="meta"><div class="hex">#EBEDF1</div><div class="role">Primary text</div></div></div>
+        <div class="sw"><div class="chip" style="background:#979a9f"></div><div class="meta"><div class="hex">#979A9F</div><div class="role">Muted text</div></div></div>
+      </div>
+    </div>
+
+    <div class="palgroup" style="margin-top:30px">
+      <h3>Light <span class="tag">system‑toggle variant</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#fbfbfd;border-bottom:1px solid #e7e8ee"></div><div class="meta"><div class="hex">#FBFBFD</div><div class="role">Base ground</div></div></div>
+        <div class="sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid #e7e8ee"></div><div class="meta"><div class="hex">#FFFFFF</div><div class="role">Surface</div></div></div>
+        <div class="sw"><div class="chip" style="background:#f4f5f8"></div><div class="meta"><div class="hex">#F4F5F8</div><div class="role">Elevated</div></div></div>
+        <div class="sw"><div class="chip" style="background:#e7e8ee"></div><div class="meta"><div class="hex">#E7E8EE</div><div class="role">Hairline border</div></div></div>
+        <div class="sw"><div class="chip" style="background:#5662f2"></div><div class="meta"><div class="hex">#5662F2</div><div class="role">Accent (unchanged)</div></div></div>
+        <div class="sw"><div class="chip" style="background:#16171b"></div><div class="meta"><div class="hex">#16171B</div><div class="role">Primary text</div></div></div>
+      </div>
+      <p style="color:var(--muted);font-size:.85rem;margin-top:14px;max-width:60ch">The accent holds constant across both themes — the brand signature never shifts. Neutrals are biased slightly cool toward the indigo so they read as chosen, not default grey.</p>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section class="fade">
+    <div class="sechead"><span class="num">02</span><h2>Typography</h2>
+      <span class="sub">Inter throughout, matching the app. One family, disciplined scale, mono reserved for data.</span></div>
+    <div class="specimen">
+      <div class="scale">
+        <div><span class="lbl">3.35 / 640</span><span class="sample" style="font-size:2.2rem;font-weight:640;letter-spacing:-.03em">Manage the move with clarity</span></div>
+        <div><span class="lbl">1.42 / 620</span><span class="sample" style="font-size:1.3rem;font-weight:620;letter-spacing:-.02em">See the whole process</span></div>
+        <div><span class="lbl">1.12 / 400</span><span class="sample" style="font-size:1.05rem;color:var(--muted)">Grounded intelligence for better judgement</span></div>
+        <div><span class="lbl">1.0 / 400</span><span class="sample">Bring relationships, opportunities and next steps into one durable system.</span></div>
+        <div><span class="lbl">0.7 / 600</span><span class="sample eyebrow" style="white-space:nowrap">EYEBROW · UPPERCASE · TRACKED</span></div>
+        <div><span class="lbl">mono</span><span class="sample mono" style="font-size:.85rem;color:var(--accent)">16d stale · 2 overdue · #5662F2</span></div>
+      </div>
+      <div class="typecard">
+        <div class="big">Aa</div>
+        <div style="color:var(--muted);font-size:.9rem;margin-top:10px">Inter — the product typeface. Tight tracking on display sizes, generous line‑height in body, uppercase tracked labels for eyebrows and field names.</div>
+        <div class="row"><span>Display / Body / Labels</span><span class="mono">Inter</span></div>
+        <div class="row" style="border-top:0;padding-top:2px"><span>Data / hex / counts</span><span class="mono">SF&nbsp;Mono</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUAL PRODUCT-AS-HERO SHOWCASE -->
+  <section class="fade">
+    <div class="sechead"><span class="num">03</span><h2>The hero — hybrid, product as proof</h2>
+      <span class="sub">A brand statement up top; the real app immediately beneath it. Shown in both themes to make the dual‑mode call concrete.</span></div>
+
+    <div class="sitehero" style="margin-bottom:26px">
+      <div class="nav">
+        <div class="brand" style="font-size:.9rem"><span class="glyph" style="width:18px;height:18px;border-radius:6px;font-size:.6rem">S</span> Stormpine</div>
+        <div class="navr">
+          <span>Product</span><span>Who it's for</span><span>Pricing</span>
+          <button class="btn">Sign in</button>
+          <button class="btn pri">Start free</button>
+        </div>
+      </div>
+      <div class="heroctr">
+        <p class="eyebrow" style="text-align:center">Personal Career CRM</p>
+        <h1 style="margin:12px auto 0">Manage your next career move with the context and clarity it deserves.</h1>
+        <p class="hlead">A private system for experienced leaders managing director, board and advisory pursuits — relationships, conversations, materials and next steps in one place, with grounded AI that helps you see what's moving and prepare what's next.</p>
+        <div class="heroctas">
+          <button class="btn pri">Start free</button>
+          <button class="btn">See how it works</button>
+        </div>
+        <div class="peek">
+          <div class="app dark" style="min-height:auto">
+            <div class="rail">
+              <div class="u"><span class="ua">KL</span> Kristian</div>
+              <div class="nav">
+                <i class="on">This Week</i><i>Pipeline</i><i>Relationships</i><i>Assessments</i>
+              </div>
+            </div>
+            <div class="main">
+              <div class="h">This Week <span class="od">2 overdue</span></div>
+              <div class="date">Wednesday, July 29</div>
+              <div class="band"><span class="pip"></span> Overdue · 2</div>
+              <div class="task"><span><b>Review material deck sent</b> <span class="sub">· CPTO search</span></span><span class="late">15d overdue</span></div>
+              <div class="task"><span><b>Get back to Jerry</b> <span class="sub">· CPTO search</span></span><span class="late">14d overdue</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="duo">
+      <div>
+        <div class="frameLabel"><span class="sdot" style="background:#5662f2"></span> Dark — default</div>
+        <div class="app dark">
+          <div class="rail">
+            <div class="u"><span class="ua">KL</span> Kristian</div>
+            <div class="nav"><i>This Week</i><i class="on">Pipeline</i><i>Relationships</i><i>Profile</i></div>
+          </div>
+          <div class="main">
+            <div class="h">Pipeline</div>
+            <div class="band" style="margin-top:14px;background:#161719">Submitted · 1</div>
+            <div class="aicard" style="margin-top:10px">
+              <div style="font-weight:640;font-size:12px">CPTO search European Martech</div>
+              <div style="color:#979a9f;margin-top:6px">Operating · via Search firm</div>
+              <div class="late" style="margin-top:8px;font-size:11px">⚑ Review deck · 15d overdue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="frameLabel"><span class="sdot" style="background:#5662f2"></span> Light — system‑toggle variant</div>
+        <div class="app light">
+          <div class="rail">
+            <div class="u"><span class="ua">KL</span> Kristian</div>
+            <div class="nav"><i>This Week</i><i class="on">Pipeline</i><i>Relationships</i><i>Profile</i></div>
+          </div>
+          <div class="main">
+            <div class="h">Pipeline</div>
+            <div class="band" style="margin-top:14px">Submitted · 1</div>
+            <div class="aicard" style="margin-top:10px;background:#f4f5f8;border-color:#e7e8ee">
+              <div style="font-weight:640;font-size:12px">CPTO search European Martech</div>
+              <div style="color:#8a8d95;margin-top:6px">Operating · via Search firm</div>
+              <div class="late" style="margin-top:8px;font-size:11px">⚑ Review deck · 15d overdue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="fade">
+    <div class="sechead"><span class="num">04</span><h2>Story spine — three pillars</h2>
+      <span class="sub">Straight from the Message Map. Each becomes a feature section, each proven with real UI.</span></div>
+    <div class="pillars">
+      <div class="pill">
+        <div class="n">01</div><h3>See the whole process</h3>
+        <p>Connected career context for control — replace scattered inbox, notes and spreadsheets with one view.</p>
+        <div class="pp">
+          <span><b>Show:</b> Pipeline board &amp; opportunity detail</span>
+          <span><b>Line:</b> Your entire career move, in context.</span>
+        </div>
+      </div>
+      <div class="pill">
+        <div class="n">02</div><h3>Know what deserves attention</h3>
+        <p>Grounded intelligence for judgement and momentum — what's moving, stalling, or missing.</p>
+        <div class="pp">
+          <span><b>Show:</b> This Week / overdue · AI assessment</span>
+          <span><b>Line:</b> Know what's moving — and what's missing.</span>
+        </div>
+      </div>
+      <div class="pill">
+        <div class="n">03</div><h3>Advantage that compounds</h3>
+        <p>Durable career memory you keep between searches — relationships and decisions that carry forward.</p>
+        <div class="pp">
+          <span><b>Show:</b> Relationships · durable record</span>
+          <span><b>Line:</b> Build career memory, not another list.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UI KIT -->
+  <section class="fade">
+    <div class="sechead"><span class="num">05</span><h2>Elements the site reuses</h2>
+      <span class="sub">Lifted from the app so marketing components and product components are one kit.</span></div>
+    <div class="kit">
+      <div class="kitcard">
+        <div class="cap">Buttons</div>
+        <div class="rowwrap"><button class="btn pri">Start free</button><button class="btn">See how it works</button></div>
+      </div>
+      <div class="kitcard">
+        <div class="cap">Filter pills</div>
+        <div class="rowwrap"><span class="pillbtn"><span class="sdot" style="background:var(--good)"></span> Active</span><span class="pillbtn">All types</span></div>
+      </div>
+      <div class="kitcard">
+        <div class="cap">Stage dots</div>
+        <div class="rowwrap" style="gap:16px">
+          <span class="stage"><span class="sdot" style="background:#5662f2"></span> Submitted</span>
+          <span class="stage"><span class="sdot" style="background:var(--amber)"></span> Watch</span>
+        </div>
+      </div>
+      <div class="kitcard">
+        <div class="cap">Avatar chips</div>
+        <div class="rowwrap"><span class="av" style="background:#4f6bd8">JB</span><span class="av" style="background:#7c5cf0">JM</span><span class="av" style="background:#5662f2">KL</span></div>
+      </div>
+      <div class="kitcard" style="grid-column:span 2">
+        <div class="cap">AI assessment — modest, opt‑in</div>
+        <div class="aicard">
+          <div class="aihead">◔ AI assessment</div>
+          <button class="aibtn">▣ &nbsp;Assess this opportunity</button>
+        </div>
+      </div>
+      <div class="kitcard" style="grid-column:span 2">
+        <div class="cap">Overdue row</div>
+        <div style="display:flex;justify-content:space-between;font-size:.86rem;padding:6px 0">
+          <span><b style="font-weight:600">Review material deck sent</b> <span style="color:var(--muted)">· CPTO search</span></span>
+          <span style="color:var(--coral);font-weight:600">15 days overdue</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section class="fade">
+    <div class="sechead"><span class="num">06</span><h2>Reference set</h2>
+      <span class="sub">Craft twins for the dark build; register references for tone. Click through on the live page.</span></div>
+    <div class="refs">
+      <a class="ref" href="https://linear.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="fav" style="background:#5e6ad2"></span><span class="nm">Linear</span><span class="kind">Craft twin</span></div>
+        <div class="steal"><b>Steal:</b> the discipline — restraint, space, site↔app continuity.</div>
+      </a>
+      <a class="ref" href="https://attio.com/" target="_blank" rel="noopener">
+        <div class="top"><span class="fav" style="background:#111"></span><span class="nm">Attio</span><span class="kind">Light twin</span></div>
+        <div class="steal"><b>Steal:</b> the value‑prop widget that proves each pillar with a screenshot.</div>
+      </a>
+      <a class="ref" href="https://www.raycast.com/" target="_blank" rel="noopener">
+        <div class="top"><span class="fav" style="background:#ff6363"></span><span class="nm">Raycast</span><span class="kind">Craft twin</span></div>
+        <div class="steal"><b>Steal:</b> AI presented as capable‑but‑calm, no hype.</div>
+      </a>
+      <a class="ref" href="https://resend.com/" target="_blank" rel="noopener">
+        <div class="top"><span class="fav" style="background:#0a0a0a;border:1px solid #333"></span><span class="nm">Resend</span><span class="kind">Craft twin</span></div>
+        <div class="steal"><b>Steal:</b> real dark UI embedded as hero proof, quiet section rhythm.</div>
+      </a>
+      <a class="ref" href="https://chief.com/" target="_blank" rel="noopener">
+        <div class="top"><span class="fav" style="background:#1a1a3a"></span><span class="nm">Chief</span><span class="kind">Register</span></div>
+        <div class="steal"><b>Steal:</b> the “for leaders at your level” tone — not the light palette.</div>
+      </a>
+      <a class="ref" href="https://www.nurole.com/" target="_blank" rel="noopener">
+        <div class="top"><span class="fav" style="background:#0f4c4c"></span><span class="nm">Nurole</span><span class="kind">Register</span></div>
+        <div class="steal"><b>Steal:</b> serious language for board &amp; advisory pursuits.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- GUARDRAILS -->
+  <section class="fade">
+    <div class="sechead"><span class="num">07</span><h2>Guardrails</h2>
+      <span class="sub">The site's hardest job is to not look like the category it's positioned against.</span></div>
+    <div class="rails">
+      <div class="rail2">
+        <h3><span class="mk y">✓</span> Do</h3>
+        <ul>
+          <li><span class="mk y">✓</span> Lead with real product UI in the app's dark palette.</li>
+          <li><span class="mk y">✓</span> Keep the indigo accent the single bold note; everything else quiet.</li>
+          <li><span class="mk y">✓</span> Write understated, discreet copy — calm control, preparedness.</li>
+          <li><span class="mk y">✓</span> Present AI modestly, as a supporting proof point.</li>
+          <li><span class="mk y">✓</span> Use generous whitespace and hairline dividers, like the app.</li>
+        </ul>
+      </div>
+      <div class="rail2">
+        <h3><span class="mk n">✕</span> Don't</h3>
+        <ul>
+          <li><span class="mk n">✕</span> Job‑tracker / resume‑builder framing or visuals.</li>
+          <li><span class="mk n">✕</span> Gamification, streaks, hustle‑culture energy.</li>
+          <li><span class="mk n">✕</span> Stocky “happy office” photography or busy gradients.</li>
+          <li><span class="mk n">✕</span> Over‑claim AI (no auto‑briefings / influence maps yet).</li>
+          <li><span class="mk n">✕</span> Consumer‑freemium loudness or emoji‑as‑headline.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div style="max-width:60ch">
+      This direction is derived from the live product tokens and the Innerbench positioning &amp; Message Map. It's a visual brief — hand it to a designer, or use it as the build spec for a coded homepage.
+      <div class="next">
+        <span><b style="color:var(--text);font-weight:600">Next:</b> confirm AI prominence (supporting vs. lead), then build the coded homepage from the dark hero above.</span>
+        <span><b style="color:var(--text);font-weight:600">Source:</b> <a href="https://stormpine.atlassian.net/wiki/spaces/IN/pages/148111361/Inspiration">Confluence · Inspiration</a></span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.documentElement;
+    var btn=document.getElementById('themeToggle');
+    var icon=document.getElementById('themeIcon');
+    var label=document.getElementById('themeLabel');
+    var mq=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)');
+    function effective(){
+      var t=root.getAttribute('data-theme');
+      if(t==='dark'||t==='light') return t;
+      return mq&&mq.matches?'dark':'light';
+    }
+    function sync(){
+      var t=effective();
+      icon.textContent=t==='dark'?'☾':'☀';
+      label.textContent=t==='dark'?'Dark':'Light';
+      btn.setAttribute('aria-pressed',t==='dark');
+    }
+    btn.addEventListener('click',function(){
+      root.setAttribute('data-theme',effective()==='dark'?'light':'dark');
+      sync();
+    });
+    if(mq&&mq.addEventListener) mq.addEventListener('change',sync);
+    sync();
+  })();
+</script>

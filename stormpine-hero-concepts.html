@@ -1,0 +1,535 @@
+<meta charset="utf-8">
+<title>Stormpine — Hero concept directions</title>
+<style>
+  :root{
+    --bg:#08090c; --surface:#0e0f12; --panel:#131417; --border:#25262a;
+    --text:#ebedf1; --muted:#979a9f; --faint:#6b6e75;
+    --accent:#5662f2; --lilac:#d1b3f8; --amber:#cd9a50; --coral:#e5634d;
+    --glow:color-mix(in srgb,var(--accent) 22%,transparent);
+    --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --maxw:1080px; --radius:16px;
+  }
+  @media (prefers-color-scheme:light){
+    :root{--bg:#fbfbfd;--surface:#ffffff;--panel:#f4f5f8;--border:#e7e8ee;
+      --text:#16171b;--muted:#6b6e78;--faint:#9a9da6;--accent:#5662f2;--lilac:#7c5cf0;
+      --amber:#a86e17;--coral:#cf4636;--glow:color-mix(in srgb,var(--accent) 13%,transparent);}
+  }
+  :root[data-theme="dark"]{--bg:#08090c;--surface:#0e0f12;--panel:#131417;--border:#25262a;
+    --text:#ebedf1;--muted:#979a9f;--faint:#6b6e75;--accent:#5662f2;--lilac:#d1b3f8;
+    --amber:#cd9a50;--coral:#e5634d;--glow:color-mix(in srgb,var(--accent) 22%,transparent);}
+  :root[data-theme="light"]{--bg:#fbfbfd;--surface:#ffffff;--panel:#f4f5f8;--border:#e7e8ee;
+    --text:#16171b;--muted:#6b6e78;--faint:#9a9da6;--accent:#5662f2;--lilac:#7c5cf0;
+    --amber:#a86e17;--coral:#cf4636;--glow:color-mix(in srgb,var(--accent) 13%,transparent);}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+    line-height:1.6;letter-spacing:-.006em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;font-weight:600;color:var(--accent)}
+  h1,h2,h3{margin:0;letter-spacing:-.025em;font-weight:640;text-wrap:balance}
+
+  header.top{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);
+    background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--border)}
+  .topin{max-width:var(--maxw);margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:640;letter-spacing:-.02em}
+  .glyph{width:22px;height:22px;border-radius:7px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:.7rem;font-weight:700}
+  .top .meta{color:var(--muted);font-size:.8rem}
+  .themebtn{margin-left:auto;width:34px;height:34px;border-radius:8px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text);cursor:pointer;font-size:.95rem}
+
+  .intro{padding:40px 0 8px}
+  .intro h2{font-size:clamp(1.4rem,3vw,2rem)}
+  .intro p{color:var(--muted);max-width:66ch;margin:12px 0 0}
+  .intro p b{color:var(--text);font-weight:600}
+
+  .concept{margin:34px 0 44px}
+  .clabel{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+  .clabel .tag{font-family:var(--mono);font-size:.72rem;color:var(--accent);font-weight:600}
+  .clabel h3{font-size:1.15rem}
+  .clabel .k{color:var(--muted);font-size:.85rem;margin-left:auto;text-align:right;max-width:40ch}
+
+  .stage{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+    background:radial-gradient(90% 70% at 50% -8%,var(--glow),transparent 62%),var(--surface);
+    min-height:440px;display:flex;flex-direction:column}
+  .stagenav{display:flex;align-items:center;gap:12px;padding:14px 18px;font-size:.78rem;color:var(--muted)}
+  .stagenav .brand{font-size:.86rem}
+  .stagenav .sp{margin-left:auto;display:flex;gap:8px;align-items:center}
+  .btn{font:inherit;font-size:.76rem;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text)}
+  .btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+  .htext{text-align:center;padding:6px 20px 0}
+  .htext h1{font-size:clamp(1.5rem,3vw,2.15rem);max-width:22ch;margin:0 auto}
+  .htext p{color:var(--muted);font-size:.95rem;max-width:54ch;margin:12px auto 0}
+  .model{flex:1;position:relative;min-height:250px}
+
+  .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+  .cap h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:600;margin:0 0 6px}
+  .cap p{margin:0;font-size:.9rem;color:var(--muted)}
+  .cap p b{color:var(--text);font-weight:600}
+
+  /* ===== A — convergence flow ===== */
+  .flowsvg{width:100%;height:100%;display:block;font-family:var(--sans)}
+  .flowsvg .chip{fill:var(--panel);stroke:var(--border)}
+  .flowsvg .chiptx{fill:var(--muted);font-size:12px;font-weight:500}
+  .flowsvg .outtx{fill:var(--text);font-size:12px;font-weight:600}
+  .flowsvg .guide{stroke:var(--border);stroke-width:1.5;fill:none}
+  .flowsvg .flow{stroke:var(--accent);stroke-width:1.6;fill:none;stroke-dasharray:2 8;stroke-linecap:round;opacity:.9;animation:dash 1.1s linear infinite}
+  .flowsvg .flow.o{stroke-dasharray:2 7}
+  @keyframes dash{to{stroke-dashoffset:-40}}
+  .flowsvg .core{fill:var(--surface);stroke:var(--accent);stroke-width:1.5}
+  .flowsvg .corerow{fill:var(--panel);stroke:var(--border)}
+  .flowsvg .corerowtx{fill:var(--text);font-size:11px;font-weight:600}
+  .flowsvg .pulse{fill:none;stroke:var(--accent);opacity:.5;animation:corepulse 2.6s ease-in-out infinite}
+  @keyframes corepulse{0%,100%{opacity:.12;transform:scale(1)}50%{opacity:.5;transform:scale(1.08)}}
+  .flowsvg .dot{fill:var(--accent)} .flowsvg .adot{fill:var(--amber)}
+  @media (prefers-reduced-motion:reduce){.flowsvg .flow{animation:none;stroke-dasharray:none;opacity:.5}.flowsvg .pulse{animation:none}}
+
+  /* ===== C — noise to signal ===== */
+  .n2s{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:10px;padding:8px 26px 20px}
+  .noise{position:relative;height:210px}
+  .frag{position:absolute;font-size:11px;color:var(--faint);background:var(--panel);border:1px solid var(--border);
+    border-radius:7px;padding:4px 9px;white-space:nowrap;animation:drift 7s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(var(--dx,4px),var(--dy,-5px))}}
+  .noiselayer{animation:fadeNoise 8s ease-in-out infinite}
+  .signal{opacity:0;animation:fadeSignal 8s ease-in-out infinite}
+  @keyframes fadeNoise{0%,38%{opacity:1}54%,92%{opacity:.12}100%{opacity:1}}
+  @keyframes fadeSignal{0%,34%{opacity:0}54%,92%{opacity:1}100%{opacity:0}}
+  .scard{border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:0 20px 50px rgba(0,0,0,.35);padding:14px;max-width:320px}
+  .srow{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px}
+  .srow:last-child{border-bottom:0}
+  .sdot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  .srow .m{color:var(--muted);margin-left:auto}
+  .snext{margin-top:10px;padding:9px 11px;border-radius:9px;background:color-mix(in srgb,var(--accent) 14%,var(--surface));
+    border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));font-size:12px;font-weight:600;color:var(--text)}
+  .arrowc{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--accent);opacity:.5;font-size:20px}
+  @media (prefers-reduced-motion:reduce){.noiselayer,.signal,.frag{animation:none}.signal{opacity:1}.noiselayer{opacity:.2}}
+
+  /* ===== D — ongoing timeline ===== */
+  .tl{width:100%;height:100%;display:block;font-family:var(--sans)}
+  .tl .axis{fill:var(--faint);font-size:11px}
+  .tl .lane{stroke:var(--border);stroke-width:1.5}
+  .tl .lbl{fill:var(--text);font-size:12px;font-weight:600}
+  .tl .ltag{fill:var(--muted);font-size:10px;font-weight:600}
+  .tl .mark{fill:var(--surface);stroke:var(--accent);stroke-width:2;animation:tlmark 3s ease-in-out infinite}
+  @keyframes tlmark{0%,100%{opacity:.5}50%{opacity:1}}
+  .tl .done{fill:var(--accent);stroke:var(--accent)}
+  .tl .donetx{fill:var(--accent);font-size:11px;font-weight:700}
+  .tl .loop{stroke:var(--lilac);stroke-width:1.5;fill:none;stroke-dasharray:2 5;animation:dash 1.2s linear infinite}
+  .tl .looptx{fill:var(--lilac);font-size:9px;font-weight:600}
+  .tl .ongoing{stroke:var(--accent);stroke-width:1.5;fill:none;stroke-dasharray:3 5;animation:dash 1.3s linear infinite}
+  .tl .ongtx{fill:var(--accent);font-size:10px;font-weight:600}
+  .tl .av{stroke:var(--surface);stroke-width:1.5} .tl .avtx{fill:#fff;font-size:8px;font-weight:700}
+  .tl .play{stroke:var(--accent);stroke-width:2;opacity:.9}
+  @media (prefers-reduced-motion:reduce){.tl .mark,.tl .loop,.tl .ongoing{animation:none}.tl .playg{display:none}}
+
+  /* ===== E — the loop ===== */
+  .loopwrap{position:absolute;inset:0;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:18px;padding:6px 30px 20px}
+  .ringE{width:100%;max-width:470px;height:260px;display:block;font-family:var(--sans);margin:0 auto;overflow:visible}
+  .ringE .rline{fill:none;stroke:var(--border);stroke-width:1.5}
+  .ringE .rflow{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:3 10;opacity:.8;animation:dash 1.4s linear infinite}
+  .ringE .rd{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+  .ringE .rd.acc{fill:var(--accent)}
+  .ringE .rt{fill:var(--text);font-size:12px;font-weight:600}
+  .ringE .rcore{fill:var(--text);font-size:13px;font-weight:640}
+  .ringE .rsub{fill:var(--muted);font-size:10px}
+  .ringE .pulse{fill:var(--accent)} .ringE .pglow{fill:var(--accent);opacity:.22}
+  .ringE .av{stroke:var(--surface);stroke-width:1.5} .ringE .avtx{fill:#fff;font-size:8px;font-weight:700}
+  @media (prefers-reduced-motion:reduce){.ringE .rflow{animation:none}}
+  .compound{border-left:1px solid var(--border);padding-left:24px}
+  .compound h5{margin:0 0 10px;font-size:.72rem;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+  .compound .chip{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;background:var(--surface);padding:9px 12px;font-size:12px;margin-bottom:8px;color:var(--text)}
+  .compound .arrow{color:var(--accent);font-weight:700}
+
+  /* ===== F — portfolio of pursuits ===== */
+  .pf{width:100%;height:100%;display:block;font-family:var(--sans)}
+  .pf .art{fill:var(--panel);stroke:var(--border)}
+  .pf .arttx{fill:var(--muted);font-size:12px;font-weight:500}
+  .pf .feed{stroke:var(--accent);stroke-width:1.4;fill:none;stroke-dasharray:2 8;opacity:.5;animation:dash 1.3s linear infinite}
+  .pf .ringJ{fill:none;stroke:var(--accent);stroke-width:2.5;opacity:.85}
+  .pf .ringB{fill:none;stroke:var(--lilac);stroke-width:2.5;opacity:.85}
+  .pf .ringA{fill:none;stroke:var(--amber);stroke-width:2.5;opacity:.85}
+  .pf .pJ{fill:var(--accent)} .pf .pB{fill:var(--lilac)} .pf .pA{fill:var(--amber)}
+  .pf .plabelJ{fill:var(--accent);font-size:12px;font-weight:700}
+  .pf .plabelB{fill:var(--lilac);font-size:12px;font-weight:700}
+  .pf .plabelA{fill:var(--amber);font-size:12px;font-weight:700}
+  .pf .core{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+  .pf .coretx{fill:var(--accent);font-size:14px;font-weight:800}
+  .pf .av{stroke:var(--surface);stroke-width:1.5}
+  .pf .avtx{fill:#fff;font-size:8px;font-weight:700}
+  .pf .avlbl{fill:var(--text);font-size:10px;font-weight:600}
+  @media (prefers-reduced-motion:reduce){.pf .feed{animation:none;opacity:.4}}
+
+  /* ===== G — product at the centre ===== */
+  .pg{width:100%;height:100%;display:block;font-family:var(--sans)}
+  .pg .art{fill:var(--panel);stroke:var(--border)}
+  .pg .arttx{fill:var(--muted);font-size:12px;font-weight:500}
+  .pg .feed{stroke:var(--accent);stroke-width:1.4;fill:none;stroke-dasharray:2 8;opacity:.5;animation:dash 1.3s linear infinite}
+  .pg .ringJ{fill:none;stroke:var(--accent);stroke-width:2.5;opacity:.7}
+  .pg .ringB{fill:none;stroke:var(--lilac);stroke-width:2.5;opacity:.7}
+  .pg .ringA{fill:none;stroke:var(--amber);stroke-width:2.5;opacity:.7}
+  .pg .pJ{fill:var(--accent)} .pg .pB{fill:var(--lilac)} .pg .pA{fill:var(--amber)}
+  .pg .plabelJ{fill:var(--accent);font-size:12px;font-weight:700}
+  .pg .plabelB{fill:var(--lilac);font-size:12px;font-weight:700}
+  .pg .plabelA{fill:var(--amber);font-size:12px;font-weight:700}
+  .pg .hubglow{fill:var(--accent);opacity:.14}
+  .pg .hub{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+  .pg .hubname{fill:var(--text);font-size:15px;font-weight:800;letter-spacing:-.02em}
+  .pg .hubdiv{stroke:var(--border);stroke-width:1}
+  .pg .modtx{fill:var(--text);font-size:11.5px;font-weight:600}
+  .pg .moddot{fill:var(--accent)}
+  .pg .glyph2{fill:var(--accent)} .pg .glyph2tx{fill:#fff;font-size:11px;font-weight:800}
+  @media (prefers-reduced-motion:reduce){.pg .feed{animation:none;opacity:.4}}
+
+  footer{padding:20px 0 60px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border);margin-top:20px}
+  footer b{color:var(--text);font-weight:600}
+  @media (max-width:720px){.caps{grid-template-columns:1fr}.clabel .k{display:none}.n2s{grid-template-columns:1fr}.noise{display:none}.loopwrap{grid-template-columns:1fr}.compound{border-left:0;padding-left:0}}
+</style>
+
+<header class="top">
+  <div class="topin">
+    <span class="brand"><span class="glyph">S</span> Stormpine</span>
+    <span class="meta">Hero concept directions</span>
+    <nav style="display:flex;gap:3px;align-items:center;flex-wrap:wrap;font-size:.78rem;font-weight:600;margin-left:8px">
+      <span style="color:var(--muted);margin-right:6px;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em">Materials</span>
+      <a href="index.html" style="padding:5px 10px;border-radius:7px;color:var(--muted);text-decoration:none">Live site ↗</a>
+      <a href="stormpine-website-direction.html" style="padding:5px 10px;border-radius:7px;color:var(--muted);text-decoration:none">Moodboard</a>
+      <a href="stormpine-hero-concepts.html" style="padding:5px 10px;border-radius:7px;color:var(--text);background:var(--surface);border:1px solid var(--border);text-decoration:none">Hero concepts</a>
+    </nav>
+    <button class="themebtn" id="themeToggle" type="button" aria-label="Switch theme">☾</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="intro">
+    <span class="eyebrow">Frontpage · replace the screenshot hero</span>
+    <h2>Ways to model the value — not screenshot it.</h2>
+    <p>Same job in each: show, at a glance, what Stormpine does. <b>A</b> and <b>C</b> are punchy value models. <b>D</b>, <b>E</b>, <b>F</b> and <b>G</b> lean into the truth that a senior move is an <b>ongoing, complex process</b> — long timelines, loops, many people and meetings, with several pursuits (job, board, advisory) live at once and board/advisory never really "closing" (employment is still the primary use-case). Pick a direction, or a hybrid; I'll productionise the winner into the real hero in both themes. Toggle ☾/☀ for dark/light.</p>
+  </section>
+
+  <!-- CONCEPT A -->
+  <section class="concept">
+    <div class="clabel"><span class="tag">Concept A</span><h3>Convergence engine</h3>
+      <span class="k">Inputs flow in → structured core reads them → clear actions flow out. The literal "operating system" story.</span></div>
+    <div class="stage">
+      <div class="stagenav"><span class="brand"><span class="glyph" style="width:16px;height:16px;font-size:.55rem">S</span> Stormpine</span>
+        <span class="sp"><span>Product</span><span>Pricing</span><button class="btn">Sign in</button><button class="btn pri">Start free</button></span></div>
+      <div class="htext"><h1>Everything behind a move — in, read, and out as your next step.</h1>
+        <p>Scattered context becomes one system, understood.</p></div>
+      <div class="model">
+        <svg class="flowsvg" viewBox="0 0 920 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Inputs converging into a core and emerging as next actions">
+          <g>
+            <path class="guide" d="M170,52 Q300,52 388,150"/><path class="flow" d="M170,52 Q300,52 388,150"/>
+            <path class="guide" d="M170,101 Q300,101 388,150"/><path class="flow" d="M170,101 Q300,101 388,150" style="animation-duration:1.3s"/>
+            <path class="guide" d="M170,150 L388,150"/><path class="flow" d="M170,150 L388,150" style="animation-duration:1s"/>
+            <path class="guide" d="M170,199 Q300,199 388,150"/><path class="flow" d="M170,199 Q300,199 388,150" style="animation-duration:1.5s"/>
+            <path class="guide" d="M170,248 Q300,248 388,150"/><path class="flow" d="M170,248 Q300,248 388,150" style="animation-duration:1.2s"/>
+          </g>
+          <g>
+            <path class="guide" d="M532,150 Q640,86 742,86"/><path class="flow o" d="M532,150 Q640,86 742,86" style="animation-duration:1.1s"/>
+            <path class="guide" d="M532,150 L742,150"/><path class="flow o" d="M532,150 L742,150" style="animation-duration:1.35s"/>
+            <path class="guide" d="M532,150 Q640,214 742,214"/><path class="flow o" d="M532,150 Q640,214 742,214" style="animation-duration:1.2s"/>
+          </g>
+          <g>
+            <rect class="chip" x="24" y="38" width="146" height="28" rx="8"/><text class="chiptx" x="40" y="56">Recruiter emails</text>
+            <rect class="chip" x="40" y="87" width="130" height="28" rx="8"/><text class="chiptx" x="56" y="105">Meeting notes</text>
+            <rect class="chip" x="46" y="136" width="124" height="28" rx="8"/><text class="chiptx" x="62" y="154">LinkedIn signal</text>
+            <rect class="chip" x="52" y="185" width="118" height="28" rx="8"/><text class="chiptx" x="68" y="203">Materials · CV</text>
+            <rect class="chip" x="56" y="234" width="114" height="28" rx="8"/><text class="chiptx" x="72" y="252">Warm intros</text>
+          </g>
+          <g>
+            <circle class="pulse" cx="460" cy="150" r="78" style="transform-origin:460px 150px"/>
+            <rect class="core" x="392" y="92" width="136" height="116" rx="16"/>
+            <rect class="corerow" x="404" y="104" width="112" height="24" rx="6"/><text class="corerowtx" x="414" y="120">Relationships</text>
+            <rect class="corerow" x="404" y="132" width="112" height="24" rx="6"/><text class="corerowtx" x="414" y="148">Pursuits</text>
+            <rect class="corerow" x="404" y="160" width="112" height="24" rx="6"/><text class="corerowtx" x="414" y="176">Next steps</text>
+            <circle class="dot" cx="460" cy="196" r="2.5"/>
+          </g>
+          <g>
+            <rect class="chip" x="742" y="72" width="152" height="28" rx="8"/><circle class="dot" cx="758" cy="86" r="3"/><text class="outtx" x="770" y="90">What's moving</text>
+            <rect class="chip" x="742" y="136" width="152" height="28" rx="8"/><circle class="dot" cx="758" cy="150" r="3"/><text class="outtx" x="770" y="154">Prep for the call</text>
+            <rect class="chip" x="742" y="200" width="152" height="28" rx="8"/><circle class="adot" cx="758" cy="214" r="3"/><text class="outtx" x="770" y="218">Next action</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="caps">
+      <div class="cap"><h4>The idea</h4><p><b>Career operating system.</b> Fragmented inputs → structured core → decisions. The clearest literal telling.</p></div>
+      <div class="cap"><h4>The motion</h4><p>Dotted streams flow inward, the core pulses as it "reads", streams flow out to actions. Calm, continuous.</p></div>
+      <div class="cap"><h4>Best when</h4><p>You want the pitch understood in <b>3 seconds</b> — great for a cold visitor who doesn't know the category.</p></div>
+    </div>
+  </section>
+
+  <!-- CONCEPT C -->
+  <section class="concept">
+    <div class="clabel"><span class="tag">Concept C</span><h3>Noise → signal</h3>
+      <span class="k">The most understated: clutter on the left resolves into one calm, ordered next step on the right.</span></div>
+    <div class="stage">
+      <div class="stagenav"><span class="brand"><span class="glyph" style="width:16px;height:16px;font-size:.55rem">S</span> Stormpine</span>
+        <span class="sp"><span>Product</span><span>Pricing</span><button class="btn">Sign in</button><button class="btn pri">Start free</button></span></div>
+      <div class="htext"><h1>From scattered and anxious to calm and prepared.</h1>
+        <p>The same context — finally in order, with a clear next move.</p></div>
+      <div class="model">
+        <div class="n2s">
+          <div class="noise noiselayer">
+            <div class="frag" style="left:6%;top:8%;--dx:6px;--dy:-4px;animation-delay:.1s">"call Jerry back?"</div>
+            <div class="frag" style="left:44%;top:2%;--dx:-5px;--dy:6px;animation-delay:.6s">deck v3.pdf</div>
+            <div class="frag" style="left:20%;top:26%;--dx:7px;--dy:5px;animation-delay:1.1s">who's the chair?</div>
+            <div class="frag" style="left:58%;top:24%;--dx:-6px;--dy:-6px;animation-delay:.3s">follow up — when?</div>
+            <div class="frag" style="left:2%;top:46%;--dx:5px;--dy:6px;animation-delay:1.4s">board intro</div>
+            <div class="frag" style="left:36%;top:52%;--dx:-4px;--dy:-5px;animation-delay:.9s">salary range?</div>
+            <div class="frag" style="left:62%;top:56%;--dx:6px;--dy:4px;animation-delay:.2s">2nd interview</div>
+            <div class="frag" style="left:14%;top:74%;--dx:-6px;--dy:5px;animation-delay:1.2s">notes.txt</div>
+            <div class="frag" style="left:48%;top:78%;--dx:5px;--dy:-6px;animation-delay:.5s">recruiter #3</div>
+          </div>
+          <div class="signal">
+            <div class="scard">
+              <div class="srow"><span class="sdot"></span> CPTO — European Martech <span class="m">Submitted</span></div>
+              <div class="srow"><span class="sdot" style="background:var(--amber)"></span> Chair, Nordic SaaS <span class="m">Board</span></div>
+              <div class="srow"><span class="sdot" style="background:var(--lilac)"></span> Advisory — Fintech <span class="m">Warm</span></div>
+              <div class="snext">Next: send the deck to Jerry · today</div>
+            </div>
+          </div>
+          <div class="arrowc">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="caps">
+      <div class="cap"><h4>The idea</h4><p><b>Calm control.</b> Sells the emotional payoff — discretion and preparedness — over mechanics.</p></div>
+      <div class="cap"><h4>The motion</h4><p>Grey fragments drift, then fade as a clean, ordered card with a single indigo "Next" resolves.</p></div>
+      <div class="cap"><h4>Best when</h4><p>You want the most <b>executive, understated</b> tone — closest to the current brand voice.</p></div>
+    </div>
+  </section>
+
+  <!-- CONCEPT D -->
+  <section class="concept">
+    <div class="clabel"><span class="tag">Concept D</span><h3>The ongoing process</h3>
+      <span class="k">Parallel pursuits over months — meetings, follow-up loops, people — where board &amp; advisory never really "close".</span></div>
+    <div class="stage">
+      <div class="stagenav"><span class="brand"><span class="glyph" style="width:16px;height:16px;font-size:.55rem">S</span> Stormpine</span>
+        <span class="sp"><span>Product</span><span>Pricing</span><button class="btn">Sign in</button><button class="btn pri">Start free</button></span></div>
+      <div class="htext"><h1>A move is a process, not a form.</h1>
+        <p>Months, meetings and follow-up loops — several pursuits running at once.</p></div>
+      <div class="model">
+        <svg class="tl" viewBox="0 0 940 280" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Timeline of parallel pursuits over months with meetings and loops">
+          <g class="axis" text-anchor="middle">
+            <text x="230" y="24">Mar</text><text x="360" y="24">May</text><text x="490" y="24">Jul</text><text x="620" y="24">Sep</text><text x="750" y="24">Nov</text><text x="860" y="24">Jan</text>
+          </g>
+          <g>
+            <text class="lbl" x="24" y="92">CPTO role</text><text class="ltag" x="24" y="108">Operating</text>
+            <text class="lbl" x="24" y="162">Nordic board</text><text class="ltag" x="24" y="178">Board</text>
+            <text class="lbl" x="24" y="232">Fintech advisory</text><text class="ltag" x="24" y="248">Advisory</text>
+          </g>
+          <line class="lane" x1="180" y1="96" x2="820" y2="96"/>
+          <line class="lane" x1="180" y1="166" x2="820" y2="166"/>
+          <line class="lane" x1="180" y1="236" x2="820" y2="236"/>
+          <path class="ongoing" d="M820,166 L906,166"/><text class="ongtx" x="872" y="156" text-anchor="middle">ongoing</text>
+          <path class="ongoing" d="M820,236 L906,236"/><text class="ongtx" x="872" y="226" text-anchor="middle">ongoing</text>
+          <path class="loop" d="M470,96 C470,58 300,58 300,96"/><text class="looptx" x="385" y="52" text-anchor="middle">follow-up loop</text>
+          <path class="loop" d="M520,236 C520,206 400,206 400,236"/>
+          <g>
+            <circle class="mark" cx="230" cy="96" r="6"/><circle class="mark" cx="300" cy="96" r="6" style="animation-delay:.4s"/><circle class="mark" cx="380" cy="96" r="6" style="animation-delay:.8s"/><circle class="mark" cx="470" cy="96" r="6" style="animation-delay:1.2s"/><circle class="mark" cx="580" cy="96" r="6" style="animation-delay:1.6s"/><circle class="mark" cx="690" cy="96" r="6" style="animation-delay:2s"/>
+            <circle class="done" cx="800" cy="96" r="7"/><text class="donetx" x="800" y="80" text-anchor="middle">Offer ✓</text>
+          </g>
+          <g>
+            <circle class="mark" cx="210" cy="166" r="6" style="animation-delay:.2s"/><circle class="mark" cx="330" cy="166" r="6" style="animation-delay:.6s"/><circle class="mark" cx="520" cy="166" r="6" style="animation-delay:1s"/><circle class="mark" cx="640" cy="166" r="6" style="animation-delay:1.4s"/><circle class="mark" cx="760" cy="166" r="6" style="animation-delay:1.8s"/>
+          </g>
+          <g>
+            <circle class="mark" cx="260" cy="236" r="6" style="animation-delay:.3s"/><circle class="mark" cx="400" cy="236" r="6" style="animation-delay:.7s"/><circle class="mark" cx="520" cy="236" r="6" style="animation-delay:1.1s"/><circle class="mark" cx="660" cy="236" r="6" style="animation-delay:1.5s"/><circle class="mark" cx="770" cy="236" r="6" style="animation-delay:1.9s"/>
+          </g>
+          <g>
+            <circle class="av" cx="300" cy="96" r="9" fill="#7c5cf0"/><text class="avtx" x="300" y="99" text-anchor="middle">JM</text>
+            <circle class="av" cx="640" cy="166" r="9" fill="#4f6bd8"/><text class="avtx" x="640" y="169" text-anchor="middle">AS</text>
+            <circle class="av" cx="400" cy="236" r="9" fill="#3f8f6b"/><text class="avtx" x="400" y="239" text-anchor="middle">TL</text>
+          </g>
+          <g class="playg">
+            <line x1="180" y1="40" x2="180" y2="262" class="play"/>
+            <animateTransform attributeName="transform" type="translate" from="0 0" to="700 0" dur="9s" repeatCount="indefinite"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="caps">
+      <div class="cap"><h4>The idea</h4><p><b>Ongoing &amp; parallel.</b> The real shape: long, looping, many people — pursuits that don't end. Jobs resolve; board &amp; advisory continue.</p></div>
+      <div class="cap"><h4>The motion</h4><p>A "now" line sweeps across the months; meetings pulse as it passes; follow-up loops and "ongoing" arrows flow.</p></div>
+      <div class="cap"><h4>Best when</h4><p>You want to signal a <b>long-term system</b>, not a one-off application tool — key for the board/advisory wedge.</p></div>
+    </div>
+  </section>
+
+  <!-- CONCEPT E -->
+  <section class="concept">
+    <div class="clabel"><span class="tag">Concept E</span><h3>The loop that compounds</h3>
+      <span class="k">A single pursuit iterates — conversation, capture, assess, prepare, act — and every lap adds to a record that carries to the next move.</span></div>
+    <div class="stage">
+      <div class="stagenav"><span class="brand"><span class="glyph" style="width:16px;height:16px;font-size:.55rem">S</span> Stormpine</span>
+        <span class="sp"><span>Product</span><span>Pricing</span><button class="btn">Sign in</button><button class="btn pri">Start free</button></span></div>
+      <div class="htext"><h1>It's a loop, not a funnel — and it compounds.</h1>
+        <p>Each lap adds context; the next move starts from everything you built.</p></div>
+      <div class="model">
+        <div class="loopwrap">
+          <svg class="ringE" viewBox="0 0 460 260" role="img" aria-label="A pursuit iterating around a loop of stages">
+            <path id="eloop" class="rline" d="M170,35 a95,95 0 1,1 0,190 a95,95 0 1,1 0,-190"/>
+            <path class="rflow" d="M170,35 a95,95 0 1,1 0,190 a95,95 0 1,1 0,-190"/>
+            <!-- stage nodes -->
+            <g><circle class="rd acc" cx="170" cy="35" r="6"/><text class="rt" x="170" y="20" text-anchor="middle">Conversation</text></g>
+            <g><circle class="rd" cx="260" cy="97" r="6"/><text class="rt" x="274" y="101" text-anchor="start">Capture</text></g>
+            <g><circle class="rd" cx="226" cy="213" r="6"/><text class="rt" x="226" y="234" text-anchor="middle">Assess</text></g>
+            <g><circle class="rd" cx="114" cy="213" r="6"/><text class="rt" x="114" y="234" text-anchor="middle">Prepare</text></g>
+            <g><circle class="rd" cx="80" cy="97" r="6"/><text class="rt" x="66" y="101" text-anchor="end">Act</text></g>
+            <!-- people at the conversation touchpoint -->
+            <circle class="av" cx="196" cy="30" r="8" fill="#7c5cf0"/><text class="avtx" x="196" y="33" text-anchor="middle">JM</text>
+            <circle class="av" cx="214" cy="30" r="8" fill="#4f6bd8"/><text class="avtx" x="214" y="33" text-anchor="middle">AS</text>
+            <!-- centre -->
+            <text class="rcore" x="170" y="122" text-anchor="middle">One pursuit</text>
+            <text class="rsub" x="170" y="138" text-anchor="middle">weeks → months</text>
+            <!-- travelling pulses -->
+            <circle class="pglow" r="9"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#eloop"/></animateMotion></circle>
+            <circle class="pulse" r="5"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#eloop"/></animateMotion></circle>
+            <circle class="pulse" r="5" opacity=".55"><animateMotion dur="6s" begin="-3s" repeatCount="indefinite"><mpath href="#eloop"/></animateMotion></circle>
+          </svg>
+          <div class="compound">
+            <h5>Why a loop, not a funnel</h5>
+            <div class="chip">↻ &nbsp;14 touchpoints · 5 months</div>
+            <div class="chip">Still open — board &amp; advisory don't "close"</div>
+            <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Every lap adds context. When the next move starts, it starts from everything you already built. <span class="arrow">→</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caps">
+      <div class="cap"><h4>The idea</h4><p><b>Iterative &amp; compounding.</b> Reframes the process as a repeating loop whose record carries forward — the durable-CRM thesis.</p></div>
+      <div class="cap"><h4>The motion</h4><p>A pulse orbits the loop continuously; the dashed ring flows; people sit at the conversation touchpoint.</p></div>
+      <div class="cap"><h4>Best when</h4><p>You want to sell <b>durability</b> — a system you keep between searches, not one you cancel.</p></div>
+    </div>
+  </section>
+
+  <!-- CONCEPT F -->
+  <section class="concept">
+    <div class="clabel"><span class="tag">Concept F</span><h3>Portfolio of pursuits <span style="color:var(--muted);font-weight:400;font-size:.85rem">— evolves E</span></h3>
+      <span class="k">Three intertwined, ongoing pursuits — job, board, advisory — fed by real artifacts and surrounded by the people involved.</span></div>
+    <div class="stage">
+      <div class="stagenav"><span class="brand"><span class="glyph" style="width:16px;height:16px;font-size:.55rem">S</span> Stormpine</span>
+        <span class="sp"><span>Product</span><span>Pricing</span><button class="btn">Sign in</button><button class="btn pri">Start free</button></span></div>
+      <div class="htext"><h1>Not one search — a portfolio of pursuits, all live at once.</h1>
+        <p>Job, board and advisory — the artifacts and people behind each, in one system.</p></div>
+      <div class="model">
+        <svg class="pf" viewBox="0 0 940 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Three intertwined pursuits fed by artifacts and surrounded by the people involved">
+          <!-- artifacts feeding in -->
+          <g>
+            <rect class="art" x="34" y="80" width="150" height="26" rx="8"/><text class="arttx" x="50" y="97">Recruiter email</text>
+            <rect class="art" x="34" y="126" width="150" height="26" rx="8"/><text class="arttx" x="50" y="143">Meeting notes</text>
+            <rect class="art" x="34" y="172" width="150" height="26" rx="8"/><text class="arttx" x="50" y="189">CV &amp; bio</text>
+            <rect class="art" x="34" y="218" width="150" height="26" rx="8"/><text class="arttx" x="50" y="235">LinkedIn signal</text>
+          </g>
+          <path class="feed" d="M184,93 Q430,120 641,178"/>
+          <path class="feed" d="M184,139 Q430,150 641,180" style="animation-duration:1.5s"/>
+          <path class="feed" d="M184,185 Q430,182 641,182" style="animation-duration:1.2s"/>
+          <path class="feed" d="M184,231 Q430,220 641,184" style="animation-duration:1.6s"/>
+          <!-- pursuit rings (intertwined) -->
+          <circle class="ringJ" cx="660" cy="95" r="80"/>
+          <circle class="ringB" cx="734" cy="222" r="80"/>
+          <circle class="ringA" cx="586" cy="222" r="80"/>
+          <!-- pursuit labels -->
+          <text class="plabelJ" x="660" y="12" text-anchor="middle">Job · CPTO role</text>
+          <text class="plabelB" x="812" y="150" text-anchor="start">Board · Nordic SaaS</text>
+          <text class="plabelA" x="520" y="320" text-anchor="middle">Advisory · Fintech</text>
+          <!-- orbit paths (invisible) -->
+          <path id="pfJ" d="M660,15 a80,80 0 1,1 0,160 a80,80 0 1,1 0,-160" fill="none" stroke="none"/>
+          <path id="pfB" d="M734,142 a80,80 0 1,1 0,160 a80,80 0 1,1 0,-160" fill="none" stroke="none"/>
+          <path id="pfA" d="M586,142 a80,80 0 1,1 0,160 a80,80 0 1,1 0,-160" fill="none" stroke="none"/>
+          <circle class="pJ" r="5"><animateMotion dur="5.5s" repeatCount="indefinite"><mpath href="#pfJ"/></animateMotion></circle>
+          <circle class="pB" r="5"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#pfB"/></animateMotion></circle>
+          <circle class="pA" r="5"><animateMotion dur="6.2s" repeatCount="indefinite"><mpath href="#pfA"/></animateMotion></circle>
+          <!-- the people involved -->
+          <g>
+            <circle class="av" cx="585" cy="68" r="11" fill="#4f6bd8"/><text class="avtx" x="585" y="71" text-anchor="middle">R</text><text class="avlbl" x="585" y="49" text-anchor="middle">Recruiter</text>
+            <circle class="av" cx="511" cy="249" r="11" fill="#7c5cf0"/><text class="avtx" x="511" y="252" text-anchor="middle">PC</text><text class="avlbl" x="511" y="274" text-anchor="middle">Primary contact</text>
+            <circle class="av" cx="809" cy="249" r="11" fill="#3f8f6b"/><text class="avtx" x="809" y="252" text-anchor="middle">BM</text><text class="avlbl" x="809" y="274" text-anchor="middle">Board member</text>
+          </g>
+          <!-- one system core -->
+          <circle class="core" cx="660" cy="180" r="19"/><text class="coretx" x="660" y="185" text-anchor="middle">S</text>
+        </svg>
+      </div>
+    </div>
+    <div class="caps">
+      <div class="cap"><h4>The idea</h4><p><b>Breadth + complexity.</b> Three intertwined, ongoing pursuits — job, board, advisory — fed by your emails, notes and materials, with the people around each. One system holds them all.</p></div>
+      <div class="cap"><h4>The motion</h4><p>A pulse orbits each pursuit at its own pace; artifacts stream into the core; the people sit on the loops.</p></div>
+      <div class="cap"><h4>Best when</h4><p>You want to show the <b>full scope</b> — employment, board and advisory at once — and the real people-and-paperwork complexity.</p></div>
+    </div>
+  </section>
+
+  <!-- CONCEPT G -->
+  <section class="concept">
+    <div class="clabel"><span class="tag">Concept G</span><h3>Product at the centre <span style="color:var(--muted);font-weight:400;font-size:.85rem">— evolves F</span></h3>
+      <span class="k">Stormpine (with its real modules) sits in the middle; job, board &amp; advisory run around it, fed by your inputs.</span></div>
+    <div class="stage">
+      <div class="stagenav"><span class="brand"><span class="glyph" style="width:16px;height:16px;font-size:.55rem">S</span> Stormpine</span>
+        <span class="sp"><span>Product</span><span>Pricing</span><button class="btn">Sign in</button><button class="btn pri">Start free</button></span></div>
+      <div class="htext"><h1>Every pursuit runs through one place.</h1>
+        <p>Job, board and advisory — your relationships, pipeline, tasks, profile and assessments at the centre.</p></div>
+      <div class="model">
+        <svg class="pg" viewBox="0 0 960 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Stormpine at the centre with its modules, three pursuits around it, and inputs feeding in">
+          <!-- inputs feeding in -->
+          <g>
+            <rect class="art" x="30" y="72" width="150" height="26" rx="8"/><text class="arttx" x="46" y="89">Recruiter email</text>
+            <rect class="art" x="30" y="120" width="150" height="26" rx="8"/><text class="arttx" x="46" y="137">Meetings</text>
+            <rect class="art" x="30" y="168" width="150" height="26" rx="8"/><text class="arttx" x="46" y="185">Resume</text>
+            <rect class="art" x="30" y="216" width="150" height="26" rx="8"/><text class="arttx" x="46" y="233">Interviews</text>
+            <rect class="art" x="30" y="264" width="150" height="26" rx="8"/><text class="arttx" x="46" y="281">References</text>
+          </g>
+          <path class="feed" d="M180,85 Q360,120 500,165"/>
+          <path class="feed" d="M180,133 Q360,150 500,186" style="animation-duration:1.5s"/>
+          <path class="feed" d="M180,181 Q360,190 500,200" style="animation-duration:1.2s"/>
+          <path class="feed" d="M180,229 Q360,220 500,214" style="animation-duration:1.6s"/>
+          <path class="feed" d="M180,277 Q360,250 500,236" style="animation-duration:1.35s"/>
+          <!-- three pursuit rings around the hub -->
+          <circle class="ringJ" cx="600" cy="120" r="100"/>
+          <circle class="ringB" cx="669" cy="240" r="100"/>
+          <circle class="ringA" cx="531" cy="240" r="100"/>
+          <text class="plabelJ" x="600" y="12" text-anchor="middle">Job · CPTO role</text>
+          <text class="plabelB" x="784" y="238" text-anchor="start">Board · Nordic SaaS</text>
+          <text class="plabelA" x="531" y="360" text-anchor="middle">Advisory · Fintech</text>
+          <!-- orbit paths + travelling pulses (behind hub) -->
+          <path id="pgJ" d="M600,20 a100,100 0 1,1 0,200 a100,100 0 1,1 0,-200" fill="none" stroke="none"/>
+          <path id="pgB" d="M669,140 a100,100 0 1,1 0,200 a100,100 0 1,1 0,-200" fill="none" stroke="none"/>
+          <path id="pgA" d="M531,140 a100,100 0 1,1 0,200 a100,100 0 1,1 0,-200" fill="none" stroke="none"/>
+          <circle class="pJ" r="5"><animateMotion dur="5.5s" repeatCount="indefinite"><mpath href="#pgJ"/></animateMotion></circle>
+          <circle class="pB" r="5"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#pgB"/></animateMotion></circle>
+          <circle class="pA" r="5"><animateMotion dur="6.2s" repeatCount="indefinite"><mpath href="#pgA"/></animateMotion></circle>
+          <!-- Stormpine hub (on top, centred) -->
+          <rect class="hubglow" x="492" y="104" width="216" height="192" rx="20"/>
+          <rect class="hub" x="500" y="110" width="200" height="180" rx="18"/>
+          <rect class="glyph2" x="516" y="124" width="20" height="20" rx="6"/><text class="glyph2tx" x="526" y="139" text-anchor="middle">S</text>
+          <text class="hubname" x="544" y="140">Stormpine</text>
+          <line class="hubdiv" x1="516" y1="156" x2="684" y2="156"/>
+          <g>
+            <circle class="moddot" cx="522" cy="172" r="3"/><text class="modtx" x="534" y="176">Relationships</text>
+            <circle class="moddot" cx="522" cy="194" r="3"/><text class="modtx" x="534" y="198">Pipeline</text>
+            <circle class="moddot" cx="522" cy="216" r="3"/><text class="modtx" x="534" y="220">Tasks</text>
+            <circle class="moddot" cx="522" cy="238" r="3"/><text class="modtx" x="534" y="242">Profile</text>
+            <circle class="moddot" cx="522" cy="260" r="3"/><text class="modtx" x="534" y="264">Assessments</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="caps">
+      <div class="cap"><h4>The idea</h4><p><b>Product at the centre.</b> Stormpine — relationships, pipeline, tasks, profile, assessments — sits in the middle; job, board and advisory run around it, fed by emails, meetings, resume, interviews and references.</p></div>
+      <div class="cap"><h4>The motion</h4><p>A pulse orbits each pursuit; inputs stream into the core; the product hub holds it all, weaving behind the rings.</p></div>
+      <div class="cap"><h4>Best when</h4><p>You want to make the <b>product itself the hero</b> — naming exactly what it holds — while still showing breadth and complexity.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <b>Next:</b> tell me which direction (A, C, D, E, F or G — or a hybrid), and I'll build it as the real hero in <b>both themes</b>, wire it into <code>index.html</code>, and preview locally. Nothing goes live until you approve the push.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, mq=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)');
+  var tb=document.getElementById('themeToggle');
+  function eff(){var t=root.getAttribute('data-theme');return t==='dark'||t==='light'?t:(mq&&mq.matches?'dark':'light');}
+  function sync(){tb.textContent=eff()==='dark'?'☾':'☀';}
+  tb.addEventListener('click',function(){root.setAttribute('data-theme',eff()==='dark'?'light':'dark');sync();});
+  if(mq&&mq.addEventListener)mq.addEventListener('change',sync); sync();
+})();
+</script>
