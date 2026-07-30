@@ -70,8 +70,17 @@ p{margin:0}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .section-sub{color:var(--muted);max-width:56ch;margin-top:14px}
 
+/* ----- materials bar (prototype navigation) ----- */
+.matbar{position:sticky;top:0;z-index:60;background:var(--elevated);border-bottom:1px solid var(--border)}
+.matbar-in{max-width:var(--maxw);margin:0 auto;padding:6px 28px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;
+  font-size:.78rem;font-weight:600}
+.matlabel{color:var(--faint);text-transform:uppercase;letter-spacing:.12em;font-size:.64rem;margin-right:8px}
+.mat{padding:4px 10px;border-radius:7px;color:var(--muted);text-decoration:none;transition:color .15s,background .15s}
+.mat:hover{color:var(--text);background:var(--surface)}
+.mat.active{color:var(--text);background:var(--surface);border:1px solid var(--border)}
+
 /* ----- nav ----- */
-.nav{position:sticky;top:0;z-index:50;height:var(--nav-h);
+.nav{position:sticky;top:33px;z-index:50;height:var(--nav-h);
   backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 80%,transparent);
   border-bottom:1px solid var(--border)}
 .nav-inner{max-width:var(--maxw);margin:0 auto;height:100%;padding:0 28px;

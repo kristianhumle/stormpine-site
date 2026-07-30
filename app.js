@@ -29,6 +29,12 @@
   function headerHTML(active){
     function cur(k){ return active===k ? ' aria-current="page"' : ''; }
     return '' +
+    '<div class="matbar"><div class="matbar-in">' +
+      '<span class="matlabel">Materials</span>' +
+      '<a class="mat active" href="index.html">Website prototype</a>' +
+      '<a class="mat" href="stormpine-website-direction.html">Moodboard</a>' +
+      '<a class="mat" href="stormpine-hero-concepts.html">Hero concepts</a>' +
+    '</div></div>' +
     '<header class="nav"><div class="nav-inner">' +
       '<a class="brand" href="index.html"><span class="glyph">S</span> Stormpine</a>' +
       '<nav class="nav-links" id="navLinks" aria-label="Primary">' +
