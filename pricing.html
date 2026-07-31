@@ -4,21 +4,247 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing — Stormpine</title>
-<meta name="description" content="Stormpine pricing — a premium tool for people who take their careers seriously.">
+<meta name="description" content="Stormpine is free while in beta. A premium tool for people who take their careers seriously — no card required, and advance notice before pricing ever lands.">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Page-scoped styles for the pricing prototype (kept out of shared styles.css) */
+  .pr-hero{padding-bottom:0;text-align:center}
+  .pr-hero .pill-tag{margin-bottom:18px}
+
+  /* Beta feature card */
+  .pr-beta{position:relative;overflow:hidden}
+  .pr-beta::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% -20%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%)}
+  .pr-beta > *{position:relative}
+  .pr-price{display:flex;align-items:baseline;gap:12px;justify-content:center;margin:6px 0 4px}
+  .pr-price .amt{font-size:clamp(2.6rem,7vw,3.6rem);font-weight:680;letter-spacing:-.03em;line-height:1}
+  .pr-price .per{color:var(--muted);font-size:1rem}
+  .pr-strike{color:var(--faint);text-decoration:line-through;font-size:1.1rem}
+
+  /* Plan preview cards */
+  .pr-plan{display:flex;flex-direction:column;height:100%}
+  .pr-plan .pr-planhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+  .pr-plan h3{margin:0}
+  .pr-plan .pr-amt{font-family:var(--mono);font-size:1.15rem;font-weight:640;letter-spacing:-.01em;margin:10px 0 2px}
+  .pr-plan .pr-amt small{font-weight:500;color:var(--muted);font-size:.8rem}
+  .pr-plan .btn{margin-top:auto}
+  .pr-tag-indic{font-size:.66rem;text-transform:uppercase;letter-spacing:.11em;font-weight:600;
+    color:var(--faint);border:1px solid var(--border);border-radius:999px;padding:3px 9px;white-space:nowrap}
+
+  /* "How pricing will work" three-up */
+  .pr-how .ic{font-size:1.1rem;margin-bottom:12px;display:inline-grid;place-items:center;
+    width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--elevated)}
+
+  /* FAQ accordion (native details/summary) */
+  .pr-faq{max-width:760px;margin-inline:auto}
+  .pr-faq details{border-bottom:1px solid var(--border);padding:2px 0}
+  .pr-faq summary{list-style:none;cursor:pointer;padding:18px 4px;font-weight:600;font-size:1rem;
+    display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .pr-faq summary::-webkit-details-marker{display:none}
+  .pr-faq summary::after{content:"+";color:var(--accent);font-weight:700;font-size:1.25rem;flex:none;
+    transition:transform .2s ease}
+  .pr-faq details[open] summary::after{content:"–"}
+  .pr-faq details[open] summary{color:var(--text)}
+  .pr-faq .pr-ans{color:var(--muted);font-size:.96rem;line-height:1.6;padding:0 4px 20px;max-width:64ch}
+
+  .pr-note{font-size:.82rem;color:var(--faint);margin-top:16px}
+  .pr-orgs{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+  @media (max-width:640px){.pr-orgs{flex-direction:column;align-items:flex-start}}
+</style>
 </head>
 <body>
 <div id="site-header" data-active="pricing"></div>
+
 <main>
-  <section class="stub">
+
+  <!-- HERO -->
+  <section class="pr-hero">
     <div class="wrap narrow">
-      <span class="pill-tag tag"><span class="dot"></span> Planned page · pricing not finalised</span>
-      <h1 style="margin-top:8px">Pricing</h1>
-      <p class="lead" style="margin-top:16px">A free start and a single premium plan, positioned as a serious tool — not a freemium utility. Final numbers to be decided; we'll design the structure here.</p>
-      <div class="hero-cta"><a class="btn" href="index.html">← Back to home</a></div>
+      <span class="pill-tag reveal"><span class="dot"></span> Free while in beta</span>
+      <h1 class="reveal" style="max-width:15ch;margin-inline:auto">Free while we build it with you.</h1>
+      <p class="lead reveal" style="max-width:56ch;margin:20px auto 0">
+        Stormpine is in private beta, so it costs nothing today. No card, no commitment, nothing to cancel.
+        When paid plans arrive, you will hear from us well in advance, and early members keep a founding rate.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="#how">How pricing will work</a>
+      </div>
+      <p class="hero-note reveal">No card required · Your data stays yours · Cancel any time, there is nothing to cancel yet</p>
     </div>
   </section>
+
+  <!-- BETA OFFER CARD -->
+  <section style="padding-top:clamp(36px,5vw,60px)">
+    <div class="wrap narrow">
+      <div class="band pr-beta reveal" style="text-align:center">
+        <span class="eyebrow">Beta access</span>
+        <div class="pr-price">
+          <span class="pr-strike mono">Premium</span>
+          <span class="amt">Free</span>
+          <span class="per">while in beta</span>
+        </div>
+        <p class="section-sub" style="margin:6px auto 0;max-width:52ch">
+          Full access to the product for experienced leaders managing director, board and advisory pursuits.
+          We are opening it up to a small group and shaping it around how you actually work.
+        </p>
+        <ul class="feature-list reveal" style="max-width:460px;margin:22px auto 0;text-align:left">
+          <li><span class="ck">✓</span> The complete product: relationships, pipeline, tasks, materials and the AI copilot</li>
+          <li><span class="ck">✓</span> No credit card, no trial clock counting down</li>
+          <li><span class="ck">✓</span> Private by design: no ads, your data is never sold, you are the customer</li>
+          <li><span class="ck">✓</span> A direct line to the team, and real influence on what we build next</li>
+        </ul>
+        <div class="hero-cta" style="margin-top:26px">
+          <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANNED STRUCTURE PREVIEW -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:34px">
+      <span class="eyebrow">Where this is heading</span>
+      <h2 style="max-width:20ch;margin:12px auto 0">A free start and one serious premium plan.</h2>
+      <p class="section-sub" style="margin:14px auto 0">
+        This is the shape we are planning, not a price list. The structure is set, the numbers are not.
+        We will publish real pricing here before anything changes.
+      </p>
+    </div>
+    <div class="wrap">
+      <div class="grid-2" style="max-width:820px;margin-inline:auto">
+
+        <div class="card pr-plan reveal">
+          <div class="pr-planhead">
+            <h3>Free</h3>
+            <span class="pr-tag-indic">Always free</span>
+          </div>
+          <div class="pr-amt">€0 <small>/ month</small></div>
+          <p style="margin-top:10px">A durable home for your relationships and pursuits, kept between searches, not just during one.</p>
+          <ul class="feature-list" style="margin:18px 0 24px">
+            <li><span class="ck">✓</span> Core CRM: contacts, opportunities and notes</li>
+            <li><span class="ck">✓</span> A single active pursuit at a time</li>
+            <li><span class="ck">✓</span> Your history, kept private</li>
+          </ul>
+          <a class="btn" href="https://app.stormpine.com">Start free</a>
+        </div>
+
+        <div class="card hover pr-plan reveal" style="border-color:color-mix(in srgb,var(--accent) 40%,var(--border))">
+          <div class="pr-planhead">
+            <h3>Premium</h3>
+            <span class="pr-tag-indic" style="color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--border))">Price to be set</span>
+          </div>
+          <div class="pr-amt">Indicative <small>· a premium subscription, not a freemium upsell</small></div>
+          <p style="margin-top:10px">The full system for running several high-stakes moves at once, with grounded AI at every stage.</p>
+          <ul class="feature-list" style="margin:18px 0 24px">
+            <li><span class="ck">✓</span> Everything in Free</li>
+            <li><span class="ck">✓</span> Unlimited parallel pursuits: employment, board and advisory</li>
+            <li><span class="ck">✓</span> AI copilot: what is moving vs stalling, next moves, briefing notes</li>
+            <li><span class="ck">✓</span> Tailored materials, versioned per role</li>
+          </ul>
+          <a class="btn pri" href="https://app.stormpine.com">Start free in beta</a>
+        </div>
+
+      </div>
+      <p class="pr-note reveal" style="text-align:center">
+        Features shown are indicative and may move between plans before launch.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW PRICING WILL WORK -->
+  <section id="how" class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:34px">
+      <span class="eyebrow">The founding promise</span>
+      <h2 style="max-width:22ch;margin:12px auto 0">What happens when pricing arrives.</h2>
+      <p class="section-sub" style="margin:14px auto 0">No surprise charges, ever. Here is exactly how the move from beta to paid will work.</p>
+    </div>
+    <div class="wrap">
+      <div class="grid-3 pr-how">
+        <div class="card reveal">
+          <span class="ic">🗓️</span>
+          <h3>Notice in advance</h3>
+          <p>We will tell you at least 30 days before any plan starts costing money. No card on file means nothing can be charged without you choosing it.</p>
+        </div>
+        <div class="card reveal">
+          <span class="ic">✦</span>
+          <h3>A founding rate</h3>
+          <p>Members who join during beta keep a preferential founding price on Premium, held for as long as the subscription stays active.</p>
+        </div>
+        <div class="card reveal">
+          <span class="ic">🔒</span>
+          <h3>Your work stays yours</h3>
+          <p>If you decide not to continue on a paid plan, your account and its history remain available on the Free tier. Nothing is held hostage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANISATIONS POINTER -->
+  <section class="divider">
+    <div class="wrap narrow">
+      <div class="band pr-orgs reveal">
+        <div>
+          <span class="eyebrow">For organisations</span>
+          <h3 style="margin:12px 0 6px">Offering Stormpine to your members or clients?</h3>
+          <p class="section-sub" style="margin-top:0">
+            A-kasser, outplacement providers, coaching firms and executive search: talk to us about bundled access. Pricing here is separate from individual plans.
+          </p>
+        </div>
+        <a class="btn" href="organisations.html" style="flex:none">For organisations →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:30px">
+      <span class="eyebrow">Questions</span>
+      <h2 style="margin-top:12px">Fair questions about a free beta.</h2>
+    </div>
+    <div class="wrap pr-faq reveal">
+      <details open>
+        <summary>Is it really free right now?</summary>
+        <div class="pr-ans">Yes. While Stormpine is in beta there is no charge and no card required. We would rather have you using it and telling us what works than have your payment details on file.</div>
+      </details>
+      <details>
+        <summary>What will it cost when you start charging?</summary>
+        <div class="pr-ans">We have not fixed the numbers. The plan is a free tier plus one premium subscription, priced as a serious professional tool rather than a cheap utility. We will publish real pricing on this page before anything changes, and members who joined in beta keep a founding rate.</div>
+      </details>
+      <details>
+        <summary>Will I be charged automatically when beta ends?</summary>
+        <div class="pr-ans">No. There is no card on file, so nothing can be charged without you actively choosing a paid plan. You will get at least 30 days' notice before paid plans begin, and you can simply stay on the Free tier if that suits you.</div>
+      </details>
+      <details>
+        <summary>What happens to my data if I do not upgrade?</summary>
+        <div class="pr-ans">It stays with you. Your relationships, notes and history remain in your account on the Free tier. Stormpine is built to be kept between searches, not cancelled after one, so we do not lock your record behind a paywall.</div>
+      </details>
+      <details>
+        <summary>Is my information private?</summary>
+        <div class="pr-ans">Career moves are sensitive, and we treat them that way. No ads, and your data is never sold. You are the customer here, not the product. More detail lives on our <a href="trust.html">Trust &amp; privacy</a> page.</div>
+      </details>
+      <details>
+        <summary>Can I cancel?</summary>
+        <div class="pr-ans">There is nothing to cancel during beta, and no subscription to unwind. When paid plans exist you will be able to cancel at any time and drop back to the Free tier without losing your history.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="divider cta">
+    <div class="wrap narrow reveal">
+      <h2>Start now, while it is free.</h2>
+      <p class="lead">Bring the relationships, context and momentum behind your career into one private system, and help shape where it goes.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="index.html#how">See how it works</a>
+      </div>
+      <p class="hero-note">No card required · Founding rate for beta members</p>
+    </div>
+  </section>
+
 </main>
+
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
 </body>
