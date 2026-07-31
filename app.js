@@ -17,7 +17,10 @@
     open:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/>',
     placed:'<path d="M5.5 21V4.5M5.5 5h11l-2 3 2 3h-11"/>',
     org:'<rect x="4.5" y="3.5" width="15" height="17" rx="1.2"/><path d="M8.5 7.5h2M8.5 11h2M8.5 14.5h2M13.5 7.5h2M13.5 11h2M13.5 14.5h2M9.5 20.5v-3h5v3"/>',
-    caret:'<path d="M6 9l6 6 6-6"/>'
+    caret:'<path d="M6 9l6 6 6-6"/>',
+    guide:'<path d="M12 6c-1.5-1-3.5-1.5-5.5-1.5H4v13h2.5c2 0 4 .5 5.5 1.5M12 6c1.5-1 3.5-1.5 5.5-1.5H20v13h-2.5c-2 0-4 .5-5.5 1.5M12 6v13"/>',
+    link:'<path d="M9.5 14.5l5-5"/><path d="M13.5 7l1-1a3.4 3.4 0 0 1 4.8 4.8l-2 2a3.4 3.4 0 0 1-4.8 0"/><path d="M10.5 17l-1 1a3.4 3.4 0 0 1-4.8-4.8l2-2a3.4 3.4 0 0 1 4.8 0"/>',
+    help:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.9.5-1.5 1.1-1.5 2.1M12 16.8h.01"/>'
   };
   function icon(n){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+(P[n]||'')+'</svg>'; }
 
@@ -81,6 +84,14 @@
           '</div></div>' +
         '</div>' +
         '<a class="nav-top" href="pricing.html"'+cur('pricing')+'>Pricing</a>' +
+        '<div class="has-mega">' +
+          '<a class="nav-top" href="guides.html"'+cur('resources')+'>Resources <span class="caret">'+icon('caret')+'</span></a>' +
+          '<div class="mega product"><div class="mega-inner">' +
+            mItem('guide','Guides &amp; playbooks','Executive-grade craft for board, advisory and recruiter work.','guides.html') +
+            mItem('link','Integrations','How Stormpine connects to LinkedIn and email, on your consent.','integrations.html') +
+            mItem('help','Help &amp; support','Getting started, FAQs and a direct line to the team.','help.html') +
+          '</div></div>' +
+        '</div>' +
         '<a class="nav-top" href="trust.html"'+cur('trust')+'>Trust &amp; privacy</a>' +
       '</nav>' +
       '<div class="nav-right">' +
@@ -108,7 +119,13 @@
           '<li><a href="organisations.html">A-kasser &amp; associations</a></li>' +
           '<li><a href="organisations.html">Outplacement</a></li>' +
           '<li><a href="organisations.html">Coaches</a></li></ul></div>' +
+        '<div><h4>Resources</h4><ul>' +
+          '<li><a href="guides.html">Guides &amp; playbooks</a></li>' +
+          '<li><a href="integrations.html">Integrations</a></li>' +
+          '<li><a href="help.html">Help &amp; support</a></li></ul></div>' +
         '<div><h4>Company</h4><ul>' +
+          '<li><a href="about.html">About us</a></li>' +
+          '<li><a href="contact.html">Contact</a></li>' +
           '<li><a href="trust.html">Trust &amp; privacy</a></li>' +
           '<li><a href="privacy.html">Privacy policy</a></li>' +
           '<li><a href="terms.html">Terms</a></li></ul></div>' +
