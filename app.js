@@ -18,6 +18,7 @@
     placed:'<path d="M5.5 21V4.5M5.5 5h11l-2 3 2 3h-11"/>',
     org:'<rect x="4.5" y="3.5" width="15" height="17" rx="1.2"/><path d="M8.5 7.5h2M8.5 11h2M8.5 14.5h2M13.5 7.5h2M13.5 11h2M13.5 14.5h2M9.5 20.5v-3h5v3"/>',
     caret:'<path d="M6 9l6 6 6-6"/>',
+    globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/>',
     guide:'<path d="M12 6c-1.5-1-3.5-1.5-5.5-1.5H4v13h2.5c2 0 4 .5 5.5 1.5M12 6c1.5-1 3.5-1.5 5.5-1.5H20v13h-2.5c-2 0-4 .5-5.5 1.5M12 6v13"/>',
     link:'<path d="M9.5 14.5l5-5"/><path d="M13.5 7l1-1a3.4 3.4 0 0 1 4.8 4.8l-2 2a3.4 3.4 0 0 1-4.8 0"/><path d="M10.5 17l-1 1a3.4 3.4 0 0 1-4.8-4.8l2-2a3.4 3.4 0 0 1 4.8 0"/>',
     help:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.9.5-1.5 1.1-1.5 2.1M12 16.8h.01"/>'
@@ -39,6 +40,35 @@
   function mItem(ic,tt,dd,href){
     return '<a class="mega-item" href="'+href+'"><span class="mega-ic">'+icon(ic)+'</span>'+
       '<span class="mega-tx"><span class="mega-tt">'+tt+'</span><span class="mega-dd">'+dd+'</span></span></a>';
+  }
+
+  /* ---------- region / language selector ----------
+     Prototype: English is live; Danish is present but marked "coming soon".
+     The control remembers the choice and sets the document lang attribute.
+     Actual translation of page content is deferred to the production build. */
+  var LOCALES = [
+    { code:'en-GB', tag:'EN', country:'United Kingdom', lang:'English', live:true },
+    { code:'da-DK', tag:'DA', country:'Danmark', lang:'Dansk', live:false }
+  ];
+  function localeCtl(up){
+    var opts = LOCALES.map(function(l){
+      var on = l.code === 'en-GB';
+      return '<button class="locale-opt'+(l.live?'':' soon')+'" type="button" role="menuitemradio"'+
+        ' aria-checked="'+(on?'true':'false')+'"'+(l.live?'':' aria-disabled="true"')+' data-locale="'+l.code+'">'+
+        '<span class="lo-main">'+l.country+'</span><span class="lo-sub">'+l.lang+'</span>'+
+        (l.live ? '<span class="lo-right locale-check" aria-hidden="true">✓</span>'
+                : '<span class="lo-right locale-soon">Soon</span>')+
+      '</button>';
+    }).join('');
+    return '<div class="locale'+(up?' up':'')+'">'+
+      '<button class="locale-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Region and language">'+
+        icon('globe')+'<span class="locale-code">EN</span><span class="caret">'+icon('caret')+'</span>'+
+      '</button>'+
+      '<div class="locale-menu" role="menu">'+
+        '<div class="locale-menu-h">Region &amp; language</div>'+opts+
+        '<div class="locale-note" hidden>Dansk kommer snart.</div>'+
+      '</div>'+
+    '</div>';
   }
 
   /* ---------- header ---------- */
@@ -95,6 +125,7 @@
         '<a class="nav-top" href="trust.html"'+cur('trust')+'>Trust &amp; privacy</a>' +
       '</nav>' +
       '<div class="nav-right">' +
+        localeCtl(false) +
         '<button class="iconbtn" id="themeToggle" type="button" aria-label="Switch theme">☾</button>' +
         '<a class="btn ghost hide-sm" href="https://app.stormpine.com">Sign in</a>' +
         '<a class="btn pri" href="https://app.stormpine.com">Start free</a>' +
@@ -131,7 +162,7 @@
           '<li><a href="terms.html">Terms</a></li></ul></div>' +
       '</div>' +
       '<div class="footer-bottom"><span>&copy; 2026 Stormpine · Nordic-native, Denmark first</span>' +
-        '<span class="langhint">English · Dansk (kommer snart)</span></div>' +
+        localeCtl(true) + '</div>' +
     '</div></footer>';
   }
 
@@ -159,6 +190,51 @@
     navToggle.addEventListener('click', function(){ var open=navLinks.classList.toggle('open'); navToggle.setAttribute('aria-expanded', open); });
     navLinks.addEventListener('click', function(e){ if(e.target.closest('a')){ navLinks.classList.remove('open'); navToggle.setAttribute('aria-expanded', false);} });
   }
+
+  /* ---------- region / language selector behaviour ---------- */
+  (function(){
+    var ctls = [].slice.call(document.querySelectorAll('.locale'));
+    if (!ctls.length) return;
+    var saved = null; try { saved = window.localStorage.getItem('sp-locale'); } catch(e){}
+    // Only English is live for now, so the effective locale stays en-GB regardless.
+    root.setAttribute('lang', (saved === 'da-DK' ? 'da' : 'en'));
+
+    function closeAll(){
+      ctls.forEach(function(c){
+        c.classList.remove('open');
+        var b = c.querySelector('.locale-btn'); if (b) b.setAttribute('aria-expanded','false');
+        var n = c.querySelector('.locale-note'); if (n) n.hidden = true;
+      });
+    }
+    ctls.forEach(function(c){
+      var btn = c.querySelector('.locale-btn');
+      var menu = c.querySelector('.locale-menu');
+      var note = c.querySelector('.locale-note');
+      menu.addEventListener('click', function(e){ e.stopPropagation(); });
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var willOpen = !c.classList.contains('open');
+        closeAll();
+        if (willOpen){ c.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+      });
+      c.querySelectorAll('.locale-opt').forEach(function(opt){
+        opt.addEventListener('click', function(){
+          if (opt.classList.contains('soon')){ if (note) note.hidden = false; return; }
+          var code = opt.getAttribute('data-locale');
+          try { window.localStorage.setItem('sp-locale', code); } catch(err){}
+          root.setAttribute('lang', code.slice(0,2));
+          ctls.forEach(function(cc){
+            cc.querySelectorAll('.locale-opt').forEach(function(o){
+              o.setAttribute('aria-checked', o.getAttribute('data-locale') === code ? 'true' : 'false');
+            });
+          });
+          closeAll();
+        });
+      });
+    });
+    document.addEventListener('click', closeAll);
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeAll(); });
+  })();
 
   /* ---------- scroll reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');

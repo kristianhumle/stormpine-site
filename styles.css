@@ -131,6 +131,39 @@ p{margin:0}
 .iconbtn:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
 .navtoggle{display:none;background:none;border:0;color:var(--text);cursor:pointer;font-size:1.3rem;padding:4px}
 
+/* ----- region / language selector ----- */
+.locale{position:relative;display:flex}
+.locale-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 9px;border-radius:8px;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;
+  font:inherit;font-size:.8rem;font-weight:600;letter-spacing:.01em;transition:border-color .15s}
+.locale-btn:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+.locale-btn svg{width:15px;height:15px;flex:none}
+.locale-btn .locale-code{line-height:1}
+.locale-btn .caret{width:11px;height:11px;opacity:.6;transition:transform .2s}
+.locale-btn .caret svg{width:11px;height:11px;display:block}
+.locale.open .caret{transform:rotate(180deg)}
+.locale-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:246px;z-index:70;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
+  padding:6px;opacity:0;visibility:hidden;transform:translateY(6px);pointer-events:none;
+  transition:opacity .16s ease,transform .16s ease,visibility .16s}
+.locale.up .locale-menu{top:auto;bottom:calc(100% + 8px)}
+.locale.open .locale-menu{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+.locale-menu-h{font-size:.64rem;text-transform:uppercase;letter-spacing:.11em;color:var(--faint);
+  font-weight:600;padding:6px 9px 8px}
+.locale-opt{display:flex;align-items:center;gap:8px;width:100%;padding:9px 10px;border-radius:9px;
+  border:0;background:none;color:var(--text);font:inherit;font-size:.86rem;text-align:left;cursor:pointer;
+  transition:background .14s}
+.locale-opt:hover{background:var(--elevated)}
+.locale-opt.soon,.locale-opt.soon:hover{cursor:default;background:none}
+.locale-opt .lo-main{font-weight:600;white-space:nowrap}
+.locale-opt .lo-sub{color:var(--muted);font-size:.8rem;white-space:nowrap}
+.locale-opt .lo-right{margin-left:auto;display:flex;align-items:center}
+.locale-check{color:var(--accent);font-weight:700}
+.locale-soon{font-size:.6rem;text-transform:uppercase;letter-spacing:.09em;font-weight:700;color:var(--faint);
+  border:1px solid var(--border);border-radius:999px;padding:2px 7px}
+.locale-note{font-size:.76rem;color:var(--muted);padding:8px 10px 4px;border-top:1px solid var(--border);margin-top:4px}
+.footer .locale-btn{background:transparent}
+
 /* ----- buttons ----- */
 .btn{font:inherit;font-size:.9rem;font-weight:600;padding:9px 16px;border-radius:9px;
   border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;
