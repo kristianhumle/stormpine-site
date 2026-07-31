@@ -54,10 +54,10 @@
           '<a class="nav-top" href="who-its-for.html"'+cur('who')+'>Who it\'s for <span class="caret">'+icon('caret')+'</span></a>' +
           '<div class="mega who"><div class="mega-inner">' +
             '<div class="mega-col">' +
-              mItem('transition','Active transition','Several live leadership opportunities at once.','who-its-for.html') +
-              mItem('board','Board &amp; advisory','Long, relationship-led board and advisory pursuits.','who-its-for.html') +
-              mItem('open','Quietly open','Maintaining recruiter relationships, not yet searching.','who-its-for.html') +
-              mItem('placed','Recently placed','Preserve the context you just built.','who-its-for.html') +
+              mItem('transition','Active transition','Several live leadership opportunities at once.','who-its-for.html#transition') +
+              mItem('board','Board &amp; advisory','Long, relationship-led board and advisory pursuits.','who-its-for.html#board') +
+              mItem('open','Quietly open','Maintaining recruiter relationships, not yet searching.','who-its-for.html#open') +
+              mItem('placed','Recently placed','Preserve the context you just built.','who-its-for.html#placed') +
             '</div>' +
             '<div class="mega-col aside">' +
               '<div class="mega-h">For organisations</div>' +
@@ -97,8 +97,8 @@
           '<li><a href="organisations.html">Coaches</a></li></ul></div>' +
         '<div><h4>Company</h4><ul>' +
           '<li><a href="trust.html">Trust &amp; privacy</a></li>' +
-          '<li><a href="#">Privacy policy</a></li>' +
-          '<li><a href="#">Terms</a></li></ul></div>' +
+          '<li><a href="privacy.html">Privacy policy</a></li>' +
+          '<li><a href="terms.html">Terms</a></li></ul></div>' +
       '</div>' +
       '<div class="footer-bottom"><span>&copy; 2026 Stormpine · Nordic-native, Denmark first</span>' +
         '<span class="langhint">English · Dansk (kommer snart)</span></div>' +

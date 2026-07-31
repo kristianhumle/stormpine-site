@@ -4,21 +4,281 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who it's for — Stormpine</title>
-<meta name="description" content="Stormpine is built for experienced leaders managing director, board and advisory moves.">
+<meta name="description" content="Stormpine is built for a handful of consequential career moves: an active transition, a board and advisory portfolio, staying quietly open, or preserving the context you just built.">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Page-scoped styles for the Who-it's-for prototype (kept out of shared styles.css) */
+  .wf-intro{text-align:center}
+  .wf-intro .pill-tag{margin-bottom:18px}
+
+  /* Self-selection strip */
+  .wf-select{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media (max-width:860px){.wf-select{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.wf-select{grid-template-columns:1fr}}
+  .wf-pick{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--border);
+    border-radius:var(--radius);background:var(--surface);text-decoration:none;color:var(--text);
+    transition:border-color .18s ease,transform .18s ease}
+  .wf-pick:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));transform:translateY(-3px)}
+  .wf-pick .pm{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#fff;
+    background:var(--wf-accent,var(--accent))}
+  .wf-pick b{font-size:.98rem;letter-spacing:-.01em}
+  .wf-pick .sub{color:var(--muted);font-size:.85rem;line-height:1.45}
+  .wf-pick .go{color:var(--accent);font-size:.8rem;font-weight:600;margin-top:auto}
+
+  /* Situation blocks */
+  .wf-anchor{scroll-margin-top:96px}
+  .wf-block + .wf-block{margin-top:clamp(48px,7vw,88px)}
+  .wf-tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;text-transform:uppercase;
+    letter-spacing:.13em;font-weight:600;color:var(--wf-accent,var(--accent));margin-bottom:14px}
+  .wf-tag .d{width:8px;height:8px;border-radius:50%;background:var(--wf-accent,var(--accent))}
+
+  /* Vignette / product-in-context panel */
+  .wf-panel{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);
+    box-shadow:var(--shadow-sm);padding:20px 22px;position:relative;overflow:hidden}
+  .wf-panel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--wf-accent,var(--accent))}
+  .wf-phead{display:flex;align-items:center;gap:9px;font-size:.68rem;text-transform:uppercase;
+    letter-spacing:.12em;color:var(--faint);font-weight:600;margin-bottom:8px}
+  .wf-phead .d{width:7px;height:7px;border-radius:50%;background:var(--wf-accent,var(--accent))}
+  .wf-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-top:1px solid var(--border);font-size:.9rem}
+  .wf-row .m{width:8px;height:8px;border-radius:2px;margin-top:5px;flex:none;
+    background:var(--wf-accent,var(--accent));opacity:.9}
+  .wf-row .t{color:var(--text);line-height:1.4}
+  .wf-row .t small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+  .wf-quote{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
+    font-size:.82rem;color:var(--faint);font-style:italic;line-height:1.55}
+
+  /* "Not built for" list */
+  .wf-not{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px 26px}
+  @media (max-width:640px){.wf-not{grid-template-columns:1fr}}
+  .wf-not li{display:flex;gap:11px;color:var(--muted);font-size:.95rem;line-height:1.45}
+  .wf-not .x{color:var(--faint);font-weight:700;flex:none}
+
+  .wf-orgs{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+  @media (max-width:640px){.wf-orgs{flex-direction:column;align-items:flex-start}}
+</style>
 </head>
 <body>
 <div id="site-header" data-active="who"></div>
+
 <main>
-  <section class="stub">
+
+  <!-- INTRO / PROBLEM RESTATEMENT -->
+  <section class="wf-intro">
     <div class="wrap narrow">
-      <span class="pill-tag tag"><span class="dot"></span> Planned page</span>
-      <h1 style="margin-top:8px">Who it's for</h1>
-      <p class="lead" style="margin-top:16px">The situations Stormpine is built for — active transition, board &amp; advisory portfolio, quietly open, recently placed. Coming after the homepage.</p>
-      <div class="hero-cta"><a class="btn" href="index.html">← Back to home</a></div>
+      <span class="pill-tag reveal"><span class="dot"></span> Who it's for</span>
+      <h1 class="reveal" style="max-width:17ch;margin-inline:auto">Built for the moves that shape a career, not a job hunt.</h1>
+      <p class="lead reveal" style="max-width:58ch;margin:20px auto 0">
+        Stormpine is not defined by a job title. It is defined by a moment: you are running one or more
+        high-stakes moves at once, and the relationships, conversations and next steps that decide them
+        are scattered across your inbox, your notes and your memory. Find the situation that sounds like
+        yours right now.
+      </p>
     </div>
   </section>
+
+  <!-- SELF-SELECTION STRIP -->
+  <section style="padding-top:clamp(28px,4vw,44px)">
+    <div class="wrap">
+      <div class="wf-select reveal">
+        <a class="wf-pick wf-anchor" href="#transition" style="--wf-accent:var(--accent)">
+          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h13.5M12 6.5l6 5.5-6 5.5"/></svg></span>
+          <b>Active transition</b>
+          <span class="sub">Several live leadership opportunities at once.</span>
+          <span class="go">This is me ↓</span>
+        </a>
+        <a class="wf-pick wf-anchor" href="#board" style="--wf-accent:var(--lilac)">
+          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="7" height="7" rx="1.2"/><rect x="13.5" y="4" width="7" height="7" rx="1.2"/><rect x="3.5" y="13" width="7" height="7" rx="1.2"/><rect x="13.5" y="13" width="7" height="7" rx="1.2"/></svg></span>
+          <b>Board &amp; advisory</b>
+          <span class="sub">Long, relationship-led board and advisory pursuits.</span>
+          <span class="go">This is me ↓</span>
+        </a>
+        <a class="wf-pick wf-anchor" href="#open" style="--wf-accent:var(--amber)">
+          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+          <b>Quietly open</b>
+          <span class="sub">Keeping relationships warm, not yet searching.</span>
+          <span class="go">This is me ↓</span>
+        </a>
+        <a class="wf-pick wf-anchor" href="#placed" style="--wf-accent:var(--lilac)">
+          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 21V4.5M5.5 5h11l-2 3 2 3h-11"/></svg></span>
+          <b>Recently placed</b>
+          <span class="sub">Preserve the context you just built.</span>
+          <span class="go">This is me ↓</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITUATION BLOCKS -->
+  <section class="divider">
+    <div class="wrap">
+
+      <!-- 1 · Active transition -->
+      <div class="wf-block wf-anchor" id="transition" style="--wf-accent:var(--accent)">
+        <div class="feature reveal">
+          <div class="feature-copy">
+            <span class="wf-tag"><span class="d"></span> Active transition</span>
+            <h2>Several live processes, none of them simple.</h2>
+            <p>You are three conversations deep with two search firms, a final round on the calendar, and a fourth lead you cannot quite place. The detail that decides these things, who said what, what you promised to send, where each process actually stands, is spread across your inbox, a notebook and your memory.</p>
+            <ul class="feature-list">
+              <li><span class="ck">✓</span> Every opportunity, stage and next step on one board, so nothing quietly stalls</li>
+              <li><span class="ck">✓</span> The full history with each recruiter and hiring manager, one click away before a call</li>
+              <li><span class="ck">✓</span> A weekly read on what is moving, what is waiting on you, and what has gone quiet</li>
+              <li><span class="ck">✓</span> Grounded prep notes before an interview or negotiation, drawn from your own record</li>
+            </ul>
+          </div>
+          <div class="wf-panel">
+            <div class="wf-phead"><span class="d"></span> In view before your next call</div>
+            <div class="wf-row"><span class="m"></span><span class="t">CFO search · Nordic SaaS<small>Final round Thursday · panel of three</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">Recruiter: Malene B.<small>You owe two references</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">COO lead · PE-backed<small>Stalled 12 days · nudge the introducer?</small></span></div>
+            <p class="wf-quote">Illustrative. Stormpine keeps the three or four things that actually matter this week at the top, instead of buried in a thread.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · Board & advisory -->
+      <div class="wf-block wf-anchor" id="board" style="--wf-accent:var(--lilac)">
+        <div class="feature flip reveal">
+          <div class="feature-copy">
+            <span class="wf-tag"><span class="d"></span> Board &amp; advisory</span>
+            <h2>The slowest, most relationship-led search you run.</h2>
+            <p>A board seat rarely comes from an application. It comes from a conversation two years ago, a warm introduction, a reputation quietly maintained. These pursuits run for months, sometimes across several boards at once, and the thread is easy to lose between the moments that matter.</p>
+            <ul class="feature-list">
+              <li><span class="ck">✓</span> Track board and advisory pursuits on their own long timeline, apart from employment</li>
+              <li><span class="ck">✓</span> Keep every sponsor, chair and introducer as a living relationship, not a stale contact</li>
+              <li><span class="ck">✓</span> Remember the context of each conversation, so a six-month gap never reads as a cold start</li>
+              <li><span class="ck">✓</span> See where a nomination is genuinely progressing versus politely idling</li>
+            </ul>
+          </div>
+          <div class="wf-panel">
+            <div class="wf-phead"><span class="d"></span> A pursuit that spans months</div>
+            <div class="wf-row"><span class="m"></span><span class="t">Board · Fintech scale-up<small>Warm intro via J. Holm · Mar</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">Chair conversation<small>Follow up in Q3, after their raise</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">Advisory · Health SaaS<small>Scope call booked · equity terms open</small></span></div>
+            <p class="wf-quote">Illustrative. The long game only works if the record outlives the gaps between conversations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Quietly open -->
+      <div class="wf-block wf-anchor" id="open" style="--wf-accent:var(--amber)">
+        <div class="feature reveal">
+          <div class="feature-copy">
+            <span class="wf-tag"><span class="d"></span> Quietly open</span>
+            <h2>Not looking. Not closed either.</h2>
+            <p>You are content where you are, but the right approach would change that. So you keep the door open: a coffee with a headhunter, a note after a good conversation, a relationship worth not letting cool. The trouble is that "quietly open" has no system, so it lives entirely in your head.</p>
+            <ul class="feature-list">
+              <li><span class="ck">✓</span> Keep recruiter and network relationships warm without a live search running</li>
+              <li><span class="ck">✓</span> Note what was discussed and when, so you can pick a thread back up naturally</li>
+              <li><span class="ck">✓</span> Capture signals, a role that opened, a mention, a move, as they happen</li>
+              <li><span class="ck">✓</span> Be ready to move deliberately the day the right approach lands</li>
+            </ul>
+          </div>
+          <div class="wf-panel">
+            <div class="wf-phead"><span class="d"></span> Kept warm, not lost</div>
+            <div class="wf-row"><span class="m"></span><span class="t">Headhunter: Anders K.<small>Coffee in ~3 weeks · fintech focus</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">Signal<small>Former peer now chairing a search committee</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">Standing note<small>Open to CPTO, not to COO</small></span></div>
+            <p class="wf-quote">Illustrative. Being "quietly open" is a real position. It deserves a real place to live.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Recently placed -->
+      <div class="wf-block wf-anchor" id="placed" style="--wf-accent:var(--lilac)">
+        <div class="feature flip reveal">
+          <div class="feature-copy">
+            <span class="wf-tag"><span class="d"></span> Recently placed</span>
+            <h2>You just landed. Do not throw the map away.</h2>
+            <p>The search is over and the offer is signed. Most people close the spreadsheet and lose everything they learned: the relationships, the compensation benchmarks, the reasons this role won. The next move is three or five years out, and it will start from cold unless you keep the record.</p>
+            <ul class="feature-list">
+              <li><span class="ck">✓</span> Preserve the relationships and context you built, ready for next time</li>
+              <li><span class="ck">✓</span> Keep a private note on why this move won, and what you would weigh differently</li>
+              <li><span class="ck">✓</span> Stay lightly in touch with the recruiters and sponsors who backed you</li>
+              <li><span class="ck">✓</span> Turn a one-off search into a durable career record you own for good</li>
+            </ul>
+          </div>
+          <div class="wf-panel">
+            <div class="wf-phead"><span class="d"></span> The record you keep between moves</div>
+            <div class="wf-row"><span class="m"></span><span class="t">Placed · VP Product<small>Closed Jun 2026 · 4-month process</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">Relationships to keep warm<small>7 people · last touch varies</small></span></div>
+            <div class="wf-row"><span class="m"></span><span class="t">Saved for next time<small>Comp benchmark · what tipped the decision</small></span></div>
+            <p class="wf-quote">Illustrative. A career is a sequence of moves. Stormpine is the thread that runs through all of them.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ROLE REASSURANCE STRIP -->
+  <section class="divider" style="padding-top:clamp(40px,6vw,72px);padding-bottom:clamp(40px,6vw,72px)">
+    <div class="wrap narrow" style="text-align:center">
+      <span class="eyebrow reveal" style="display:block;margin-bottom:20px">Usually that means</span>
+      <div class="builtfor reveal" style="border:0">
+        <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg> Experienced leaders</span>
+        <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7.5" width="17" height="11" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5M3.5 12.5h17"/></svg> Directors &amp; VPs</span>
+        <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="6" width="4" height="12" rx="1"/><rect x="10" y="6" width="4" height="12" rx="1"/><rect x="15.5" y="6" width="4" height="12" rx="1"/></svg> Board candidates</span>
+        <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l1.6 4.4L18 10l-4.4 1.6L12 16l-1.6-4.4L6 10l4.4-1.6z"/></svg> Advisers &amp; portfolio-builders</span>
+      </div>
+      <p class="section-sub reveal" style="margin:20px auto 0;max-width:52ch">
+        The common thread is seniority and stakes, not a single title. If a move could reshape your next few years, it belongs here.
+      </p>
+    </div>
+  </section>
+
+  <!-- NOT BUILT FOR (honesty) -->
+  <section class="divider">
+    <div class="wrap narrow">
+      <div class="band reveal">
+        <span class="eyebrow" style="display:block;margin-bottom:12px">Where Stormpine is the wrong tool</span>
+        <h2 style="max-width:22ch">A focused instrument for a few high-stakes moves, not a volume machine.</h2>
+        <p class="section-sub" style="margin-top:14px">Being clear about what this is not is part of the point. Stormpine is deliberately not built for:</p>
+        <ul class="wf-not">
+          <li><span class="x">✕</span> High-volume applying: hundreds of roles, autofilled and fired off</li>
+          <li><span class="x">✕</span> Entry-level or early-career job hunting</li>
+          <li><span class="x">✕</span> Recruiters managing candidates: this is built from the leader's side of the table</li>
+          <li><span class="x">✕</span> Anyone who wants a public profile: Stormpine is private by design</li>
+        </ul>
+        <p class="section-sub" style="margin-top:18px">
+          If that is what you need, an application tracker will serve you better. Stormpine is for the handful of moves that actually shape a career.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR ORGANISATIONS POINTER -->
+  <section class="divider">
+    <div class="wrap narrow">
+      <div class="band wf-orgs reveal">
+        <div>
+          <span class="eyebrow">For organisations</span>
+          <h3 style="margin:12px 0 6px">Supporting leaders through a transition?</h3>
+          <p class="section-sub" style="margin-top:0">
+            A-kasser and associations, outplacement providers and coaches can offer Stormpine to the people they support, as a private career benefit or a digital backbone between sessions.
+          </p>
+        </div>
+        <a class="btn" href="organisations.html" style="flex:none">For organisations →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="divider cta">
+    <div class="wrap narrow reveal">
+      <h2>Whichever move you are making, make it deliberately.</h2>
+      <p class="lead">Bring the relationships, context and momentum behind your career into one private system.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="index.html#how">See how it works</a>
+      </div>
+      <p class="hero-note">Free while in beta · No card required</p>
+    </div>
+  </section>
+
 </main>
+
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
 </body>

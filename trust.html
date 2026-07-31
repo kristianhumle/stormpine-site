@@ -4,21 +4,273 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trust &amp; privacy — Stormpine</title>
-<meta name="description" content="How Stormpine handles sensitive career data: ownership, GDPR, Nordic residency and security posture.">
+<meta name="description" content="How Stormpine handles sensitive career data: you own it, it is never sold, it is built for GDPR, kept in the EU, and shared only with your consent.">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Page-scoped styles for the trust prototype (kept out of shared styles.css) */
+  .tp-hero{padding-bottom:0;text-align:center}
+  .tp-hero .pill-tag{margin-bottom:18px}
+
+  /* principle cards */
+  .tp-ic{font-size:1.05rem;margin-bottom:14px;display:inline-grid;place-items:center;
+    width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--elevated)}
+  .tp-card h3{margin:0 0 8px}
+  .tp-card p{margin:0}
+
+  /* rights list */
+  .tp-rights{display:grid;grid-template-columns:1fr 1fr;gap:14px 34px;max-width:820px;margin:0 auto}
+  @media (max-width:640px){.tp-rights{grid-template-columns:1fr}}
+  .tp-right{display:flex;gap:12px;align-items:flex-start}
+  .tp-right .rk{flex:none;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;
+    border:1px solid var(--border);background:var(--elevated);font-size:.8rem;color:var(--accent)}
+  .tp-right h4{margin:0 0 2px;font-size:.98rem}
+  .tp-right p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+
+  /* sub-processor table */
+  .tp-table{width:100%;border-collapse:collapse;font-size:.92rem}
+  .tp-table th,.tp-table td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+  .tp-table th{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:600}
+  .tp-table td:first-child{font-weight:600;white-space:nowrap}
+  .tp-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:14px}
+
+  /* honesty note */
+  .tp-honest{border:1px dashed color-mix(in srgb,var(--accent) 40%,var(--border));border-radius:16px;
+    padding:22px 24px;background:color-mix(in srgb,var(--accent) 5%,transparent)}
+
+  /* doc links */
+  .tp-docs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:820px){.tp-docs{grid-template-columns:1fr 1fr}}
+  @media (max-width:520px){.tp-docs{grid-template-columns:1fr}}
+  .tp-doc{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    border:1px solid var(--border);border-radius:12px;padding:15px 17px;background:var(--elevated);
+    text-decoration:none;color:var(--text);transition:border-color .15s ease,transform .15s ease}
+  .tp-doc:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));transform:translateY(-1px)}
+  .tp-doc span.t{font-weight:600;font-size:.95rem}
+  .tp-doc span.a{color:var(--accent)}
+</style>
 </head>
 <body>
 <div id="site-header" data-active="trust"></div>
+
 <main>
-  <section class="stub">
+
+  <!-- HERO -->
+  <section class="tp-hero">
     <div class="wrap narrow">
-      <span class="pill-tag tag"><span class="dot"></span> Planned page</span>
-      <h1 style="margin-top:8px">Trust &amp; privacy</h1>
-      <p class="lead" style="margin-top:16px">Data ownership, GDPR readiness, Nordic residency and the security posture that a sensitive career audience expects. Claims will stay disciplined — only what we can stand behind.</p>
-      <div class="hero-cta"><a class="btn" href="index.html">← Back to home</a></div>
+      <span class="pill-tag reveal"><span class="dot"></span> Trust &amp; privacy</span>
+      <h1 class="reveal" style="max-width:17ch;margin-inline:auto">Your career is sensitive. We treat it that way.</h1>
+      <p class="lead reveal" style="max-width:60ch;margin:20px auto 0">
+        Stormpine holds the relationships, conversations and quiet ambitions behind your next move.
+        That only works if you can trust where the data lives and who can see it. Here is how we handle it,
+        in plain language, and only what we can stand behind.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn pri lg" href="#rights">Your data, your rights</a>
+        <a class="btn lg" href="privacy.html">Read the privacy policy</a>
+      </div>
+      <p class="hero-note reveal">You own your data · Never sold · Built for GDPR · Kept in the EU</p>
     </div>
   </section>
+
+  <!-- PRINCIPLES -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:34px">
+      <span class="eyebrow">Our principles</span>
+      <h2 style="max-width:22ch;margin:12px auto 0">Six commitments we design around.</h2>
+      <p class="section-sub" style="margin:14px auto 0">
+        Not a compliance checkbox. These shape the product itself, because the audience we build for would notice if they did not.
+      </p>
+    </div>
+    <div class="wrap">
+      <div class="grid-3">
+
+        <div class="card tp-card reveal">
+          <span class="tp-ic">🗝️</span>
+          <h3>You own your data</h3>
+          <p>Your record is yours. Export it or delete it at any time. We never sell it, rent it, or use it to target ads. You are the customer, not the product.</p>
+        </div>
+
+        <div class="card tp-card reveal">
+          <span class="tp-ic">🕶️</span>
+          <h3>Private by design</h3>
+          <p>A career move is confidential until you choose otherwise. No public profile, no social feed, no broadcasting. Access inside Stormpine follows least-privilege.</p>
+        </div>
+
+        <div class="card tp-card reveal">
+          <span class="tp-ic">⚖️</span>
+          <h3>Built for GDPR</h3>
+          <p>European data protection is the baseline, not an afterthought. Clear lawful basis, real data-subject rights, and the right to complain to your supervisory authority.</p>
+        </div>
+
+        <div class="card tp-card reveal">
+          <span class="tp-ic">🇪🇺</span>
+          <h3>Kept in the EU</h3>
+          <p>Our commitment is to store and process your data within the EU/EEA. Where a service provider sits outside it, we use approved safeguards and tell you who they are.</p>
+        </div>
+
+        <div class="card tp-card reveal">
+          <span class="tp-ic">🔒</span>
+          <h3>Secured, sensibly</h3>
+          <p>Encryption in transit and at rest, access controls, and regular backups. Formal certifications will come as we grow, and we will not claim them before they are real.</p>
+        </div>
+
+        <div class="card tp-card reveal">
+          <span class="tp-ic">🔗</span>
+          <h3>You control connections</h3>
+          <p>Any integration (LinkedIn, email) runs on your explicit consent and only pulls what you authorise. Connect or disconnect whenever you like. We never scrape other people.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUR RIGHTS -->
+  <section id="rights" class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:34px">
+      <span class="eyebrow">Your data, your rights</span>
+      <h2 style="max-width:22ch;margin:12px auto 0">What you can ask us to do, any time.</h2>
+      <p class="section-sub" style="margin:14px auto 0">
+        Under GDPR these are your rights over your own data. In Stormpine they are meant to be a setting, not a legal battle.
+      </p>
+    </div>
+    <div class="wrap">
+      <div class="tp-rights reveal">
+        <div class="tp-right"><span class="rk">↧</span><div><h4>Access &amp; export</h4><p>Get a copy of everything we hold about you, in a portable format.</p></div></div>
+        <div class="tp-right"><span class="rk">✎</span><div><h4>Rectify</h4><p>Correct anything that is wrong or out of date.</p></div></div>
+        <div class="tp-right"><span class="rk">⌫</span><div><h4>Erase</h4><p>Delete your account and its data, including anything imported from LinkedIn.</p></div></div>
+        <div class="tp-right"><span class="rk">⏸</span><div><h4>Restrict &amp; object</h4><p>Pause certain processing, or object to it, including profiling by the AI copilot.</p></div></div>
+        <div class="tp-right"><span class="rk">↺</span><div><h4>Withdraw consent</h4><p>Turn off an integration or withdraw consent at any time, without losing the rest.</p></div></div>
+        <div class="tp-right"><span class="rk">§</span><div><h4>Complain</h4><p>Raise a concern with your data protection authority (in Denmark, Datatilsynet).</p></div></div>
+      </div>
+      <p class="section-sub reveal" style="text-align:center;margin:26px auto 0">
+        To exercise any of these, write to <a href="mailto:privacy@stormpine.com">privacy@stormpine.com</a>. Full detail lives in the <a href="privacy.html">privacy policy</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- LINKEDIN & INTEGRATIONS -->
+  <section class="divider">
+    <div class="wrap narrow">
+      <div class="band reveal">
+        <span class="eyebrow">LinkedIn &amp; integrations</span>
+        <h2 style="margin:12px 0 8px;max-width:24ch">Your data comes in because you bring it, not because we take it.</h2>
+        <p class="section-sub" style="margin-top:0;max-width:64ch">
+          Where Stormpine connects to LinkedIn or your inbox, it is always through official, consent-based access to
+          <strong>your own</strong> data. You authorise the connection, you see what is pulled, and you can revoke it in a click.
+        </p>
+        <ul class="feature-list" style="margin:20px 0 0;max-width:640px">
+          <li><span class="ck">✓</span> LinkedIn import runs on your consent through LinkedIn's own data-portability channels, not scraping.</li>
+          <li><span class="ck">✓</span> We only ingest the categories needed for a feature you use, and nothing about people who have not consented beyond your own contacts.</li>
+          <li><span class="ck">✓</span> Disconnect at any time and the imported data stops flowing, and is deleted on request.</li>
+          <li><span class="ck">✓</span> Email capture is scoped to conversations you choose to log, never a blanket read of your inbox.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI & YOUR DATA -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:30px">
+      <span class="eyebrow">AI &amp; your data</span>
+      <h2 style="max-width:24ch;margin:12px auto 0">The copilot works from your material, and keeps it yours.</h2>
+    </div>
+    <div class="wrap">
+      <div class="grid-3">
+        <div class="card reveal">
+          <span class="tp-ic">◎</span>
+          <h3>Grounded, not generic</h3>
+          <p>The AI reasons over your own opportunities, contacts and notes to suggest next moves and prepare briefings. Its value is that it knows your situation.</p>
+        </div>
+        <div class="card reveal">
+          <span class="tp-ic">⛨</span>
+          <h3>Not training fodder</h3>
+          <p>Your data is used to serve you, not to train public models. We do not sell it or feed it into someone else's product.</p>
+        </div>
+        <div class="card reveal">
+          <span class="tp-ic">☝</span>
+          <h3>You stay in control</h3>
+          <p>Suggestions are yours to accept or ignore. Nothing is sent to anyone, and no decision that matters is made about you automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUB-PROCESSORS -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:30px">
+      <span class="eyebrow">Who helps us run Stormpine</span>
+      <h2 style="max-width:24ch;margin:12px auto 0">The providers behind the service.</h2>
+      <p class="section-sub" style="margin:14px auto 0">
+        We keep this list current. Each provider is bound by a data-processing agreement, and where one sits outside the EU/EEA we apply approved transfer safeguards.
+      </p>
+    </div>
+    <div class="wrap narrow">
+      <div class="tp-scroll reveal">
+        <table class="tp-table">
+          <thead><tr><th>Category</th><th>Purpose</th><th>Region</th></tr></thead>
+          <tbody>
+            <tr><td>Cloud hosting</td><td>Runs the application and stores your data</td><td>EU/EEA</td></tr>
+            <tr><td>AI model provider</td><td>Powers the copilot's analysis and drafting</td><td>To be confirmed, with safeguards</td></tr>
+            <tr><td>Email delivery</td><td>Account and product notifications</td><td>To be confirmed, with safeguards</td></tr>
+            <tr><td>Product analytics</td><td>Privacy-respecting usage measurement</td><td>EU/EEA preferred</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="section-sub reveal" style="text-align:center;margin:18px auto 0;font-size:.86rem;color:var(--faint)">
+        Indicative while we finalise the stack. The published list will name each provider before launch.
+      </p>
+    </div>
+  </section>
+
+  <!-- HONESTY NOTE -->
+  <section class="divider">
+    <div class="wrap narrow">
+      <div class="tp-honest reveal">
+        <span class="eyebrow">Where we are honest with you</span>
+        <p style="margin:10px 0 0">
+          Stormpine is in beta and still being built. Some of what is above is a live capability today, and some is a
+          commitment we are building toward, for example formal security certifications and the final list of providers.
+          We would rather tell you that plainly than dress up a prototype. As things become real, this page becomes more
+          specific, never less honest.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTS -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:26px">
+      <span class="eyebrow">The detail</span>
+      <h2 style="margin-top:12px">The full documents.</h2>
+      <p class="section-sub" style="margin:14px auto 0">This page is the overview. The binding detail lives here.</p>
+    </div>
+    <div class="wrap narrow">
+      <div class="tp-docs reveal">
+        <a class="tp-doc" href="privacy.html"><span class="t">Privacy policy</span><span class="a">→</span></a>
+        <a class="tp-doc" href="cookie-policy.html"><span class="t">Cookie policy</span><span class="a">→</span></a>
+        <a class="tp-doc" href="terms.html"><span class="t">Terms of service</span><span class="a">→</span></a>
+        <a class="tp-doc" href="organisations.html"><span class="t">DPA (for organisations)</span><span class="a">→</span></a>
+        <a class="tp-doc" href="mailto:privacy@stormpine.com"><span class="t">Contact our privacy team</span><span class="a">→</span></a>
+        <a class="tp-doc" href="privacy.html#subprocessors"><span class="t">Sub-processor list</span><span class="a">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="divider cta">
+    <div class="wrap narrow reveal">
+      <h2>A private system for a serious career.</h2>
+      <p class="lead">Keep the relationships, context and momentum behind your next move in one place you control.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="index.html#how">See how it works</a>
+      </div>
+      <p class="hero-note">You own your data · Never sold · Built for GDPR</p>
+    </div>
+  </section>
+
 </main>
+
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
 </body>
