@@ -20,6 +20,19 @@
     caret:'<path d="M6 9l6 6 6-6"/>'
   };
   function icon(n){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+(P[n]||'')+'</svg>'; }
+
+  /* ---------- Stormpine wordmark (official logo, recolours via currentColor) ---------- */
+  var LOGO = '<svg class="brand-mark" viewBox="0 0 500 104.65" fill="currentColor" role="img" aria-label="Stormpine">' +
+    '<path d="M44.49,65.81c0,10.72-9.22,17.29-21.55,17.29-11.53,0-19.59-5.53-22.94-13.49l8.64-4.96c1.84,5.53,7.15,8.99,14.29,8.99,6.11,0,11.41-2.19,11.41-7.84,0-12.33-32.27-5.3-32.27-26.16,0-10.14,8.76-17.17,20.4-17.17,9.45,0,17.06,4.49,20.75,11.99l-8.41,4.73c-2.19-5.19-7.26-7.38-12.33-7.38s-10.26,2.54-10.26,7.72c0,12.33,32.27,5.07,32.27,26.28Z"/>' +
+    '<path d="M86.56,52.79c0-17.06,13.49-30.31,30.31-30.31s30.43,13.25,30.43,30.31-13.6,30.31-30.43,30.31-30.31-13.25-30.31-30.31ZM137.28,52.79c0-11.64-8.88-20.52-20.4-20.52s-20.29,8.87-20.29,20.52,8.88,20.52,20.29,20.52,20.4-8.87,20.4-20.52Z"/>' +
+    '<path d="M276.28,45.76v35.84h-10.03v-35.5c0-9.11-5.07-14.06-12.68-14.06-8.07,0-14.18,5.07-14.18,17.52v32.04h-10.03v-35.5c0-9.11-4.73-14.06-12.22-14.06s-14.75,5.07-14.75,17.52v32.04h-10.03V23.97h10.03v7.72c4.15-6.45,10.14-9.22,17.17-9.22,7.84,0,13.6,3.57,16.94,9.8,4.03-6.57,10.6-9.8,18.1-9.8,12.79,0,21.67,8.87,21.67,23.28Z"/>' +
+    '<path d="M348.89,52.79c0,17.06-13.14,30.31-29.16,30.31-9.8,0-17.17-4.38-21.78-11.41v32.96h-10.03V23.97h10.03v9.91c4.61-7.03,11.99-11.41,21.78-11.41,16.02,0,29.16,13.25,29.16,30.31ZM338.87,52.79c0-11.76-8.87-20.63-20.4-20.63s-20.52,8.87-20.52,20.63,8.87,20.63,20.52,20.63,20.4-8.88,20.4-20.63Z"/>' +
+    '<path d="M356.85,6.8c0-3.69,3-6.8,6.8-6.8s6.68,3.11,6.68,6.8-3,6.69-6.68,6.69-6.8-3-6.8-6.69ZM358.58,23.97h10.03v57.63h-10.03V23.97Z"/>' +
+    '<path d="M432.69,46.22v35.38h-10.03v-34.81c0-9.45-5.42-14.75-14.29-14.75s-16.71,5.42-16.71,19.02v30.54h-10.03V23.97h10.03v8.3c4.26-6.8,10.6-9.8,18.67-9.8,13.49,0,22.36,8.99,22.36,23.74Z"/>' +
+    '<path d="M472.22,73.65c7.95,0,13.72-3.69,16.6-8.41l8.53,4.84c-5.07,7.84-13.83,13.02-25.36,13.02-18.56,0-30.89-13.02-30.89-30.31s12.22-30.31,30.2-30.31,28.7,14.29,28.7,30.43c0,1.5-.12,3-.35,4.5h-48.29c1.96,10.37,10.14,16.25,20.86,16.25ZM451.36,48.64h38.5c-1.73-11.41-9.91-16.71-18.56-16.71-10.83,0-18.33,6.69-19.94,16.71Z"/>' +
+    '<path d="M83.71,23.97h-13.64s-8.02-.02-8.02-.02l6.33-6.33V7.84l-10.03.05v16.09h-11.41v9.68h11.41v31.23c0,14.41,8.07,19.02,25.36,16.71v-8.99c-10.26.46-15.33,1.04-15.33-7.72v-24.93l-6.34-6.34h8.04s0,.04,0,.04h13.63v-9.68Z"/>' +
+    '<polyline points="156.97 81.47 166.99 81.47 166.99 39.96 160.69 33.66 182.32 33.66 182.32 23.97 156.82 23.97 156.82 33.66"/>' +
+  '</svg>';
   function mItem(ic,tt,dd,href){
     return '<a class="mega-item" href="'+href+'"><span class="mega-ic">'+icon(ic)+'</span>'+
       '<span class="mega-tx"><span class="mega-tt">'+tt+'</span><span class="mega-dd">'+dd+'</span></span></a>';
@@ -37,7 +50,7 @@
       '<a class="mat" href="stormpine-page-element-concepts.html">Page elements</a>' +
     '</div></div>' +
     '<header class="nav"><div class="nav-inner">' +
-      '<a class="brand" href="index.html"><span class="glyph">S</span> Stormpine</a>' +
+      '<a class="brand" href="index.html" aria-label="Stormpine home">'+LOGO+'</a>' +
       '<nav class="nav-links" id="navLinks" aria-label="Primary">' +
         '<div class="has-mega">' +
           '<a class="nav-top" href="product.html"'+cur('product')+'>Product <span class="caret">'+icon('caret')+'</span></a>' +
@@ -84,7 +97,7 @@
     return '' +
     '<footer class="footer"><div class="wrap">' +
       '<div class="footer-top">' +
-        '<div><a class="brand" href="index.html"><span class="glyph">S</span> Stormpine</a>' +
+        '<div><a class="brand" href="index.html" aria-label="Stormpine home">'+LOGO+'</a>' +
           '<p style="margin-top:14px;max-width:30ch">The Personal Career CRM for experienced leaders managing director, board and advisory moves.</p></div>' +
         '<div><h4>Product</h4><ul>' +
           '<li><a href="product.html">How it works</a></li>' +
