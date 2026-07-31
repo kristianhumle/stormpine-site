@@ -221,6 +221,9 @@ section{padding:clamp(56px,8vw,104px) 0}
   color:var(--muted);font-size:.92rem}
 .builtfor .sep{color:var(--faint)}
 .builtfor b{color:var(--text);font-weight:600}
+.builtfor .lab{color:var(--muted)}
+.builtfor .it{display:inline-flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.builtfor .it svg{width:17px;height:17px;color:var(--accent);flex:none}
 
 /* AI / privacy accent band */
 .band{border:1px solid var(--border);border-radius:var(--radius);

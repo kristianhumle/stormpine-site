@@ -34,6 +34,7 @@
       '<a class="mat active" href="index.html">Website prototype</a>' +
       '<a class="mat" href="stormpine-website-direction.html">Moodboard</a>' +
       '<a class="mat" href="stormpine-hero-concepts.html">Hero concepts</a>' +
+      '<a class="mat" href="stormpine-page-element-concepts.html">Page elements</a>' +
     '</div></div>' +
     '<header class="nav"><div class="nav-inner">' +
       '<a class="brand" href="index.html"><span class="glyph">S</span> Stormpine</a>' +
