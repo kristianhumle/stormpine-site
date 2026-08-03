@@ -3,23 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Product — Stormpine</title>
-<meta name="description" content="How Stormpine works: a Personal Career CRM built around relationships, pursuits and grounded AI.">
+<title>How it works — Stormpine</title>
+<meta name="description" content="How a leadership move actually unfolds, from first conversation to first 100 days, and where Stormpine supports each stage. Built around relationships, momentum and grounded AI.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div id="site-header" data-active="product"></div>
+
 <main>
-  <section class="stub">
-    <div class="wrap narrow">
-      <span class="pill-tag tag"><span class="dot"></span> Next up to build</span>
-      <h1 style="margin-top:8px">Product — How it works</h1>
-      <p class="lead" style="margin-top:16px">This page will walk through the CRM model — people, organisations and pursuits — plus Gmail capture and the grounded AI assessment. We'll build it after the homepage is signed off.</p>
-      <div class="hero-cta"><a class="btn" href="index.html">← Back to home</a></div>
+
+  <!-- INTRO -->
+  <section class="hero" style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h1 style="max-width:20ch">How a move actually unfolds.</h1>
+      <p class="lead">A director role, board seat or advisory brief runs for months, on relationships and momentum. Stormpine runs on the same. Follow the arc of a move, and see where the product carries the weight.</p>
+      <div class="hero-cta" style="margin-top:22px">
+        <div class="jny-switch" role="tablist" aria-label="Pursuit type">
+          <button class="on" type="button" data-pursuit="employment" role="tab" aria-selected="true">New role</button>
+          <button class="soon" type="button" aria-disabled="true" title="Coming soon">Board seat</button>
+          <button class="soon" type="button" aria-disabled="true" title="Coming soon">Advisory</button>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- JOURNEY -->
+  <section style="padding-top:clamp(34px,5vw,60px)">
+    <div class="wrap">
+      <div class="jny-rail" id="jnyRail" role="tablist" aria-label="Stages of a move"></div>
+      <div class="jny-panel" id="jnyPanel"></div>
+      <p class="jny-foot">A full retained search runs roughly 90 to 120 days, with your notice period stacked on top. Amber marks the offer and contract stage: the highest-stakes, least-supported moment, and in Denmark the one the law leaves to your contract.</p>
+    </div>
+  </section>
+
+  <!-- FEATURE MAPPING -->
+  <section class="divider">
+    <div class="wrap">
+      <div class="reveal" style="max-width:52ch;margin-bottom:32px">
+        <span class="eyebrow">Every stage, the right tool</span>
+        <h2 style="margin-top:12px">The same six capabilities, shown where they earn their place.</h2>
+        <p class="section-sub">Stormpine is not a list of features. Each one does its work at a specific moment in the arc above.</p>
+      </div>
+      <div class="grid-3 reveal">
+
+        <div class="card">
+          <span class="og-ic" style="color:var(--accent)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="2.4" height="10" rx="1"/><circle cx="7.2" cy="7" r="2.4"/><circle cx="17" cy="7" r="2.4"/><circle cx="12" cy="17" r="2.4"/><path d="M8.4 7h7.2"/></svg></span>
+          <h3>Relationships</h3>
+          <p>Recruiters, sponsors and board contacts as records you keep warm, not a stale address book.</p>
+          <span class="pill-tag" style="margin-top:14px"><span class="dot"></span> Positioning · Sourcing</span>
+        </div>
+
+        <div class="card">
+          <span class="og-ic" style="color:var(--accent)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4.5" height="16" rx="1"/><rect x="9.75" y="4" width="4.5" height="11" rx="1"/><rect x="16.5" y="4" width="4.5" height="7" rx="1"/></svg></span>
+          <h3>Pipeline</h3>
+          <p>Every parallel process and its stage on one board, so nothing quietly stalls while a search runs for months.</p>
+          <span class="pill-tag" style="margin-top:14px"><span class="dot"></span> Sourcing to References</span>
+        </div>
+
+        <div class="card">
+          <span class="og-ic" style="color:var(--accent)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v4M16 3v4"/></svg></span>
+          <h3>This Week</h3>
+          <p>What is overdue, stalling or waiting on you, surfaced so momentum never slips between rounds.</p>
+          <span class="pill-tag" style="margin-top:14px"><span class="dot"></span> Screening to Contract</span>
+        </div>
+
+        <div class="card">
+          <span class="og-ic" style="color:var(--accent)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.8 4.8 1.7-4.8 1.7L12 16l-1.7-4.8L5.5 9.5l4.8-1.7z"/><path d="M18.5 15l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z"/></svg></span>
+          <h3>AI assessment</h3>
+          <p>Grounded analysis of a specific opportunity, most valuable at assessment and the offer, reasoning over your own record.</p>
+          <span class="pill-tag" style="margin-top:14px"><span class="dot"></span> Assessment · Offer</span>
+        </div>
+
+        <div class="card">
+          <span class="og-ic" style="color:var(--accent)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7.5l8 5.5 8-5.5"/></svg></span>
+          <h3>Gmail capture</h3>
+          <p>Log conversations with people you already know, so the history of each process stays complete without effort.</p>
+          <span class="pill-tag" style="margin-top:14px"><span class="dot"></span> Interviews onward</span>
+        </div>
+
+        <div class="card">
+          <span class="og-ic" style="color:var(--accent)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+          <h3>Durable record</h3>
+          <p>A private career memory you keep between searches, so the next move never starts from a cold spreadsheet.</p>
+          <span class="pill-tag" style="margin-top:14px"><span class="dot"></span> Positioning · Onboarding</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS (three pains) -->
+  <section class="divider">
+    <div class="wrap">
+      <div class="strip reveal">
+        <span class="eyebrow" style="display:block;margin-bottom:8px">Why it matters</span>
+        <h2 style="max-width:24ch">Three things go wrong in every high-stakes move. Stormpine fixes each.</h2>
+        <div class="grid-3" style="margin-top:26px">
+          <div>
+            <h3 style="margin-bottom:8px">The invisible pipeline</h3>
+            <p style="color:var(--muted);font-size:.94rem">You run several processes at once, at different stages, today held in your inbox and memory. Stormpine gives you one view of what is moving versus stalling.</p>
+          </div>
+          <div>
+            <h3 style="margin-bottom:8px">Relationship capital that vanishes</h3>
+            <p style="color:var(--muted);font-size:.94rem">Recruiters, interviewers and references, all abandoned after each search. Stormpine keeps the people and context, between searches, not just during.</p>
+          </div>
+          <div>
+            <h3 style="margin-bottom:8px">The offer, unsupported</h3>
+            <p style="color:var(--muted);font-size:.94rem">The highest-stakes moment, and in Denmark the contract, not the law, is your protection. Stormpine brings benchmarks and a record of every promise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="divider cta">
+    <div class="wrap narrow reveal">
+      <h2>See the whole move, in one private system.</h2>
+      <p class="lead">Bring the relationships, context and momentum behind your next move into one place.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="who-its-for.html">Who it's for</a>
+      </div>
+      <p class="hero-note">Free while in beta · Private by design</p>
+    </div>
+  </section>
+
 </main>
+
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
+
+<!-- Journey data (New role / employment). Board and advisory follow the same anatomy. -->
+<script type="application/json" id="jny-data">
+[
+ {"n":0,"lbl":"Positioning","dur":"ongoing","amber":false,
+  "whats":"You quietly become receptive to a move.",
+  "hard":"It is invisible and self-directed, with no deadline and nowhere to keep recruiter relationships warm between searches.",
+  "help":"A durable, private home for your target list, network map and positioning, with reminders that keep relationships warm.",
+  "chips":["Durable record","Relationships"]},
+ {"n":1,"lbl":"Sourcing","dur":"days to weeks","amber":false,
+  "whats":"Roles surface, often a headhunter's discreet call about an unadvertised mandate.",
+  "hard":"Several approaches run in parallel, held in your inbox and memory, with real leak risk in a small market.",
+  "help":"One record of every approach: which recruiter holds which CV, with which client, and the brief.",
+  "chips":["Relationships","Pipeline"]},
+ {"n":2,"lbl":"Screening","dur":"1 to 3 weeks","amber":false,
+  "whats":"Exploratory calls, then a shortlist is assembled.",
+  "hard":"You are written about in a report you never see; the cut from dozens down to a handful is opaque.",
+  "help":"One view of every parallel process and its stage, plus a nudge to get the roadmap early.",
+  "chips":["Pipeline","This Week"]},
+ {"n":3,"lbl":"Interviews","dur":"3 to 6 weeks","amber":false,
+  "whats":"Two to four rounds, increasingly a two-way courtship.",
+  "hard":"Fresh tailored prep each round, feedback filtered and delayed, all around a full-time job and in confidence.",
+  "help":"Per-round notes on who you met and what was said, prep briefs, and clear momentum signals.",
+  "chips":["This Week","Gmail capture"]},
+ {"n":4,"lbl":"Assessment","dur":"1 to 3 weeks","amber":false,
+  "whats":"Psychometrics, a case, a panel.",
+  "hard":"High-stakes and opaque; the deciding report is unseen; heavy unpaid prep on top of the day job.",
+  "help":"Track finalist status, keep the case deck and debrief, and read an assessment invitation as the finalist signal it is.",
+  "chips":["AI assessment"]},
+ {"n":5,"lbl":"References","dur":"1 to 2 weeks","amber":false,
+  "whats":"Formal references and background checks.",
+  "hard":"Your most relevant reference, the current manager, cannot be called yet; timing against resignation is fraught.",
+  "help":"Manage who has been asked across processes, consent boundaries, and timing.",
+  "chips":["Pipeline","This Week"]},
+ {"n":6,"lbl":"Offer","dur":"1 to 3 weeks","amber":true,
+  "whats":"A verbal offer, then negotiation of pay, notice, severance, equity and clauses.",
+  "hard":"The highest-stakes, least-supported moment. In Denmark, directors sit outside Funktionaerloven, so the contract, not the law, is your protection.",
+  "help":"Walk in with benchmarks and a record of every promise, plus decision support on the clause and equity terms.",
+  "chips":["AI assessment","Durable record"]},
+ {"n":7,"lbl":"Contract & notice","dur":"1 to 3 months","amber":true,
+  "whats":"You sign, then resign and serve notice.",
+  "hard":"Counter-offers, a long anxious sign-to-start gap, and an old clause can still blow up the move.",
+  "help":"Track notice dates, clause checks old and new, and the announcement plan.",
+  "chips":["This Week","Durable record"]},
+ {"n":8,"lbl":"Onboarding","dur":"3 to 6 months","amber":false,
+  "whats":"Early wins, stakeholder mapping, probation.",
+  "hard":"When the real role diverges from the pitch, there is no record of what was promised, and your relationship capital evaporates.",
+  "help":"Hold the commitments made during hiring, and keep your network and materials warm for next time.",
+  "chips":["Durable record","Relationships"]}
+]
+</script>
+<script>
+(function(){
+  var el = document.getElementById('jny-data'); if(!el) return;
+  var stages = JSON.parse(el.textContent);
+  var rail = document.getElementById('jnyRail');
+  var panel = document.getElementById('jnyPanel');
+  if(!rail || !panel) return;
+  var sel = 0;
+
+  stages.forEach(function(s,i){
+    var b = document.createElement('button');
+    b.className = 'jny-node' + (i===sel?' on':'');
+    b.type = 'button'; b.setAttribute('role','tab');
+    if(s.amber) b.setAttribute('data-amber','');
+    b.innerHTML = '<span class="jny-dot">'+s.n+'</span><span class="jny-lbl">'+s.lbl+'</span>';
+    b.addEventListener('click', function(){ sel=i; render(); });
+    rail.appendChild(b);
+  });
+
+  function render(){
+    var kids = rail.children;
+    for(var i=0;i<kids.length;i++){ kids[i].classList.toggle('on', i===sel); kids[i].setAttribute('aria-selected', i===sel); }
+    var s = stages[sel];
+    if(s.amber) panel.setAttribute('data-amber',''); else panel.removeAttribute('data-amber');
+    var chips = (s.chips||[]).map(function(c){ return '<span class="jny-chip">'+c+'</span>'; }).join('');
+    panel.innerHTML =
+      '<div>' +
+        '<p class="jny-stage"><span class="n">'+s.n+'</span> Stage '+s.n+' · '+s.dur+'</p>' +
+        '<h3>'+s.lbl+'</h3>' +
+        '<div class="jny-kv whats"><p class="k">What is happening</p><p>'+s.whats+'</p></div>' +
+        '<div class="jny-kv hard"><p class="k">The hard part</p><p>'+s.hard+'</p></div>' +
+        '<div class="jny-kv help"><p class="k">With Stormpine</p><p>'+s.help+'</p></div>' +
+        '<div class="jny-chips">'+chips+'</div>' +
+      '</div>' +
+      '<div class="jny-shot">' +
+        '<div class="sh-h">'+s.lbl+' <span>Stormpine</span></div>' +
+        '<div class="jny-card"'+(s.amber?' data-amber':'')+'><span class="b"></span><span class="tx"><b>'+(s.chips[0]||'')+'</b><small>in context at this stage</small></span><span class="meta">live</span></div>' +
+        '<div class="jny-card"><span class="b"></span><span class="tx"><b>Momentum</b><small>'+s.dur+'</small></span><span class="meta">on track</span></div>' +
+        '<div class="jny-card"><span class="b"></span><span class="tx"><b>Next action</b><small>suggested for this stage</small></span><span class="meta">1</span></div>' +
+        '<p class="jny-note">Placeholder. A real product screenshot for this stage goes here.</p>' +
+      '</div>';
+  }
+  render();
+})();
+</script>
 </body>
 </html>

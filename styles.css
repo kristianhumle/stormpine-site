@@ -402,3 +402,85 @@ section{padding:clamp(56px,8vw,104px) 0}
 @media (max-width:520px){
   .footer-top{grid-template-columns:1fr 1fr}
 }
+
+/* ==========================================================================
+   Journey module — "How a move unfolds" (process / stage view)
+   Interactive on product.html; static condensed band elsewhere.
+   Uses shared tokens, so it flips with light/dark automatically.
+   ========================================================================== */
+/* pursuit switch */
+.jny-switch{display:inline-flex;gap:4px;background:var(--surface);border:1px solid var(--border);
+  border-radius:999px;padding:4px}
+.jny-switch button{background:transparent;border:0;color:var(--muted);font:inherit;font-size:.88rem;
+  font-weight:600;padding:8px 18px;border-radius:999px;cursor:pointer;transition:color .15s,background .15s}
+.jny-switch button.on{background:var(--accent);color:#fff}
+.jny-switch button:not(.on):not(.soon):hover{color:var(--text)}
+.jny-switch .soon{cursor:default;opacity:.55}
+.jny-switch .soon::after{content:" · soon";color:var(--faint);font-size:.7rem;font-weight:600}
+
+/* rail */
+.jny-rail{position:relative;display:flex;justify-content:space-between;gap:8px;margin:0 4px;padding-top:8px}
+.jny-rail::before{content:"";position:absolute;left:19px;right:19px;top:27px;height:2px;
+  background:linear-gradient(90deg,var(--border) 0%,var(--accent) 14%,var(--accent) 82%,var(--amber) 100%)}
+.jny-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:9px;
+  flex:1;background:transparent;border:0;cursor:pointer;padding:0;min-width:0}
+.jny-dot{width:38px;height:38px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);
+  color:var(--text);font-weight:700;font-size:.95rem;display:grid;place-items:center;transition:.15s}
+.jny-node[data-amber] .jny-dot{border-color:var(--amber)}
+.jny-node .jny-lbl{font-size:.74rem;color:var(--muted);font-weight:500;text-align:center;line-height:1.25;max-width:96px}
+.jny-node.on .jny-dot{background:var(--accent);color:#fff;
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 18%,transparent)}
+.jny-node.on .jny-lbl,.jny-node:not([aria-disabled="true"]):hover .jny-lbl{color:var(--text)}
+
+/* detail panel */
+.jny-panel{margin-top:30px;display:grid;grid-template-columns:1.05fr .95fr;gap:26px;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);padding:clamp(22px,3vw,32px)}
+.jny-stage{display:inline-flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
+.jny-stage .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:6px;
+  display:grid;place-items:center;font-size:.72rem}
+.jny-panel[data-amber] .jny-stage .n{background:var(--amber)}
+.jny-panel h3{font-size:1.3rem;margin-bottom:16px}
+.jny-kv{margin-bottom:15px}
+.jny-kv .k{font-size:.64rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.jny-kv.whats .k{color:var(--muted)}
+.jny-kv.hard .k{color:var(--amber)}
+.jny-kv.help .k{color:var(--accent)}
+.jny-kv p{font-size:.94rem;color:var(--muted);line-height:1.5;margin:0}
+.jny-kv.help p{color:var(--text)}
+.jny-chips{margin-top:18px;display:flex;flex-wrap:wrap;gap:7px}
+.jny-chip{font-size:.72rem;color:var(--muted);border:1px solid var(--border);background:var(--elevated);
+  border-radius:999px;padding:4px 11px;font-weight:600}
+/* product-shot placeholder (mirrors the .app mock look) */
+.jny-shot{background:var(--elevated);border:1px solid var(--border);border-radius:12px;padding:15px;
+  display:flex;flex-direction:column;gap:9px}
+.jny-shot .sh-h{display:flex;align-items:center;justify-content:space-between;font-size:.8rem;font-weight:600}
+.jny-shot .sh-h span{color:var(--faint);font-weight:500;font-size:.72rem}
+.jny-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 12px;
+  display:flex;align-items:center;gap:10px}
+.jny-card .b{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.jny-card[data-amber] .b{background:var(--amber)}
+.jny-card .tx{flex:1;min-width:0}
+.jny-card .tx b{display:block;font-size:.82rem;font-weight:600}
+.jny-card .tx small{color:var(--muted);font-size:.72rem}
+.jny-card .meta{color:var(--faint);font-size:.7rem;white-space:nowrap}
+.jny-note{color:var(--faint);font-size:.72rem;margin-top:2px}
+.jny-foot{color:var(--faint);font-size:.82rem;margin-top:22px}
+
+/* condensed band (home / organisations placeholders) */
+.jny-band{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);
+  box-shadow:var(--shadow-sm);padding:clamp(22px,3.5vw,34px)}
+.jny-band .jny-rail{margin-top:24px}
+.jny-band .jny-node{cursor:default}
+.jny-band-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.jny-deeplink{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:600;font-size:.9rem}
+.jny-deeplink:hover{text-decoration:underline}
+
+/* responsive */
+@media (max-width:860px){
+  .jny-panel{grid-template-columns:1fr}
+  .jny-rail{overflow-x:auto;justify-content:flex-start;gap:22px;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+  .jny-rail::before{display:none}
+  .jny-node{flex:0 0 74px}
+}
