@@ -21,7 +21,10 @@
     globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/>',
     guide:'<path d="M12 6c-1.5-1-3.5-1.5-5.5-1.5H4v13h2.5c2 0 4 .5 5.5 1.5M12 6c1.5-1 3.5-1.5 5.5-1.5H20v13h-2.5c-2 0-4 .5-5.5 1.5M12 6v13"/>',
     link:'<path d="M9.5 14.5l5-5"/><path d="M13.5 7l1-1a3.4 3.4 0 0 1 4.8 4.8l-2 2a3.4 3.4 0 0 1-4.8 0"/><path d="M10.5 17l-1 1a3.4 3.4 0 0 1-4.8-4.8l2-2a3.4 3.4 0 0 1 4.8 0"/>',
-    help:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.9.5-1.5 1.1-1.5 2.1M12 16.8h.01"/>'
+    help:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.9.5-1.5 1.1-1.5 2.1M12 16.8h.01"/>',
+    profile:'<circle cx="12" cy="8.5" r="3.5"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/>',
+    tasks:'<path d="M4 6.5l1.5 1.5L8 5.5"/><path d="M4 12.5l1.5 1.5L8 11.5"/><path d="M4 18.5l1.5 1.5L8 17.5"/><path d="M11 7h9M11 13h9M11 19h9"/>',
+    overview:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/>'
   };
   function icon(n){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+(P[n]||'')+'</svg>'; }
 
@@ -88,12 +91,12 @@
         '<div class="has-mega">' +
           '<a class="nav-top" href="product.html"'+cur('product')+'>Product <span class="caret">'+icon('caret')+'</span></a>' +
           '<div class="mega product"><div class="mega-inner">' +
-            mItem('pipeline','Pipeline','Every opportunity, stage and strategy on one board.','product.html') +
-            mItem('relationships','Relationships','Recruiters, sponsors and board contacts as records.','product.html') +
-            mItem('week','This Week','What is overdue, stalling or missing — at a glance.','product.html') +
-            mItem('ai','AI assessment','Grounded analysis of a specific opportunity.','product.html') +
-            mItem('mail','Gmail capture','Log conversations with people you already know.','product.html') +
-            mItem('record','Durable record','A private career memory you keep between searches.','product.html') +
+            mItem('overview','The overview','Your day, next steps and what needs you now.','overview.html') +
+            mItem('pipeline','Pipeline','Every parallel process and its stage on one board.','pipeline.html') +
+            mItem('profile','Profile','Your career written once, tailored per role.','profile.html') +
+            mItem('relationships','Relationships','Recruiters, sponsors, board contacts and referees.','relationships.html') +
+            mItem('tasks','Tasks','Every next step across your processes in one list.','tasks.html') +
+            mItem('ai','Intelligence','Grounded analysis over your own record.','intelligence.html') +
           '</div></div>' +
         '</div>' +
         '<div class="has-mega">' +
@@ -143,9 +146,13 @@
           '<p style="margin-top:14px;max-width:30ch">The Personal Career CRM for experienced leaders managing director, board and advisory moves.</p></div>' +
         '<div><h4>Product</h4><ul>' +
           '<li><a href="product.html">How it works</a></li>' +
-          '<li><a href="who-its-for.html">Who it\'s for</a></li>' +
-          '<li><a href="pricing.html">Pricing</a></li>' +
-          '<li><a href="https://app.stormpine.com">Sign in</a></li></ul></div>' +
+          '<li><a href="overview.html">The overview</a></li>' +
+          '<li><a href="pipeline.html">Pipeline</a></li>' +
+          '<li><a href="profile.html">Profile</a></li>' +
+          '<li><a href="relationships.html">Relationships</a></li>' +
+          '<li><a href="tasks.html">Tasks</a></li>' +
+          '<li><a href="intelligence.html">Intelligence</a></li>' +
+          '<li><a href="pricing.html">Pricing</a></li></ul></div>' +
         '<div><h4>For organisations</h4><ul>' +
           '<li><a href="organisations.html">A-kasser &amp; associations</a></li>' +
           '<li><a href="organisations.html">Outplacement</a></li>' +
