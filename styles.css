@@ -452,20 +452,11 @@ section{padding:clamp(56px,8vw,104px) 0}
 .jny-chips{margin-top:18px;display:flex;flex-wrap:wrap;gap:7px}
 .jny-chip{font-size:.72rem;color:var(--muted);border:1px solid var(--border);background:var(--elevated);
   border-radius:999px;padding:4px 11px;font-weight:600}
-/* product-shot placeholder (mirrors the .app mock look) */
-.jny-shot{background:var(--elevated);border:1px solid var(--border);border-radius:12px;padding:15px;
-  display:flex;flex-direction:column;gap:9px}
-.jny-shot .sh-h{display:flex;align-items:center;justify-content:space-between;font-size:.8rem;font-weight:600}
-.jny-shot .sh-h span{color:var(--faint);font-weight:500;font-size:.72rem}
-.jny-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 12px;
-  display:flex;align-items:center;gap:10px}
-.jny-card .b{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
-.jny-card[data-amber] .b{background:var(--amber)}
-.jny-card .tx{flex:1;min-width:0}
-.jny-card .tx b{display:block;font-size:.82rem;font-weight:600}
-.jny-card .tx small{color:var(--muted);font-size:.72rem}
-.jny-card .meta{color:var(--faint);font-size:.7rem;white-space:nowrap}
-.jny-note{color:var(--faint);font-size:.72rem;margin-top:2px}
+/* product-shot: a faithful app mock per stage (reuses .app / .appwin) */
+.jny-shot{min-width:0;display:flex;align-items:center}
+.jny-shot .appwin{width:100%}
+.jny-panel h3 .jhn{color:var(--accent)}
+.jny-panel[data-amber] h3 .jhn{color:var(--amber)}
 .jny-foot{color:var(--faint);font-size:.82rem;margin-top:22px}
 
 /* condensed band (home / organisations placeholders) */

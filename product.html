@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How it works — Stormpine</title>
 <meta name="description" content="How a leadership move actually unfolds, from first conversation to first 100 days, and where Stormpine supports each stage. Built around relationships, momentum and grounded AI.">
-<link rel="stylesheet" href="styles.css?v=2">
+<link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 <div id="site-header" data-active="product"></div>
@@ -32,8 +32,11 @@
   <section style="padding-top:clamp(34px,5vw,60px)">
     <div class="wrap">
       <div class="jny-rail" id="jnyRail" role="tablist" aria-label="Stages of a move"></div>
-      <div class="jny-panel" id="jnyPanel"></div>
-      <p class="jny-foot">A full retained search runs roughly 90 to 120 days, with your notice period stacked on top. Amber marks the offer and contract stage: the highest-stakes, least-supported moment, and in Denmark the one the law leaves to your contract.</p>
+      <div class="jny-panel" id="jnyPanel">
+        <div id="jnyText"></div>
+        <div class="jny-shot" id="jnyShot"></div>
+      </div>
+      <p class="jny-foot">Amber marks the offer and contract stage: the highest-stakes, least-supported moment, and in Denmark the one the law leaves to your contract.</p>
     </div>
   </section>
 
@@ -135,54 +138,122 @@
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
 
+<!-- Per-stage app mocks (faithful UI recreations in the product's tokens; swap for real screenshots later) -->
+<template id="scr-pipeline"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">KL</span> Kristian</div>
+    <div class="nav-i"><i>This Week</i><i class="on">Pipeline</i><i>Relationships</i><i>Assessments</i></div></div>
+  <div class="main">
+    <div class="m-h">Pipeline</div>
+    <div class="board">
+      <div class="col"><div class="colh">Identified</div><div class="bcard"><b>Chair, Nordic SaaS</b><span class="btag">Board · Referral</span></div></div>
+      <div class="col"><div class="colh">Initial contact</div><div class="bcard"><b>Advisory, Fintech</b><span class="btag">Advisory · Warm intro</span></div></div>
+      <div class="col"><div class="colh">Submitted</div><div class="bcard"><b>CPTO, Martech</b><span class="btag">Operating · Search firm</span></div></div>
+      <div class="col"><div class="colh">Interviewing</div><div class="bcard"><b>VP Eng, SaaS</b><span class="btag">Operating · Direct</span></div></div>
+    </div>
+  </div>
+</div></div></template>
+
+<template id="scr-week"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">KL</span> Kristian</div>
+    <div class="nav-i"><i class="on">This Week</i><i>Pipeline</i><i>Relationships</i><i>Assessments</i></div></div>
+  <div class="main">
+    <div class="m-h">This Week <span class="over">Needs you</span></div>
+    <div class="chip"><span class="pip"></span> Waiting on you</div>
+    <div class="task"><span><b>Review material deck sent</b> <span class="sub">· CPTO search</span></span><span class="late">Overdue</span></div>
+    <div class="task"><span><b>Get back to Jerry</b> <span class="sub">· CPTO search</span></span><span class="late">Overdue</span></div>
+    <div class="chip" style="margin-top:14px"><span class="pip" style="background:var(--amber)"></span> Going quiet</div>
+    <div class="task"><span><b>CPTO search, European Martech</b> <span class="sub">· Submitted</span></span><span class="late" style="color:var(--amber)">Stalling</span></div>
+  </div>
+</div></div></template>
+
+<template id="scr-relationships"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">KL</span> Kristian</div>
+    <div class="nav-i"><i>This Week</i><i>Pipeline</i><i class="on">Relationships</i><i>Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">Relationships <span style="color:var(--muted);font-weight:500;font-size:11px">· 48 people</span></div>
+    <div class="prow"><span class="av" style="background:#4f6bd8">JB</span><span><b>James Brooke</b></span><span class="role">CEO · Mapp</span></div>
+    <div class="prow"><span class="av" style="background:#7c5cf0">JM</span><span><b>Jerry Maynard</b></span><span class="role">Search partner</span></div>
+    <div class="prow"><span class="av" style="background:#5662f2">AS</span><span><b>Anna Sørensen</b></span><span class="role">Chair · Nordic board</span></div>
+    <div class="prow"><span class="av" style="background:#3f8f6b">TL</span><span><b>Thomas Lind</b></span><span class="role">Hiring manager</span></div>
+    <div class="prow"><span class="av" style="background:#b06f3f">MK</span><span><b>Mette Krogh</b></span><span class="role">Reference</span></div>
+  </div>
+</div></div></template>
+
+<template id="scr-ai"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">KL</span> Kristian</div>
+    <div class="nav-i"><i>This Week</i><i class="on">Pipeline</i><i>Relationships</i><i>Assessments</i></div></div>
+  <div class="main">
+    <div class="m-h">CPTO search, European Martech</div>
+    <div style="color:var(--muted);margin:8px 0 2px;font-size:11px"><b style="color:inherit">NEXT:</b> Review material deck</div>
+    <div class="cardlet"><div class="aihead">◔ AI assessment</div><span class="aibtn">▣ Assess this opportunity</span></div>
+    <div class="cardlet"><div style="color:var(--muted);font-size:11px;margin-bottom:7px">Stakeholder</div>
+      <div class="prow" style="border:0;padding:0"><span class="av" style="background:#7c5cf0">JM</span><span><b>Jerry Maynard</b></span><span class="role">Search partner</span></div>
+    </div>
+  </div>
+</div></div></template>
+
+<template id="scr-record"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">KL</span> Kristian</div>
+    <div class="nav-i"><i>This Week</i><i>Pipeline</i><i>Relationships</i><i class="on">Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">Career record</div>
+    <div class="stat"><span><b>48</b><s>Relationships</s></span><span><b>3</b><s>Live pursuits</s></span><span><b>Since 2021</b><s>One record</s></span></div>
+    <div class="cardlet"><div style="color:var(--muted);font-size:11px;margin-bottom:4px">History</div>
+      <div class="trow"><span class="yr">Now</span><span><b>VP Engineering</b> · Mapp</span></div>
+      <div class="trow"><span class="yr">Prev</span><span><b>Director, Platform</b> · Nordisk</span></div>
+      <div class="trow" style="border:0"><span class="yr">Earlier</span><span><b>Head of Data</b> · Templafy</span></div>
+    </div>
+  </div>
+</div></div></template>
+
 <!-- Journey data (New role / employment). Board and advisory follow the same anatomy. -->
 <script type="application/json" id="jny-data">
 [
- {"n":0,"lbl":"Positioning","dur":"ongoing","amber":false,
+ {"n":0,"lbl":"Positioning","amber":false,"screen":"record",
   "whats":"You quietly become receptive to a move.",
   "hard":"It is invisible and self-directed, with no deadline and nowhere to keep recruiter relationships warm between searches.",
   "help":"A durable, private home for your target list, network map and positioning, with reminders that keep relationships warm.",
-  "chips":["Durable record","Relationships"]},
- {"n":1,"lbl":"Sourcing","dur":"days to weeks","amber":false,
+  "chips":["Durable record","Relationship map","Private by design"]},
+ {"n":1,"lbl":"Sourcing","amber":false,"screen":"relationships",
   "whats":"Roles surface, often a headhunter's discreet call about an unadvertised mandate.",
   "hard":"Several approaches run in parallel, held in your inbox and memory, with real leak risk in a small market.",
   "help":"One record of every approach: which recruiter holds which CV, with which client, and the brief.",
-  "chips":["Relationships","Pipeline"]},
- {"n":2,"lbl":"Screening","dur":"1 to 3 weeks","amber":false,
+  "chips":["Every approach logged","Recruiter tracking","Discretion"]},
+ {"n":2,"lbl":"Screening","amber":false,"screen":"pipeline",
   "whats":"Exploratory calls, then a shortlist is assembled.",
   "hard":"You are written about in a report you never see; the cut from dozens down to a handful is opaque.",
   "help":"One view of every parallel process and its stage, plus a nudge to get the roadmap early.",
-  "chips":["Pipeline","This Week"]},
- {"n":3,"lbl":"Interviews","dur":"3 to 6 weeks","amber":false,
+  "chips":["One pipeline view","Moving vs stalling","Ask for the roadmap"]},
+ {"n":3,"lbl":"Interviews","amber":false,"screen":"week",
   "whats":"Two to four rounds, increasingly a two-way courtship.",
   "hard":"Fresh tailored prep each round, feedback filtered and delayed, all around a full-time job and in confidence.",
   "help":"Per-round notes on who you met and what was said, prep briefs, and clear momentum signals.",
-  "chips":["This Week","Gmail capture"]},
- {"n":4,"lbl":"Assessment","dur":"1 to 3 weeks","amber":false,
+  "chips":["Per-round notes","Prep briefs","Momentum signals"]},
+ {"n":4,"lbl":"Assessment","amber":false,"screen":"ai",
   "whats":"Psychometrics, a case, a panel.",
   "hard":"High-stakes and opaque; the deciding report is unseen; heavy unpaid prep on top of the day job.",
   "help":"Track finalist status, keep the case deck and debrief, and read an assessment invitation as the finalist signal it is.",
-  "chips":["AI assessment"]},
- {"n":5,"lbl":"References","dur":"1 to 2 weeks","amber":false,
+  "chips":["AI assessment","Finalist signal","Case deck kept"]},
+ {"n":5,"lbl":"References","amber":false,"screen":"relationships",
   "whats":"Formal references and background checks.",
   "hard":"Your most relevant reference, the current manager, cannot be called yet; timing against resignation is fraught.",
   "help":"Manage who has been asked across processes, consent boundaries, and timing.",
-  "chips":["Pipeline","This Week"]},
- {"n":6,"lbl":"Offer","dur":"1 to 3 weeks","amber":true,
+  "chips":["Reference tracking","Consent and timing","No over-asking"]},
+ {"n":6,"lbl":"Offer","amber":true,"screen":"ai",
   "whats":"A verbal offer, then negotiation of pay, notice, severance, equity and clauses.",
   "hard":"The highest-stakes, least-supported moment. In Denmark, directors sit outside Funktionaerloven, so the contract, not the law, is your protection.",
   "help":"Walk in with benchmarks and a record of every promise, plus decision support on the clause and equity terms.",
-  "chips":["AI assessment","Durable record"]},
- {"n":7,"lbl":"Contract & notice","dur":"1 to 3 months","amber":true,
+  "chips":["Package benchmarks","Every promise logged","Clause support"]},
+ {"n":7,"lbl":"Contract & notice","amber":true,"screen":"week",
   "whats":"You sign, then resign and serve notice.",
   "hard":"Counter-offers, a long anxious sign-to-start gap, and an old clause can still blow up the move.",
   "help":"Track notice dates, clause checks old and new, and the announcement plan.",
-  "chips":["This Week","Durable record"]},
- {"n":8,"lbl":"Onboarding","dur":"3 to 6 months","amber":false,
+  "chips":["Notice dates","Clause checks","Announcement plan"]},
+ {"n":8,"lbl":"Onboarding","amber":false,"screen":"record",
   "whats":"Early wins, stakeholder mapping, probation.",
   "hard":"When the real role diverges from the pitch, there is no record of what was promised, and your relationship capital evaporates.",
   "help":"Hold the commitments made during hiring, and keep your network and materials warm for next time.",
-  "chips":["Durable record","Relationships"]}
+  "chips":["Commitments held","Relationship capital","Ready for next"]}
 ]
 </script>
 <script>
@@ -190,8 +261,10 @@
   var el = document.getElementById('jny-data'); if(!el) return;
   var stages = JSON.parse(el.textContent);
   var rail = document.getElementById('jnyRail');
+  var text = document.getElementById('jnyText');
+  var shot = document.getElementById('jnyShot');
   var panel = document.getElementById('jnyPanel');
-  if(!rail || !panel) return;
+  if(!rail || !text || !shot) return;
   var sel = 0;
 
   stages.forEach(function(s,i){
@@ -210,22 +283,15 @@
     var s = stages[sel];
     if(s.amber) panel.setAttribute('data-amber',''); else panel.removeAttribute('data-amber');
     var chips = (s.chips||[]).map(function(c){ return '<span class="jny-chip">'+c+'</span>'; }).join('');
-    panel.innerHTML =
-      '<div>' +
-        '<p class="jny-stage"><span class="n">'+s.n+'</span> Stage '+s.n+' · '+s.dur+'</p>' +
-        '<h3>'+s.lbl+'</h3>' +
-        '<div class="jny-kv whats"><p class="k">What is happening</p><p>'+s.whats+'</p></div>' +
-        '<div class="jny-kv hard"><p class="k">The hard part</p><p>'+s.hard+'</p></div>' +
-        '<div class="jny-kv help"><p class="k">With Stormpine</p><p>'+s.help+'</p></div>' +
-        '<div class="jny-chips">'+chips+'</div>' +
-      '</div>' +
-      '<div class="jny-shot">' +
-        '<div class="sh-h">'+s.lbl+' <span>Stormpine</span></div>' +
-        '<div class="jny-card"'+(s.amber?' data-amber':'')+'><span class="b"></span><span class="tx"><b>'+(s.chips[0]||'')+'</b><small>in context at this stage</small></span><span class="meta">live</span></div>' +
-        '<div class="jny-card"><span class="b"></span><span class="tx"><b>Momentum</b><small>'+s.dur+'</small></span><span class="meta">on track</span></div>' +
-        '<div class="jny-card"><span class="b"></span><span class="tx"><b>Next action</b><small>suggested for this stage</small></span><span class="meta">1</span></div>' +
-        '<p class="jny-note">Placeholder. A real product screenshot for this stage goes here.</p>' +
-      '</div>';
+    text.innerHTML =
+      '<h3><span class="jhn">'+s.n+'.</span> '+s.lbl+'</h3>' +
+      '<div class="jny-kv whats"><p class="k">What is happening</p><p>'+s.whats+'</p></div>' +
+      '<div class="jny-kv hard"><p class="k">The hard part</p><p>'+s.hard+'</p></div>' +
+      '<div class="jny-kv help"><p class="k">With Stormpine</p><p>'+s.help+'</p></div>' +
+      '<div class="jny-chips">'+chips+'</div>';
+    shot.innerHTML = '';
+    var tpl = document.getElementById('scr-'+s.screen);
+    if(tpl && 'content' in tpl){ shot.appendChild(tpl.content.cloneNode(true)); }
   }
   render();
 })();
