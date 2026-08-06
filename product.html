@@ -21,7 +21,7 @@
       <div class="hero-cta" style="margin-top:22px">
         <div class="jny-switch" role="tablist" aria-label="Pursuit type">
           <button class="on" type="button" data-pursuit="employment" role="tab" aria-selected="true">New role</button>
-          <button class="soon" type="button" aria-disabled="true" title="Coming soon">Board seat</button>
+          <button type="button" data-pursuit="board" role="tab" aria-selected="false">Board seat</button>
           <button class="soon" type="button" aria-disabled="true" title="Coming soon">Advisory</button>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div id="jnyText"></div>
         <div class="jny-shot" id="jnyShot"></div>
       </div>
-      <p class="jny-foot">Amber marks the offer and contract stage: the highest-stakes, least-supported moment, and in Denmark the one the law leaves to your contract.</p>
+      <p class="jny-foot" id="jnyFoot">Amber marks the offer and contract stage: the highest-stakes, least-supported moment, and in Denmark the one the law leaves to your contract.</p>
     </div>
   </section>
 
@@ -268,6 +268,126 @@
   </svg>
 </div></div></template>
 
+<!-- Board-seat per-stage mocks -->
+<template id="scr-board-record"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">AH</span> Astrid Holm</div>
+    <div class="nav-i"><i>This Week</i><i>Pipeline</i><i>Relationships</i><i class="on">Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">Board profile</div>
+    <div class="stat"><span><b>Board CV</b><s>v3</s></span><span><b>5</b><s>Target chairs</s></span><span><b>Since 2019</b><s>One record</s></span></div>
+    <div class="cardlet"><div style="color:var(--muted);font-size:11px;margin-bottom:6px">Competence matrix</div>
+      <div class="field"><span class="k">Finance &amp; audit</span><span style="color:var(--good)">Strong</span></div>
+      <div class="field"><span class="k">Strategy &amp; M&amp;A</span><span style="color:var(--good)">Strong</span></div>
+      <div class="field"><span class="k">Digital &amp; ESG</span><span style="color:var(--good)">Covered</span></div>
+      <div class="field" style="border:0"><span class="k">International</span><span style="color:var(--amber)">Gap to fill</span></div>
+    </div>
+  </div>
+</div></div></template>
+
+<template id="scr-board-sourcing"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">AH</span> Astrid Holm</div>
+    <div class="nav-i"><i>This Week</i><i>Pipeline</i><i class="on">Relationships</i><i>Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">Board network <span style="color:var(--muted);font-weight:500;font-size:11px">· 24 tracked</span></div>
+    <div class="prow"><span class="av" style="background:#4f6bd8">HS</span><span><b>Henrik Sørensen</b></span><span class="role" style="color:var(--good)">Chair · Vacancy forming</span></div>
+    <div class="prow"><span class="av" style="background:#7c5cf0">NV</span><span><b>Nadia Vinter</b></span><span class="role" style="color:var(--good)">Board search · Live mandate</span></div>
+    <div class="prow"><span class="av" style="background:#5662f2">ML</span><span><b>Mette Lund</b></span><span class="role">Director · Rotating off Q1</span></div>
+    <div class="prow"><span class="av" style="background:#3f8f6b">AK</span><span><b>Anders Krogh</b></span><span class="role" style="color:var(--good)">Chair · Asked for your CV</span></div>
+    <div class="prow"><span class="av" style="background:#b06f3f">TB</span><span><b>Thomas Berg</b></span><span class="role" style="color:var(--amber)">Introducer · Idling 6 wks</span></div>
+  </div>
+</div></div></template>
+
+<template id="scr-board-connected"><div class="appwin"><div style="background:var(--surface);padding:15px 16px 13px">
+  <div style="font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);font-weight:600;margin-bottom:6px">How this seat is connected</div>
+  <svg viewBox="0 0 560 300" style="width:100%;height:auto;display:block;font-family:var(--sans)">
+    <g stroke="var(--border)" stroke-width="1.4" fill="none">
+      <path d="M214,132 L156,88"/>
+      <path d="M346,132 L404,88"/>
+      <path d="M214,166 L156,212"/>
+      <path d="M346,166 L404,212"/>
+      <path d="M280,180 L280,216"/>
+    </g>
+    <rect x="212" y="118" width="136" height="62" rx="12" fill="var(--elevated)" stroke="var(--accent)" stroke-opacity="0.55"/>
+    <text x="280" y="144" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">NED, Nordisk A/S</text>
+    <text x="280" y="163" text-anchor="middle" fill="var(--muted)" font-size="11">Exploring</text>
+    <rect x="24" y="46" width="150" height="46" rx="9" fill="var(--surface)" stroke="var(--border)"/>
+    <text x="38" y="66" fill="var(--faint)" font-size="9.5" font-weight="700" letter-spacing="0.6">STAKEHOLDERS</text>
+    <text x="160" y="66" text-anchor="end" fill="var(--muted)" font-size="10" font-weight="600">3</text>
+    <text x="38" y="82" fill="var(--text)" font-size="11">Chair, CEO, 1 director</text>
+    <rect x="386" y="46" width="150" height="46" rx="9" fill="var(--surface)" stroke="var(--border)"/>
+    <text x="400" y="66" fill="var(--faint)" font-size="9.5" font-weight="700" letter-spacing="0.6">CONFLICTS</text>
+    <text x="522" y="66" text-anchor="end" fill="var(--good)" font-size="10" font-weight="600">clear</text>
+    <text x="400" y="82" fill="var(--text)" font-size="11">Independence checked</text>
+    <rect x="24" y="208" width="150" height="46" rx="9" fill="var(--surface)" stroke="var(--border)"/>
+    <text x="38" y="228" fill="var(--faint)" font-size="9.5" font-weight="700" letter-spacing="0.6">ACTIVITY</text>
+    <text x="160" y="228" text-anchor="end" fill="var(--muted)" font-size="10" font-weight="600">2</text>
+    <text x="38" y="244" fill="var(--text)" font-size="11">Met chair, met CEO</text>
+    <rect x="386" y="208" width="150" height="46" rx="9" fill="var(--surface)" stroke="var(--border)"/>
+    <text x="400" y="228" fill="var(--faint)" font-size="9.5" font-weight="700" letter-spacing="0.6">MATERIALS</text>
+    <text x="522" y="228" text-anchor="end" fill="var(--muted)" font-size="10" font-weight="600">2</text>
+    <text x="400" y="244" fill="var(--text)" font-size="11">Board CV, bio</text>
+    <rect x="205" y="216" width="150" height="46" rx="9" fill="var(--surface)" stroke="var(--border)"/>
+    <text x="219" y="236" fill="var(--faint)" font-size="9.5" font-weight="700" letter-spacing="0.6">SOURCE</text>
+    <text x="219" y="252" fill="var(--text)" font-size="11">Nadia V. · Board search</text>
+  </svg>
+</div></div></template>
+
+<template id="scr-board-compliance"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">AH</span> Astrid Holm</div>
+    <div class="nav-i"><i>This Week</i><i class="on">Pipeline</i><i>Relationships</i><i>Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">Governance &amp; risk · NED, Nordisk A/S</div>
+    <div class="field"><span class="k">Independence</span><span style="color:var(--good)">Independent</span></div>
+    <div class="field"><span class="k">Other directorships</span><span>2 declared</span></div>
+    <div class="field"><span class="k">D&amp;O insurance</span><span style="color:var(--good)">In force</span></div>
+    <div class="field"><span class="k">CVR registration</span><span style="color:var(--good)">Filed</span></div>
+    <div class="field" style="border:0"><span class="k">Liability checklist</span><span style="color:var(--amber)">7 / 8</span></div>
+    <div class="cardlet"><div class="aihead">◔ AI assistance</div><span class="aibtn">▣ Review my liability exposure</span></div>
+  </div>
+</div></div></template>
+
+<template id="scr-board-pipeline"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">AH</span> Astrid Holm</div>
+    <div class="nav-i"><i>This Week</i><i class="on">Pipeline</i><i>Relationships</i><i>Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">Pipeline</div>
+    <div class="board">
+      <div class="col"><div class="colh">Exploring</div><div class="bcard"><b>Advisory, Fintech</b><span class="btag">Advisory · Warm intro</span></div></div>
+      <div class="col"><div class="colh">In DD</div><div class="bcard"><b>Chair, Aurora A/S</b><span class="btag">Board · Search firm</span></div></div>
+      <div class="col"><div class="colh">Nominated</div><div class="bcard"><b>NED, Nordisk A/S</b><span class="btag">Board · Referral</span></div></div>
+      <div class="col"><div class="colh">Elected</div><div class="bcard"><b>NED, Vantable A/S</b><span class="btag">Board · Network</span></div></div>
+    </div>
+  </div>
+</div></div></template>
+
+<template id="scr-board-tasks"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">AH</span> Astrid Holm</div>
+    <div class="nav-i"><i class="on">This Week</i><i>Pipeline</i><i>Relationships</i><i>Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">First 100 days · NED, Nordisk A/S</div>
+    <div class="chip"><span class="pip"></span> Induction</div>
+    <div class="task"><span><b>Read board handbook &amp; forretningsorden</b></span><span class="sub">Wk 1</span></div>
+    <div class="task"><span><b>Meet CEO and CFO</b></span><span class="sub">Wk 2</span></div>
+    <div class="task"><span><b>Walk the annual wheel</b> <span class="sub">· aarshjul</span></span><span class="late">Overdue</span></div>
+    <div class="cardlet"><div class="aihead">◔ AI assistance</div><span class="aibtn">▣ Draft my first-100-days plan</span></div>
+  </div>
+</div></div></template>
+
+<template id="scr-board-portfolio"><div class="appwin"><div class="app">
+  <div class="rail"><div class="u"><span class="ua">AH</span> Astrid Holm</div>
+    <div class="nav-i"><i>This Week</i><i>Pipeline</i><i>Relationships</i><i class="on">Profile</i></div></div>
+  <div class="main">
+    <div class="m-h">Board seats <span style="color:var(--muted);font-weight:500;font-size:11px">· 3 active</span></div>
+    <div class="prow"><span class="av" style="background:#4f6bd8">NA</span><span><b>Nordisk A/S</b> <span class="sub">· NED</span></span><span class="role">Re-election Apr 2027</span></div>
+    <div class="prow"><span class="av" style="background:#7c5cf0">VA</span><span><b>Vantable A/S</b> <span class="sub">· Audit chair</span></span><span class="role">Re-election Mar 2027</span></div>
+    <div class="prow"><span class="av" style="background:#3f8f6b">FA</span><span><b>Fintech ApS</b> <span class="sub">· Advisory</span></span><span class="role">Rolling term</span></div>
+    <div class="cardlet"><div style="color:var(--muted);font-size:11px;margin-bottom:4px">Durable record</div>
+      <div class="field"><span class="k">Disclosures</span><span>Up to date</span></div>
+      <div class="field" style="border:0"><span class="k">Next self-evaluation</span><span>Q4</span></div>
+    </div>
+  </div>
+</div></div></template>
+
 <!-- Journey data (New role / employment). Board and advisory follow the same anatomy. -->
 <script type="application/json" id="jny-data">
 [
@@ -313,31 +433,89 @@
   "chips":["Network kept warm","Durable record","Ready for the next move"]}
 ]
 </script>
+<!-- Journey data (Board seat). Same anatomy as New role, board-specific stages. -->
+<script type="application/json" id="jny-data-board">
+[
+ {"n":0,"lbl":"Readiness","amber":false,"screen":"board-record",
+  "whats":"You decide a board seat is a deliberate next step, translate an executive CV into a board CV, map your competences to what boards actually need, and often take a board education.",
+  "hard":"There is little transparent guidance on what board-ready means, the education is a real cost with unclear return, and the CV still reads as an operator, not a director.",
+  "help":"One home for your board thesis, a competence-matrix self-assessment, your target company and chair list, and a versioned board CV and bio.",
+  "chips":["Board CV & bio","Competence matrix","Target chairs"]},
+ {"n":1,"lbl":"Sourcing","amber":false,"screen":"board-sourcing",
+  "whats":"Because most seats never reach an open market, you work to be seen by the people who fill them: chairs, directors and board-search consultants, across networks and candidate banks.",
+  "hard":"The black box. No view of which boards have vacancies forming, which warm contact is actually advancing you, or any pipeline across parallel networks, with almost no feedback.",
+  "help":"The hero use case. Map who can introduce you, track chairs, directors and search consultants across every network, and capture each signal and next action, turning an opaque network into a pipeline you can see and work.",
+  "chips":["Introducer map","Chairs & consultants","Signals to pipeline"]},
+ {"n":2,"lbl":"Exploration","amber":false,"screen":"board-connected",
+  "whats":"A specific seat or likely vacancy surfaces, usually through an introduction. Exploratory talks begin, first with the chair, then directors, the CEO and sometimes major owners, testing chemistry and fit.",
+  "hard":"Asymmetry and ambiguity. You rarely know if you are the only one being explored, and momentum is invisible between board-paced meetings.",
+  "help":"Track each named seat, who you have met, the chair and CEO dynamics, and any conflicts flagged early.",
+  "chips":["Named seats tracked","Chair & CEO notes","Conflicts flagged"]},
+ {"n":3,"lbl":"Evaluation & DD","amber":true,"screen":"board-compliance",
+  "whats":"Both sides move to a structured assessment: interviews, sometimes a nomination committee, reference checks, and your own diligence on the accounts, contracts and culture, plus your personal-liability exposure.",
+  "hard":"Diligence asymmetry and liability blindness. Limited access to real financials before you commit, and a Danish director can carry personal, potentially unlimited liability.",
+  "help":"Store the data-room review, references, independence and interest declarations and D&O terms, with a personal-liability due-diligence checklist.",
+  "chips":["Independence & conflicts","D&O terms","Liability checklist"]},
+ {"n":4,"lbl":"Nomination","amber":false,"screen":"board-pipeline",
+  "whats":"The board or its nomination committee formally puts you forward. For listed companies your profile and independence statement become part of the AGM notice.",
+  "hard":"Loss of control. Timing depends on the AGM calendar, with notice three to five weeks before, and the published disclosures expose your other roles and independence status.",
+  "help":"Track nomination status, verify the disclosures that will be published, and hold the AGM timing.",
+  "chips":["Nomination status","Disclosures verified","AGM timing"]},
+ {"n":5,"lbl":"Election","amber":true,"screen":"board-compliance",
+  "whats":"Shareholders elect you at the general meeting, or the board co-opts between meetings. The company files your registration and you appear in the CVR register within two weeks.",
+  "hard":"You depend on the company to file the CVR registration and bind D&O. A gap leaves a newly seated director personally exposed.",
+  "help":"Confirm the CVR registration is filed and D&O is in force before the first decision, and keep the general-meeting minutes.",
+  "chips":["CVR registration","D&O in force","Minutes kept"]},
+ {"n":6,"lbl":"Onboarding","amber":false,"screen":"board-tasks",
+  "whats":"Election is effective and you must contribute quickly: a structured induction, the business model and strategy, the history and culture, and meetings with key functions.",
+  "hard":"Onboarding quality is wildly inconsistent, especially in SMEs. Often sink-or-swim, no handbook, and you self-organise a mass of documents and relationships.",
+  "help":"Hold the board handbook, the annual wheel, and a first-100-days-on-the-board plan, so you contribute sooner.",
+  "chips":["Board handbook","Annual wheel","First 100 days"]},
+ {"n":7,"lbl":"Tenure & renewal","amber":false,"screen":"board-portfolio",
+  "whats":"Ongoing service across the annual board cycle: board and committee meetings, the annual self-evaluation, and the re-election decision at each AGM. You may take on more seats.",
+  "hard":"Managing multiple seats, deadlines and disclosures across companies with no single system, and keeping the record durable between mandates.",
+  "help":"Manage multiple seats, re-election dates, evaluations and disclosures in one place, with a durable record that makes the next seat easier to win.",
+  "chips":["Multiple seats","Re-election dates","Durable record"]}
+]
+</script>
 <script>
 (function(){
-  var el = document.getElementById('jny-data'); if(!el) return;
-  var stages = JSON.parse(el.textContent);
+  var DATA = {};
+  var srcE = document.getElementById('jny-data');
+  var srcB = document.getElementById('jny-data-board');
+  if(srcE) DATA.employment = JSON.parse(srcE.textContent);
+  if(srcB) DATA.board = JSON.parse(srcB.textContent);
   var rail = document.getElementById('jnyRail');
   var text = document.getElementById('jnyText');
   var shot = document.getElementById('jnyShot');
   var panel = document.getElementById('jnyPanel');
-  if(!rail || !text || !shot) return;
-  var sel = 0;
+  var foot = document.getElementById('jnyFoot');
+  if(!rail || !text || !shot || !DATA.employment) return;
 
-  stages.forEach(function(s,i){
-    var b = document.createElement('button');
-    b.className = 'jny-node' + (i===sel?' on':'');
-    b.type = 'button'; b.setAttribute('role','tab');
-    if(s.amber) b.setAttribute('data-amber','');
-    b.innerHTML = '<span class="jny-dot">'+s.n+'</span><span class="jny-lbl">'+s.lbl+'</span>';
-    b.addEventListener('click', function(){ sel=i; render(); });
-    rail.appendChild(b);
-  });
+  var FOOT = {
+    employment: "Amber marks the offer and contract stage: the highest-stakes, least-supported moment, and in Denmark the one the law leaves to your contract.",
+    board: "Amber marks the two governance moments where personal risk is real: accepting potential personal liability at due diligence, and confirming D&O cover is in force at election."
+  };
+  var switchBtns = [].slice.call(document.querySelectorAll('.jny-switch [data-pursuit]'));
+  var cur = 'employment', sel = 0, stages = DATA.employment;
+
+  function buildRail(){
+    rail.innerHTML = '';
+    stages.forEach(function(s,i){
+      var b = document.createElement('button');
+      b.className = 'jny-node' + (i===sel?' on':'');
+      b.type = 'button'; b.setAttribute('role','tab');
+      if(s.amber) b.setAttribute('data-amber','');
+      b.innerHTML = '<span class="jny-dot">'+s.n+'</span><span class="jny-lbl">'+s.lbl+'</span>';
+      b.addEventListener('click', function(){ sel=i; render(); });
+      rail.appendChild(b);
+    });
+  }
 
   function render(){
     var kids = rail.children;
     for(var i=0;i<kids.length;i++){ kids[i].classList.toggle('on', i===sel); kids[i].setAttribute('aria-selected', i===sel); }
-    var s = stages[sel];
+    var s = stages[sel]; if(!s) return;
     if(s.amber) panel.setAttribute('data-amber',''); else panel.removeAttribute('data-amber');
     var chips = (s.chips||[]).map(function(c){ return '<span class="jny-chip">'+c+'</span>'; }).join('');
     text.innerHTML =
@@ -350,6 +528,24 @@
     var tpl = document.getElementById('scr-'+s.screen);
     if(tpl && 'content' in tpl){ shot.appendChild(tpl.content.cloneNode(true)); }
   }
+
+  function setPursuit(p){
+    if(!DATA[p] || p === cur) return;
+    cur = p; stages = DATA[p]; sel = 0;
+    buildRail(); render();
+    if(foot && FOOT[p]) foot.textContent = FOOT[p];
+    switchBtns.forEach(function(b){
+      var on = b.getAttribute('data-pursuit') === p;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+  switchBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setPursuit(b.getAttribute('data-pursuit')); });
+  });
+
+  buildRail();
   render();
 })();
 </script>
