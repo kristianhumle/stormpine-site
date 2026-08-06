@@ -333,6 +333,8 @@ section{padding:clamp(56px,8vw,104px) 0}
 .app .bcard b{font-size:11px;display:block}
 .app .btag{color:var(--muted);margin-top:5px;display:block}
 .app .bcard .late{margin-top:6px;display:block;font-size:10px}
+.app .btask{color:var(--muted);margin-top:6px;display:block;font-size:10px;line-height:1.35}
+.app .btask.od{color:var(--coral);font-weight:600}
 /* timeline / record (inside .app) */
 .app .stat{display:flex;gap:22px;margin:6px 0 12px}
 .app .stat b{font-size:17px;font-weight:640;letter-spacing:-.02em}
