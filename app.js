@@ -82,7 +82,7 @@
       '<span class="matlabel">Materials</span>' +
       '<a class="mat active" href="index.html">Website prototype</a>' +
       '<a class="mat" href="stormpine-website-direction.html">Moodboard</a>' +
-      '<a class="mat" href="stormpine-hero-concepts.html">Hero concepts</a>' +
+      '<a class="mat" href="stormpine-design-system.html">Design system</a>' +
       '<a class="mat" href="stormpine-page-element-concepts.html">Page elements</a>' +
     '</div></div>' +
     '<header class="nav"><div class="nav-inner">' +
