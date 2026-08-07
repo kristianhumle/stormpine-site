@@ -61,6 +61,20 @@
 
   .subhead{margin:26px 0 4px;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);font-weight:700;border-top:1px dashed var(--border);padding-top:16px}
 
+  /* collapsible research / alternatives */
+  .research{margin-top:8px}
+  .research > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
+    border-top:1px dashed var(--border);margin-top:20px;padding:16px 2px 6px;
+    font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);font-weight:700}
+  .research > summary::-webkit-details-marker{display:none}
+  .research > summary::before{content:"▸";color:var(--muted);transition:transform .18s;font-size:.85rem;line-height:1}
+  .research[open] > summary::before{transform:rotate(90deg)}
+  .research > summary:hover{color:var(--muted)}
+  .research > summary .hint{margin-left:auto;text-transform:none;letter-spacing:.01em;font-weight:600;font-size:.76rem;color:var(--faint)}
+  .research > summary .hint::before{content:"Show"}
+  .research[open] > summary .hint{color:var(--accent)}
+  .research[open] > summary .hint::before{content:"Hide"}
+
   .opt{margin:20px 0 26px}
   .opt-label{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
   .opt-label .tag{font-family:var(--mono);font-size:.72rem;color:var(--accent);font-weight:600}
@@ -477,7 +491,8 @@
       </div>
     </div>
 
-    <div class="subhead">Research · the directions we explored</div>
+    <details class="research">
+      <summary>Research · the directions we explored (A–G) <span class="hint"></span></summary>
 
     <div class="opt">
       <div class="opt-label"><span class="tag">A</span><h3>Convergence engine</h3><span class="k">Inputs flow in, a structured core reads them, clear actions flow out. The literal "operating system" story.</span></div>
@@ -774,6 +789,7 @@
         <div class="cap"><h4>Best when</h4><p>You want to show Stormpine turns scattered inputs into <b>executive-grade judgement</b>, the clearest "what you put in vs. what you get out". <b>H</b> evolves this into the live hero.</p></div>
       </div>
     </div>
+    </details>
   </section>
 
   <!-- ===== BUILT FOR ===== -->
@@ -794,7 +810,8 @@
       <div class="caps two"><div class="cap"><h4>Why it won</h4><p>Most visual and scannable; ties the strip to the product's iconography without shouting.</p></div><div class="cap"><h4>Kept quiet</h4><p>Icons are thin, single-weight and accent-coloured, so it stays executive, not consumer-y.</p></div></div>
     </div>
 
-    <div class="subhead">Research · alternatives explored</div>
+    <details class="research">
+      <summary>Research · alternatives explored <span class="hint"></span></summary>
 
     <div class="opt">
       <div class="opt-label"><span class="tag">ORIG</span><h3>Plain inline list</h3><span class="k">The original: inline list with dot separators. Superseded by B; the roles didn't feel distinct.</span></div>
@@ -828,6 +845,7 @@
       <div class="estage"><p class="bf-quiet">For <b>experienced leaders</b>, directors, board candidates and advisers managing a small number of high-stakes moves.</p></div>
       <div class="caps two"><div class="cap"><h4>The idea</h4><p>The most discreet; disappears into the page and lets the hero model lead.</p></div><div class="cap"><h4>Watch</h4><p>May be <em>too</em> quiet; easy to skip.</p></div></div>
     </div>
+    </details>
   </section>
 
   <!-- ===== JOURNEY BAND ===== -->
