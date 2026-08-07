@@ -20,6 +20,7 @@
     border-radius:10px;background:var(--surface);padding:13px 16px;font-size:.9rem;color:var(--muted);max-width:80ch}
   .ds-note b{color:var(--text);font-weight:600}
   .ds-note code{font-family:var(--mono);font-size:.82em;color:var(--accent)}
+  .ds-sec code{font-family:var(--mono);font-size:.86em;color:var(--accent)}
 
   .ds-sec{padding:40px 0;border-top:1px solid var(--border)}
   .ds-sec > h2{font-size:1.4rem;margin:0 0 4px}
@@ -61,6 +62,19 @@
   /* live components */
   .comp-box{border:1px solid var(--border);border-radius:14px;background:var(--surface);
     padding:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+
+  /* semantic status chips */
+  .st-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .st{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:999px;
+    padding:6px 13px;font-size:.82rem;font-weight:600;background:var(--surface)}
+  .st .d{width:8px;height:8px;border-radius:50%;flex:none}
+
+  /* iconography */
+  .ic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(116px,1fr));gap:12px;margin-top:6px}
+  .ic{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:16px 12px;
+    display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center}
+  .ic svg{width:22px;height:22px;color:var(--text)}
+  .ic .nm{font-size:.74rem;color:var(--muted);font-family:var(--mono)}
 
   /* logo */
   .logo-stage{border:1px solid var(--border);border-radius:14px;background:var(--surface);
@@ -135,10 +149,21 @@
     <div class="sw-grid">
       <div class="sw" data-token="--accent"><div class="sw-chip" style="background:var(--accent)"></div><div class="sw-meta"><div class="sw-name">--accent</div><div class="sw-role">Brand indigo (constant both themes)</div><div class="sw-hex"></div></div></div>
       <div class="sw" data-token="--accent-weak"><div class="sw-chip" style="background:var(--accent-weak)"></div><div class="sw-meta"><div class="sw-name">--accent-weak</div><div class="sw-role">Accent tint · hover / selected bg</div><div class="sw-hex"></div></div></div>
-      <div class="sw" data-token="--lilac"><div class="sw-chip" style="background:var(--lilac)"></div><div class="sw-meta"><div class="sw-name">--lilac</div><div class="sw-role">Soft accent · Board ring</div><div class="sw-hex"></div></div></div>
-      <div class="sw" data-token="--amber"><div class="sw-chip" style="background:var(--amber)"></div><div class="sw-meta"><div class="sw-name">--amber</div><div class="sw-role">Signal · Advisory ring</div><div class="sw-hex"></div></div></div>
-      <div class="sw" data-token="--coral"><div class="sw-chip" style="background:var(--coral)"></div><div class="sw-meta"><div class="sw-name">--coral</div><div class="sw-role">Overdue / urgent</div><div class="sw-hex"></div></div></div>
-      <div class="sw" data-token="--good"><div class="sw-chip" style="background:var(--good)"></div><div class="sw-meta"><div class="sw-name">--good</div><div class="sw-role">Success / positive</div><div class="sw-hex"></div></div></div>
+      <div class="sw" data-token="--lilac"><div class="sw-chip" style="background:var(--lilac)"></div><div class="sw-meta"><div class="sw-name">--lilac</div><div class="sw-role">Soft accent · Board pursuit</div><div class="sw-hex"></div></div></div>
+    </div>
+
+    <div class="ds-subh">Semantic status</div>
+    <p class="sub" style="margin:0 0 12px">Reserved meanings, kept distinct from the brand accent. Use to signal state, never for decoration. Indigo (<code style="font-family:var(--mono);font-size:.85em;color:var(--accent)">--accent</code>) doubles as the neutral/in-progress state.</p>
+    <div class="sw-grid">
+      <div class="sw" data-token="--good"><div class="sw-chip" style="background:var(--good)"></div><div class="sw-meta"><div class="sw-name">--good</div><div class="sw-role">Success / positive · confirmed, complete</div><div class="sw-hex"></div></div></div>
+      <div class="sw" data-token="--coral"><div class="sw-chip" style="background:var(--coral)"></div><div class="sw-meta"><div class="sw-name">--coral</div><div class="sw-role">Error / overdue / urgent</div><div class="sw-hex"></div></div></div>
+      <div class="sw" data-token="--amber"><div class="sw-chip" style="background:var(--amber)"></div><div class="sw-meta"><div class="sw-name">--amber</div><div class="sw-role">Attention / signal · also the Advisory pursuit</div><div class="sw-hex"></div></div></div>
+    </div>
+    <div class="st-row">
+      <span class="st"><span class="d" style="background:var(--good)"></span> Success</span>
+      <span class="st"><span class="d" style="background:var(--coral)"></span> Overdue</span>
+      <span class="st"><span class="d" style="background:var(--amber)"></span> Needs attention</span>
+      <span class="st"><span class="d" style="background:var(--accent)"></span> In progress</span>
     </div>
   </section>
 
@@ -176,6 +201,20 @@
     </div>
   </section>
 
+  <!-- ============ RESPONSIVE ============ -->
+  <section class="ds-sec" id="responsive">
+    <h2>Responsive &amp; breakpoints</h2>
+    <p class="sub">The site is fluid, not fixed. Headings and lead text scale with <code>clamp()</code>, so there are no separate "mobile sizes"; layout reflows at two breakpoints. Every page must ship the viewport meta.</p>
+    <div class="spec-grid">
+      <div class="spec"><div class="k">Content width</div><div class="v"><b>--maxw 1120px</b>, centered, 28px gutters (<code>.wrap</code>); <code>.narrow</code> 760px for prose</div></div>
+      <div class="spec"><div class="k">≤ 860px · primary</div><div class="v">Nav → hamburger, mega-menus → plain links; feature / cards / pillars grids → <b>1 column</b>; footer → 2 columns; walkthrough stacks (sticky index hidden); journey rail scrolls sideways</div></div>
+      <div class="spec"><div class="k">≤ 520px · small phone</div><div class="v">Small-phone tweaks; footer stays 2-up, everything else already single-column</div></div>
+      <div class="spec"><div class="k">Fluid type</div><div class="v">Headings + <code>.lead</code> use <code>clamp()</code>, they shrink smoothly with the viewport, no per-breakpoint font sizes</div></div>
+      <div class="spec"><div class="k">Hero model</div><div class="v">The animated SVG scales via <code>viewBox</code> + <code>preserveAspectRatio</code>; it gets dense at phone width (a mobile-simplified hero is a tracked follow-up)</div></div>
+    </div>
+    <div class="ds-note"><b>Required on every page:</b> <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code>. Without it, mobile browsers render the page at desktop width and zoom out. Verified: no horizontal overflow at 375px.</div>
+  </section>
+
   <!-- ============ ELEVATION ============ -->
   <section class="ds-sec" id="elevation">
     <h2>Elevation</h2>
@@ -207,6 +246,29 @@
       </div>
     </div>
     <div class="ds-note" style="margin-top:16px"><b>Assets &amp; usage:</b> on-site use the inline <code>currentColor</code> wordmark (the <code>LOGO</code> constant in <code>app.js</code>). For external/embedded use, the standalone files are <code>assets/stormpine-logo-black.svg</code> (light backgrounds) and <code>assets/stormpine-logo-white.svg</code> (dark). See <code>assets/README.md</code>. Keep all three in sync if the mark changes.</div>
+  </section>
+
+  <!-- ============ ICONOGRAPHY ============ -->
+  <section class="ds-sec" id="icons">
+    <h2>Iconography</h2>
+    <p class="sub">One line-icon family across nav, mega-menus and accents. <b>24×24 viewBox, 1.6px stroke, round caps &amp; joins, no fill</b>, and <code style="font-family:var(--mono);font-size:.85em;color:var(--accent)">currentColor</code> so each icon takes the surrounding text colour (accent on hover in the mega-menu). Defined in <code style="font-family:var(--mono);font-size:.85em;color:var(--accent)">app.js</code>; used at 18px in the nav.</p>
+    <div class="ic-grid">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4.5" height="16" rx="1"/><rect x="9.75" y="4" width="4.5" height="11" rx="1"/><rect x="16.5" y="4" width="4.5" height="7" rx="1"/></svg><span class="nm">pipeline</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17" r="2.4"/><path d="M7.7 8.6l2.6 6.8M16.3 8.6l-2.6 6.8M8.4 7h7.2"/></svg><span class="nm">relationships</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5l1.5 1.5L8 5.5"/><path d="M4 12.5l1.5 1.5L8 11.5"/><path d="M4 18.5l1.5 1.5L8 17.5"/><path d="M11 7h9M11 13h9M11 19h9"/></svg><span class="nm">tasks</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.8 4.8 1.7-4.8 1.7L12 16l-1.7-4.8L5.5 9.5l4.8-1.7z"/><path d="M18.5 15l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z"/></svg><span class="nm">intelligence</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg><span class="nm">profile</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg><span class="nm">overview</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="7" height="7" rx="1.2"/><rect x="13.5" y="4" width="7" height="7" rx="1.2"/><rect x="3.5" y="13" width="7" height="7" rx="1.2"/><rect x="13.5" y="13" width="7" height="7" rx="1.2"/></svg><span class="nm">board</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h13.5M12 6.5l6 5.5-6 5.5"/></svg><span class="nm">transition</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7.5l8 5.5 8-5.5"/></svg><span class="nm">mail</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v4M16 3v4"/></svg><span class="nm">calendar</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span class="nm">record</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg><span class="nm">globe</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-1.5-1-3.5-1.5-5.5-1.5H4v13h2.5c2 0 4 .5 5.5 1.5M12 6c1.5-1 3.5-1.5 5.5-1.5H20v13h-2.5c-2 0-4 .5-5.5 1.5M12 6v13"/></svg><span class="nm">guide</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5l5-5"/><path d="M13.5 7l1-1a3.4 3.4 0 0 1 4.8 4.8l-2 2a3.4 3.4 0 0 1-4.8 0"/><path d="M10.5 17l-1 1a3.4 3.4 0 0 1-4.8-4.8l2-2a3.4 3.4 0 0 1 4.8 0"/></svg><span class="nm">link</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.9.5-1.5 1.1-1.5 2.1M12 16.8h.01"/></svg><span class="nm">help</span></div>
+    </div>
   </section>
 
   <!-- ============ CORE COMPONENTS ============ -->

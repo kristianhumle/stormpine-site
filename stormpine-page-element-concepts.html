@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Stormpine · Page elements</title>
 <style>
@@ -41,7 +42,7 @@
 
   /* ---- status system ---- */
   .badge{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:999px;border:1px solid;white-space:nowrap}
-  .badge.confirmed{color:var(--green);border-color:color-mix(in srgb,var(--green) 45%,var(--border));background:color-mix(in srgb,var(--green) 12%,transparent)}
+  .badge.production{color:var(--green);border-color:color-mix(in srgb,var(--green) 45%,var(--border));background:color-mix(in srgb,var(--green) 12%,transparent)}
   .badge.research{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));background:color-mix(in srgb,var(--accent) 12%,transparent)}
   .badge.proposed{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 45%,var(--border));background:color-mix(in srgb,var(--amber) 12%,transparent)}
   .legend{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:20px 0 0;font-size:.85rem;color:var(--muted)}
@@ -152,6 +153,40 @@
   .pvfoot{width:100%;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:20px;font-size:.82rem;color:var(--muted)}
   .pvfoot h5{font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin:0 0 8px}
   .pvfoot a{display:block;color:var(--muted);text-decoration:none;line-height:1.95}
+
+  /* journey band preview (mirrors the live .jny-band) */
+  .pvjny{width:100%}
+  .pvjny-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+  .pvjny-top .eyebrow{display:block;margin-bottom:7px}
+  .pvjny-top h3{font-size:1.15rem;margin:0;max-width:26ch}
+  .pvjny-switch{display:inline-flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px;flex:none}
+  .pvjny-switch span{font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:999px;color:var(--muted);white-space:nowrap}
+  .pvjny-switch span.on{background:var(--accent);color:#fff}
+  .pvjny-switch span.soon{color:var(--faint)}
+  .pvjny-rail{position:relative;display:flex;justify-content:space-between;gap:6px;margin:4px 6px 0}
+  .pvjny-rail::before{content:"";position:absolute;left:15px;right:15px;top:15px;height:2px;background:linear-gradient(90deg,var(--accent) 0%,var(--accent) 80%,var(--amber) 100%)}
+  .pvjny-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:0}
+  .pvjny-dot{width:30px;height:30px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);color:var(--text);font-weight:700;font-size:.8rem;display:grid;place-items:center}
+  .pvjny-node.amber .pvjny-dot{border-color:var(--amber)}
+  .pvjny-lbl{font-size:.7rem;color:var(--muted);text-align:center;line-height:1.25;max-width:84px}
+  .pvjny-cta{display:flex;justify-content:center;margin-top:22px}
+
+  /* value-prop walkthrough preview */
+  .pvws{width:100%}
+  .pvws-intro{margin-bottom:20px}
+  .pvws-intro .eyebrow{display:block;margin-bottom:6px}
+  .pvws-intro h3{font-size:1.2rem;margin:0}
+  .pvws-cols{display:grid;grid-template-columns:190px 1fr;gap:26px;align-items:start}
+  .pvws-nav{display:flex;flex-direction:column;gap:1px}
+  .pvws-nav a{padding:9px 0 9px 16px;border-left:2px solid var(--border);font-size:.92rem;font-weight:600;color:var(--faint)}
+  .pvws-nav a.on{color:var(--text);border-left-color:var(--accent)}
+  .pvws-block h4{font-size:1.02rem;margin:0 0 14px;line-height:1.3}
+  .pvws-block h4 span{color:var(--muted);font-weight:400}
+  .pvws-frame{border:1px solid var(--border);border-radius:12px;background:var(--panel);padding:6px 14px}
+  .pvws-frame .row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:.82rem;color:var(--muted)}
+  .pvws-frame .row:last-child{border-bottom:0}
+  .pvws-frame .row b{color:var(--text);font-weight:600}
+  @media(max-width:720px){.pvws-cols{grid-template-columns:1fr;gap:16px}.pvjny-rail{overflow-x:auto;justify-content:flex-start;gap:20px}.pvjny-rail::before{display:none}.pvjny-node{flex:0 0 64px}}
 
   /* ============ hero-concept stages (moved in from Hero concepts) ============ */
   .stage{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
@@ -306,29 +341,30 @@
   <section class="intro">
     <span class="eyebrow">Design system · element catalogue</span>
     <h2>Every page element the site is built from.</h2>
-    <p>One place for each building block the marketing site uses. For every element you see the <b>confirmed version</b> first (what's live, or the direction we've picked), and where we explored alternatives, a <b>research</b> section with the concepts we went through. Each carries a status so it's clear what's settled and what's still open. The <b>Hero</b> concepts now live here too. Toggle ☾/☀ for both themes.</p>
+    <p>One place for each building block the marketing site uses. For every element you see the <b>live version</b> first (what's in production), and where we explored alternatives, a <b>research</b> section with the concepts we went through. Each carries a status so it's clear what's shipped and what's still open. The <b>Hero</b> concepts now live here too. Toggle ☾/☀ for both themes.</p>
     <div class="legend">
-      <span class="i"><span class="badge confirmed">Confirmed</span> live on the site, or the picked direction</span>
-      <span class="i"><span class="badge research">Research</span> concepts explored, choice still open</span>
+      <span class="i"><span class="badge production">Production</span> implemented and live on the real site</span>
+      <span class="i"><span class="badge research">Research</span> alternatives explored, choice still open</span>
       <span class="i"><span class="badge proposed">Proposed</span> designed idea, not built yet</span>
     </div>
     <ul class="toc">
-      <li><a href="#header">Site header &amp; navigation</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#hero">Hero</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#builtfor">"Built for" strip</a><span class="badge research">Research</span></li>
-      <li><a href="#journey">Journey band</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#band">Section band</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#featband">Feature-list band</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#cards">Cards ("Who it's for")</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#pillars">Pillars (icon three-up)</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#privacy">Privacy strip</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#pricing">Pricing tiers</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#faq">FAQ accordion</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#cta">CTA banner</a><span class="badge confirmed">Confirmed</span></li>
-      <li><a href="#richtext">Rich text / legal document</a><span class="badge confirmed">Confirmed</span></li>
+      <li><a href="#header">Site header &amp; navigation</a><span class="badge production">Production</span></li>
+      <li><a href="#hero">Hero</a><span class="badge production">Production</span></li>
+      <li><a href="#builtfor">"Built for" strip</a><span class="badge production">Production</span></li>
+      <li><a href="#journey">Journey band</a><span class="badge production">Production</span></li>
+      <li><a href="#walkthrough">Value-prop walkthrough</a><span class="badge production">Production</span></li>
+      <li><a href="#band">Section band</a><span class="badge production">Production</span></li>
+      <li><a href="#featband">Feature-list band</a><span class="badge production">Production</span></li>
+      <li><a href="#cards">Cards ("Who it's for")</a><span class="badge production">Production</span></li>
+      <li><a href="#pillars">Pillars (icon three-up)</a><span class="badge production">Production</span></li>
+      <li><a href="#privacy">Privacy strip</a><span class="badge production">Production</span></li>
+      <li><a href="#pricing">Pricing tiers</a><span class="badge production">Production</span></li>
+      <li><a href="#faq">FAQ accordion</a><span class="badge production">Production</span></li>
+      <li><a href="#cta">CTA banner</a><span class="badge production">Production</span></li>
+      <li><a href="#richtext">Rich text / legal document</a><span class="badge production">Production</span></li>
       <li><a href="#table">Sub-processor table</a><span class="badge proposed">Proposed</span></li>
       <li><a href="#doclinks">Document links grid</a><span class="badge proposed">Proposed</span></li>
-      <li><a href="#footer">Footer</a><span class="badge confirmed">Confirmed</span></li>
+      <li><a href="#footer">Footer</a><span class="badge production">Production</span></li>
     </ul>
   </section>
 
@@ -336,7 +372,7 @@
 
   <!-- ===== SITE HEADER ===== -->
   <section class="element" id="header">
-    <div class="element-head"><h2>Site header &amp; navigation</h2><span class="badge confirmed">Confirmed</span><span class="where">sticky · every page</span></div>
+    <div class="element-head"><h2>Site header &amp; navigation</h2><span class="badge production">Production</span><span class="where">sticky · every page</span></div>
     <p class="edesc">Sticky top bar: wordmark, primary nav with mega-menus (Product, Who it's for, Resources), and a utility cluster (language, theme, Sign in, Start free). Links and CTAs are bound to Sanity so they're editable.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Live header</h3><span class="chosen">✓ live</span></div>
@@ -352,11 +388,11 @@
 
   <!-- ===== HERO ===== -->
   <section class="element" id="hero">
-    <div class="element-head"><h2>Hero</h2><span class="badge confirmed">Confirmed · H</span><span class="where">top of every page</span></div>
+    <div class="element-head"><h2>Hero</h2><span class="badge production">Production · H</span><span class="where">top of every page</span></div>
     <p class="edesc">The frontpage hero models what Stormpine does rather than screenshotting it. We explored eight directions (A to H). Direction <b>H, "living pursuits, different tempos"</b>, is confirmed and productionised as the live home hero; content pages (pricing, trust, legal) use a simpler centered variant of it. The research directions are kept below for the record.</p>
 
     <div class="opt">
-      <div class="opt-label"><span class="tag">CONFIRMED</span><h3>H · Living pursuits, different tempos</h3><span class="chosen">✓ live hero</span></div>
+      <div class="opt-label"><span class="tag">LIVE</span><h3>H · Living pursuits, different tempos</h3><span class="chosen">✓ live hero</span></div>
       <div class="stage">
         <div class="stagenav"><span class="brand"><span class="glyph" style="width:16px;height:16px;font-size:.55rem">S</span> Stormpine</span>
           <span class="sp"><span>Product</span><span>Pricing</span><button class="btn">Sign in</button><button class="btn pri">Start free</button></span></div>
@@ -742,12 +778,27 @@
 
   <!-- ===== BUILT FOR ===== -->
   <section class="element" id="builtfor">
-    <div class="element-head"><h2>"Built for" strip</h2><span class="badge research">Research</span><span class="where">hero · under the sub-headline</span></div>
-    <p class="edesc">The audience strip directly under the hero sub-headline. The current version is a plain inline list; the options below are the alternatives we sketched. Choice still open, so it's marked Research.</p>
+    <div class="element-head"><h2>"Built for" strip</h2><span class="badge production">Production</span><span class="where">hero · under the sub-headline</span></div>
+    <p class="edesc">The audience strip directly under the hero sub-headline. The live version is <b>Option B, icon + label</b>: each audience with a thin accent line-icon echoing the product's iconography. The other directions we sketched are kept below for the record.</p>
 
     <div class="opt">
-      <div class="opt-label"><span class="tag">NOW</span><h3>Currently on the site</h3><span class="k">Inline list with dot separators. Fine, but plain; the roles don't feel distinct.</span></div>
-      <div class="estage now">
+      <div class="opt-label"><span class="tag">LIVE · B</span><h3>Icon + label</h3><span class="chosen">✓ live</span></div>
+      <div class="estage">
+        <div class="bf-ico"><span class="lab">Built for</span>
+          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg> Experienced leaders</span>
+          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7.5" width="17" height="11" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5M3.5 12.5h17"/></svg> Directors &amp; VPs</span>
+          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="6" width="4" height="12" rx="1"/><rect x="10" y="6" width="4" height="12" rx="1"/><rect x="15.5" y="6" width="4" height="12" rx="1"/></svg> Board candidates</span>
+          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l1.6 4.4L18 10l-4.4 1.6L12 16l-1.6-4.4L6 10l4.4-1.6z"/></svg> Advisers</span>
+        </div>
+      </div>
+      <div class="caps two"><div class="cap"><h4>Why it won</h4><p>Most visual and scannable; ties the strip to the product's iconography without shouting.</p></div><div class="cap"><h4>Kept quiet</h4><p>Icons are thin, single-weight and accent-coloured, so it stays executive, not consumer-y.</p></div></div>
+    </div>
+
+    <div class="subhead">Research · alternatives explored</div>
+
+    <div class="opt">
+      <div class="opt-label"><span class="tag">ORIG</span><h3>Plain inline list</h3><span class="k">The original: inline list with dot separators. Superseded by B; the roles didn't feel distinct.</span></div>
+      <div class="estage">
         <div class="bf-base"><span>Built for</span><b>experienced leaders</b><span class="sep">·</span><b>directors &amp; VPs</b><span class="sep">·</span><b>board candidates</b><span class="sep">·</span><b>advisers &amp; portfolio-builders</b></div>
       </div>
     </div>
@@ -761,19 +812,6 @@
     </div>
 
     <div class="opt">
-      <div class="opt-label"><span class="tag">B</span><h3>Icon + label</h3><span class="k">A small line icon per audience, echoing the product's icon language.</span></div>
-      <div class="estage">
-        <div class="bf-ico"><span class="lab">Built for</span>
-          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg> Experienced leaders</span>
-          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7.5" width="17" height="11" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5M3.5 12.5h17"/></svg> Directors &amp; VPs</span>
-          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="6" width="4" height="12" rx="1"/><rect x="10" y="6" width="4" height="12" rx="1"/><rect x="15.5" y="6" width="4" height="12" rx="1"/></svg> Board candidates</span>
-          <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l1.6 4.4L18 10l-4.4 1.6L12 16l-1.6-4.4L6 10l4.4-1.6z"/></svg> Advisers</span>
-        </div>
-      </div>
-      <div class="caps two"><div class="cap"><h4>The idea</h4><p>Most visual/scannable; ties the strip to the product's iconography.</p></div><div class="cap"><h4>Watch</h4><p>Icons risk feeling consumer-y for an executive audience; keep them thin and quiet.</p></div></div>
-    </div>
-
-    <div class="opt">
       <div class="opt-label"><span class="tag">C</span><h3>Situation sentence</h3><span class="k">Reframe from job titles to the situations they're in; more sophisticated, on-positioning.</span></div>
       <div class="estage"><p class="bf-sent">For the leader weighing a <b>director role</b>, building a <b>board seat or advisory portfolio</b>, and preparing for the move after this one.</p></div>
       <div class="caps two"><div class="cap"><h4>The idea</h4><p>Speaks to the <b>moment</b>, not the résumé line; the most executive, least "list-y".</p></div><div class="cap"><h4>Watch</h4><p>Loses the quick who-it's-for scan; better paired with the "Who it's for" cards.</p></div></div>
@@ -782,7 +820,7 @@
     <div class="opt">
       <div class="opt-label"><span class="tag">D</span><h3>Eyebrow + roles</h3><span class="k">A small "BUILT FOR" label above a clean row of roles; clearer hierarchy, very quiet.</span></div>
       <div class="estage"><div class="bf-eye"><span class="eyebrow">Built for</span><div class="roles">experienced leaders<span class="sep">·</span>directors &amp; VPs<span class="sep">·</span>board candidates<span class="sep">·</span>advisers &amp; portfolio-builders</div></div></div>
-      <div class="caps two"><div class="cap"><h4>The idea</h4><p>Separates label from roles for cleaner structure; keeps the restraint of "now".</p></div><div class="cap"><h4>Watch</h4><p>Closest to current; a refinement more than a rethink.</p></div></div>
+      <div class="caps two"><div class="cap"><h4>The idea</h4><p>Separates label from roles for cleaner structure; keeps the restraint of the original.</p></div><div class="cap"><h4>Watch</h4><p>A refinement more than a rethink.</p></div></div>
     </div>
 
     <div class="opt">
@@ -794,16 +832,57 @@
 
   <!-- ===== JOURNEY BAND ===== -->
   <section class="element" id="journey">
-    <div class="element-head"><h2>Journey band</h2><span class="badge confirmed">Confirmed</span><span class="where">home · "the arc of a move"</span></div>
-    <p class="edesc">A horizontal band showing the stages of a director/board/advisory move, with one stage highlighted (Offer). Communicates that a move is a long, multi-stage process.</p>
+    <div class="element-head"><h2>Journey band</h2><span class="badge production">Production</span><span class="where">home · product · "the arc of a move"</span></div>
+    <p class="edesc">The home band that frames a move as a long, multi-stage process. A <b>pursuit switch</b> (New role is live; Board seat and Advisory are marked "soon") sits above a numbered <b>stage rail</b> (0-7), Positioning through Staying connected, with <b>Offer &amp; contract</b> highlighted in amber and the connecting line warming from indigo to amber at the close. "See how each stage works" opens the full interactive journey on the product page.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>The arc of a move</h3><span class="chosen">✓ live</span></div>
       <div class="estage">
-        <div style="width:100%;text-align:center">
-          <span class="eyebrow">The arc of a move</span>
-          <h3 style="font-size:1.2rem;margin:8px 0 18px">From first conversation to first 100 days.</h3>
-          <div class="pvjourney">
-            <span class="pvstage">Positioning</span><span class="pvarr">→</span><span class="pvstage">Sourcing</span><span class="pvarr">→</span><span class="pvstage">Screening</span><span class="pvarr">→</span><span class="pvstage">Interviews</span><span class="pvarr">→</span><span class="pvstage">Assessment</span><span class="pvarr">→</span><span class="pvstage">References</span><span class="pvarr">→</span><span class="pvstage amber">Offer</span><span class="pvarr">→</span><span class="pvstage">Contract &amp; notice</span><span class="pvarr">→</span><span class="pvstage">Onboarding</span>
+        <div class="pvjny">
+          <div class="pvjny-top">
+            <div><span class="eyebrow">The arc of a move</span><h3>From first conversation to your next move.</h3></div>
+            <div class="pvjny-switch"><span class="on">New role</span><span class="soon">Board seat · soon</span><span class="soon">Advisory · soon</span></div>
+          </div>
+          <div class="pvjny-rail">
+            <div class="pvjny-node"><div class="pvjny-dot">0</div><div class="pvjny-lbl">Positioning</div></div>
+            <div class="pvjny-node"><div class="pvjny-dot">1</div><div class="pvjny-lbl">Sourcing</div></div>
+            <div class="pvjny-node"><div class="pvjny-dot">2</div><div class="pvjny-lbl">Screening</div></div>
+            <div class="pvjny-node"><div class="pvjny-dot">3</div><div class="pvjny-lbl">Interviews</div></div>
+            <div class="pvjny-node"><div class="pvjny-dot">4</div><div class="pvjny-lbl">Assessment</div></div>
+            <div class="pvjny-node"><div class="pvjny-dot">5</div><div class="pvjny-lbl">References</div></div>
+            <div class="pvjny-node amber"><div class="pvjny-dot">6</div><div class="pvjny-lbl">Offer &amp; contract</div></div>
+            <div class="pvjny-node"><div class="pvjny-dot">7</div><div class="pvjny-lbl">Staying connected</div></div>
+          </div>
+          <div class="pvjny-cta"><button class="btn">See how each stage works →</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VALUE-PROP WALKTHROUGH ===== -->
+  <section class="element" id="walkthrough">
+    <div class="element-head"><h2>Value-prop walkthrough</h2><span class="badge production">Production</span><span class="where">home · "One system" section</span></div>
+    <p class="edesc">The homepage's core value section, introduced by the <b>"One system, everything behind a move in one place"</b> heading. An Attio-style sticky-scroll walkthrough: a left index of five value props highlights as you scroll, each paired with a product mock on the right (See the whole process, Track what's moving, Prepare for conversations, Manage relationships, Build career memory).</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">NOW</span><h3>Sticky-scroll walkthrough</h3><span class="chosen">✓ live</span></div>
+      <div class="estage">
+        <div class="pvws">
+          <div class="pvws-intro"><span class="eyebrow">One system</span><h3>Everything behind a move in one place.</h3></div>
+          <div class="pvws-cols">
+            <nav class="pvws-nav">
+              <a class="on">See the whole process</a>
+              <a>Track what's moving</a>
+              <a>Prepare for conversations</a>
+              <a>Manage relationships</a>
+              <a>Build career memory</a>
+            </nav>
+            <div class="pvws-block">
+              <h4>See the whole move, your way. <span>A pipeline built around the relationships behind each opportunity.</span></h4>
+              <div class="pvws-frame">
+                <div class="row"><b>Chair, Nordic SaaS</b> <span>Board · Referral</span></div>
+                <div class="row"><b>CPTO, Northwind</b> <span>Operating · Search firm</span></div>
+                <div class="row"><b>VP Eng, Vantable</b> <span>Interviewing</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -812,8 +891,8 @@
 
   <!-- ===== SECTION BAND ===== -->
   <section class="element" id="band">
-    <div class="element-head"><h2>Section band</h2><span class="badge confirmed">Confirmed</span><span class="where">home &amp; content pages · <code>bandSection</code></span></div>
-    <p class="edesc">A centered eyebrow + heading + short body, used to introduce a theme (the "one system" and AI bands on the home page). The workhorse divider between richer sections.</p>
+    <div class="element-head"><h2>Section band</h2><span class="badge production">Production</span><span class="where">home &amp; content pages · <code>bandSection</code></span></div>
+    <p class="edesc">A centered eyebrow + heading + short body, used to introduce a theme (the AI band on the home page, section intros on content pages). The workhorse divider between richer sections.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Centered band</h3><span class="chosen">✓ live</span></div>
       <div class="estage"><div class="pvband"><span class="eyebrow">Grounded, not generic</span><h3>AI that reasons over your context, never a generic script.</h3><p>Stormpine's assistance is grounded in your own pursuits, relationships and materials. It's there when you ask for it, and it stays quiet the rest of the time.</p></div></div>
@@ -822,7 +901,7 @@
 
   <!-- ===== FEATURE-LIST BAND ===== -->
   <section class="element" id="featband">
-    <div class="element-head"><h2>Feature-list band</h2><span class="badge confirmed">Confirmed</span><span class="where">pricing, trust · <code>bandSection</code> + features</span></div>
+    <div class="element-head"><h2>Feature-list band</h2><span class="badge production">Production</span><span class="where">pricing, trust · <code>bandSection</code> + features</span></div>
     <p class="edesc">The section band with a checkmark feature list underneath. Used where a band needs to enumerate a few concrete points.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Band + checklist</h3><span class="chosen">✓ live</span></div>
@@ -838,7 +917,7 @@
 
   <!-- ===== CARDS ===== -->
   <section class="element" id="cards">
-    <div class="element-head"><h2>Cards ("Who it's for")</h2><span class="badge confirmed">Confirmed</span><span class="where">home, who-it's-for · <code>cardsSection</code></span></div>
+    <div class="element-head"><h2>Cards ("Who it's for")</h2><span class="badge production">Production</span><span class="where">home, who-it's-for · <code>cardsSection</code></span></div>
     <p class="edesc">A three-up grid of cards with a kicker, title and body. On the home page it carries the "Who it's for" situations; reusable anywhere a set of parallel points is needed.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Three-up cards</h3><span class="chosen">✓ live</span></div>
@@ -852,7 +931,7 @@
 
   <!-- ===== PILLARS ===== -->
   <section class="element" id="pillars">
-    <div class="element-head"><h2>Pillars (icon three-up)</h2><span class="badge confirmed">Confirmed</span><span class="where">trust, pricing, product · <code>pillarsSection</code></span></div>
+    <div class="element-head"><h2>Pillars (icon three-up)</h2><span class="badge production">Production</span><span class="where">trust, pricing, product · <code>pillarsSection</code></span></div>
     <p class="edesc">Icon + title + body in a three-up (or six-up) grid. Used for principles, promises and value pillars. The generic renderer scales it from 3 to 6 items.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Icon pillars</h3><span class="chosen">✓ live</span></div>
@@ -866,7 +945,7 @@
 
   <!-- ===== PRIVACY STRIP ===== -->
   <section class="element" id="privacy">
-    <div class="element-head"><h2>Privacy strip</h2><span class="badge confirmed">Confirmed</span><span class="where">home · <code>privacySection</code></span></div>
+    <div class="element-head"><h2>Privacy strip</h2><span class="badge production">Production</span><span class="where">home · <code>privacySection</code></span></div>
     <p class="edesc">A discretion-focused strip: eyebrow, heading, short body, a row of reassurance pills, and a link to the Trust page. Speaks to the sensitivity of career data.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Private by design</h3><span class="chosen">✓ live</span></div>
@@ -883,7 +962,7 @@
 
   <!-- ===== PRICING TIERS ===== -->
   <section class="element" id="pricing">
-    <div class="element-head"><h2>Pricing tiers</h2><span class="badge confirmed">Confirmed</span><span class="where">pricing · <code>pricingSection</code></span></div>
+    <div class="element-head"><h2>Pricing tiers</h2><span class="badge production">Production</span><span class="where">pricing · <code>pricingSection</code></span></div>
     <p class="edesc">Two side-by-side plan cards, one highlighted, each with a name, price, description, feature list and CTA. Built to scale to more tiers later.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Free + Premium</h3><span class="chosen">✓ live</span></div>
@@ -896,7 +975,7 @@
 
   <!-- ===== FAQ ===== -->
   <section class="element" id="faq">
-    <div class="element-head"><h2>FAQ accordion</h2><span class="badge confirmed">Confirmed</span><span class="where">pricing · <code>faqSection</code></span></div>
+    <div class="element-head"><h2>FAQ accordion</h2><span class="badge production">Production</span><span class="where">pricing · <code>faqSection</code></span></div>
     <p class="edesc">Native <code>&lt;details&gt;</code> accordion (accessible for free), first item open by default. Used for objection-handling on the pricing page.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Accordion</h3><span class="chosen">✓ live</span></div>
@@ -911,7 +990,7 @@
 
   <!-- ===== CTA BANNER ===== -->
   <section class="element" id="cta">
-    <div class="element-head"><h2>CTA banner</h2><span class="badge confirmed">Confirmed</span><span class="where">bottom of every page · <code>ctaSection</code></span></div>
+    <div class="element-head"><h2>CTA banner</h2><span class="badge production">Production</span><span class="where">bottom of every page · <code>ctaSection</code></span></div>
     <p class="edesc">The closing call-to-action: heading, supporting line, two buttons, and an optional reassurance note. Ends every page.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Closing CTA</h3><span class="chosen">✓ live</span></div>
@@ -921,7 +1000,7 @@
 
   <!-- ===== RICH TEXT / LEGAL ===== -->
   <section class="element" id="richtext">
-    <div class="element-head"><h2>Rich text / legal document</h2><span class="badge confirmed">Confirmed</span><span class="where">privacy, cookie, terms · <code>richTextSection</code></span></div>
+    <div class="element-head"><h2>Rich text / legal document</h2><span class="badge production">Production</span><span class="where">privacy, cookie, terms · <code>richTextSection</code></span></div>
     <p class="edesc">Long-form prose: numbered headings, sub-headings, paragraphs, bullet lists and inline links, rendered from Portable Text. Powers the legal pages (drafts, pending review) and any future article-style page.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Legal document layout</h3><span class="chosen">✓ live</span></div>
@@ -972,7 +1051,7 @@
 
   <!-- ===== FOOTER ===== -->
   <section class="element" id="footer">
-    <div class="element-head"><h2>Footer</h2><span class="badge confirmed">Confirmed</span><span class="where">every page · bound to Sanity</span></div>
+    <div class="element-head"><h2>Footer</h2><span class="badge production">Production</span><span class="where">every page · bound to Sanity</span></div>
     <p class="edesc">The global footer: tagline plus columns of links, and a legal line. Content is editable in Sanity so links stay in one place.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Multi-column footer</h3><span class="chosen">✓ live</span></div>
@@ -987,7 +1066,7 @@
 
 
   <footer>
-    <b>How to use this:</b> point at any element and tell me the change ("chips for Built-for", "a real table for sub-processors") and I'll wire it into the site. <b>Confirmed</b> elements are already live via the shared section renderer; <b>Research</b>/<b>Proposed</b> ones are waiting on a call. The Hero direction is settled on <b>H</b>; the rest of the hero concepts are kept here for the record.
+    <b>How to use this:</b> point at any element and tell me the change ("a real table for sub-processors", "swap the Built-for style") and I'll wire it into the site. <b>Production</b> elements are live via the shared section renderer; <b>Research</b>/<b>Proposed</b> ones are waiting on a call. The Hero direction is settled on <b>H</b>; the rest of the hero concepts are kept here for the record.
   </footer>
 </div>
 
