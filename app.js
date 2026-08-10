@@ -129,7 +129,7 @@
       '</nav>' +
       '<div class="nav-right">' +
         localeCtl(false) +
-        '<button class="iconbtn" id="themeToggle" type="button" aria-label="Switch theme">☾</button>' +
+        '<button class="theme-toggle" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Switch theme"><span class="tt-thumb"></span></button>' +
         '<a class="btn ghost hide-sm" href="https://app.stormpine.com">Sign in</a>' +
         '<a class="btn pri" href="https://app.stormpine.com">Start free</a>' +
         '<button class="navtoggle" id="navToggle" aria-label="Menu" aria-expanded="false">☰</button>' +
@@ -179,11 +179,16 @@
   var fEl = document.getElementById('site-footer');
   if (fEl) fEl.outerHTML = footerHTML();
 
-  /* ---------- theme toggle ---------- */
+  /* ---------- theme toggle (pill switch: sun in light, moon in dark) ---------- */
+  var SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>';
+  var MOON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>';
   function effective(){ var t=root.getAttribute('data-theme'); if(t==='dark'||t==='light') return t; return mq&&mq.matches?'dark':'light'; }
   var toggle = document.getElementById('themeToggle');
-  function syncToggle(){ if(!toggle) return; var t=effective(); toggle.textContent = t==='dark'?'☾':'☀';
-    toggle.setAttribute('aria-label','Switch to '+(t==='dark'?'light':'dark')+' theme'); toggle.setAttribute('aria-pressed', t==='dark'); }
+  var thumb = toggle && toggle.querySelector('.tt-thumb');
+  function syncToggle(){ if(!toggle) return; var dark = effective()==='dark';
+    if(thumb) thumb.innerHTML = dark ? MOON : SUN;
+    toggle.setAttribute('aria-checked', dark ? 'true' : 'false');
+    toggle.setAttribute('aria-label','Switch to '+(dark?'light':'dark')+' theme'); }
   if (toggle){
     toggle.addEventListener('click', function(){ root.setAttribute('data-theme', effective()==='dark'?'light':'dark'); syncToggle(); });
     if (mq && mq.addEventListener) mq.addEventListener('change', syncToggle);

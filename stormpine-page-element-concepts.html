@@ -85,6 +85,24 @@
     min-height:120px;display:flex;align-items:center;justify-content:center;padding:30px 24px}
   .estage.now{border-style:dashed}
   .estage.tall{min-height:200px}
+  /* theme toggle (pill switch) + side-by-side light/dark preview */
+  .theme-toggle{--tt-w:56px;--tt-h:30px;--tt-pad:3px;position:relative;width:var(--tt-w);height:var(--tt-h);
+    flex:0 0 auto;padding:0;border-radius:999px;border:1px solid var(--border);background:var(--surface);
+    cursor:pointer;transition:background .2s ease,border-color .2s ease}
+  .theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .theme-toggle .tt-thumb{position:absolute;top:var(--tt-pad);left:var(--tt-pad);
+    width:calc(var(--tt-h) - var(--tt-pad)*2);height:calc(var(--tt-h) - var(--tt-pad)*2);
+    border-radius:50%;background:#fff;color:var(--accent);display:grid;place-items:center;
+    box-shadow:0 1px 3px rgba(0,0,0,.28);transition:transform .22s cubic-bezier(.4,.15,.2,1)}
+  .theme-toggle .tt-thumb svg{width:15px;height:15px;display:block}
+  .theme-toggle[aria-checked="true"]{background:var(--accent);border-color:var(--accent)}
+  .theme-toggle[aria-checked="true"] .tt-thumb{transform:translateX(calc(var(--tt-w) - var(--tt-h)))}
+  .tt-demos{display:flex;gap:18px;flex-wrap:wrap;width:100%}
+  .tt-demo{flex:1 1 200px;min-width:180px;border-radius:14px;border:1px solid var(--border);
+    padding:24px;display:flex;flex-direction:column;align-items:center;gap:15px}
+  .tt-demo .tt-cap{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .tt-demo--light{--surface:#ffffff;--border:#e7e8ee;--muted:#6b6e78;--accent:#5662f2;background:#fbfbfd}
+  .tt-demo--dark{--surface:#0e0f12;--border:#25262a;--muted:#979a9f;--accent:#5662f2;background:#08090c}
 
   /* ---- Built-for variations ---- */
   .bf-base{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;justify-content:center;color:var(--muted);font-size:.95rem}
@@ -200,6 +218,17 @@
   .pvws-frame .row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:.82rem;color:var(--muted)}
   .pvws-frame .row:last-child{border-bottom:0}
   .pvws-frame .row b{color:var(--text);font-weight:600}
+
+  /* capability map ("Works with") preview */
+  .pvww{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
+  .pvww-card{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:14px;display:flex;flex-direction:column;gap:5px}
+  .pvww-card .ic{color:var(--accent)}
+  .pvww-card .ic svg{width:18px;height:18px;display:block}
+  .pvww-card b{font-size:.92rem;margin-top:2px}
+  .pvww-card .d{font-size:.8rem;color:var(--muted);line-height:1.4}
+  .pvww-card.cur{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+  .pvww-here{color:var(--accent);font-weight:600;font-size:.76rem}
+  @media(max-width:720px){.pvww{grid-template-columns:1fr}}
   @media(max-width:720px){.pvws-cols{grid-template-columns:1fr;gap:16px}.pvjny-rail{overflow-x:auto;justify-content:flex-start;gap:20px}.pvjny-rail::before{display:none}.pvjny-node{flex:0 0 64px}}
 
   /* ============ hero-concept stages (moved in from Hero concepts) ============ */
@@ -363,6 +392,7 @@
     </div>
     <ul class="toc">
       <li><a href="#header">Site header &amp; navigation</a><span class="badge production">Production</span></li>
+      <li><a href="#theme-toggle">Theme toggle</a><span class="badge production">Production</span></li>
       <li><a href="#hero">Hero</a><span class="badge production">Production</span></li>
       <li><a href="#builtfor">"Built for" strip</a><span class="badge production">Production</span></li>
       <li><a href="#journey">Journey band</a><span class="badge production">Production</span></li>
@@ -379,6 +409,7 @@
       <li><a href="#table">Sub-processor table</a><span class="badge proposed">Proposed</span></li>
       <li><a href="#doclinks">Document links grid</a><span class="badge proposed">Proposed</span></li>
       <li><a href="#footer">Footer</a><span class="badge production">Production</span></li>
+      <li><a href="#workswith">Capability map ("Works with")</a><span class="badge production">Production</span></li>
     </ul>
   </section>
 
@@ -398,6 +429,31 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ===== THEME TOGGLE ===== -->
+  <section class="element" id="theme-toggle">
+    <div class="element-head"><h2>Theme toggle</h2><span class="badge production">Production</span><span class="where">header utility cluster · every page</span></div>
+    <p class="edesc">The light/dark switch in the header. Replaces the single-glyph icon button with a pill switch: the track fills with the brand accent in dark mode, and a sliding thumb carries a sun (light) or moon (dark) icon, so the control shows both its current state and what tapping it will do. Built with <code>role="switch"</code> and <code>aria-checked</code>; the thumb icon and label update on toggle and on OS theme change.</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">NOW</span><h3>Pill switch (sun / moon)</h3><span class="chosen">✓ live</span></div>
+      <div class="estage">
+        <div class="tt-demos">
+          <div class="tt-demo tt-demo--light"><span class="tt-cap">Light</span><span class="theme-toggle" role="img" aria-checked="false" aria-label="Light mode: thumb left, sun icon, neutral track"><span class="tt-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span></div>
+          <div class="tt-demo tt-demo--dark"><span class="tt-cap">Dark</span><span class="theme-toggle" role="img" aria-checked="true" aria-label="Dark mode: thumb right, moon icon, accent-filled track"><span class="tt-thumb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></span></span></div>
+        </div>
+      </div>
+      <div class="caps two"><div class="cap"><h4>The idea</h4><p>A switch reads as a two-state control at a glance, unlike a lone glyph where the icon can mean either "current mode" or "what you'll get". The moving thumb and the accent fill make the state unambiguous.</p></div><div class="cap"><h4>Behaviour</h4><p>Thumb sits left with a sun in light mode and slides right with a moon in dark mode. Respects <code>prefers-reduced-motion</code> (no slide), is keyboard-focusable, and re-syncs if the OS theme changes.</p></div></div>
+    </div>
+    <details class="research">
+      <summary>Research · alternatives explored <span class="hint"></span></summary>
+      <div class="opt">
+        <div class="opt-label"><span class="tag">ORIG</span><h3>Glyph icon button</h3><span class="k">The original: a 34px button showing ☾ or ☀. Superseded; a single glyph is ambiguous about state vs. action.</span></div>
+        <div class="estage"><span class="iconbtn" role="img" aria-label="Original icon-button toggle" style="width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);display:grid;place-items:center;font-size:.95rem">☾</span></div>
+        <div class="caps two"><div class="cap"><h4>Why we moved on</h4><p>Users cannot tell whether the moon means "you are in dark mode" or "switch to dark". There is no visible on/off affordance, and it looks like the other icon buttons rather than a control.</p></div><div class="cap"><h4>Kept from it</h4><p>The sun/moon metaphor and the single-tap behaviour; only the shape changed.</p></div></div>
+      </div>
+      <div class="cap" style="margin-top:6px"><h4>Best practice this follows</h4><p>A pill switch (or segmented control) rather than a bare icon is the common pattern across executive-grade SaaS (Linear, Vercel, Notion, GitHub settings), because it signals a binary state. We keep it compact for the header, use <code>role="switch"</code> and <code>aria-checked</code> for assistive tech, place the icon <b>on the thumb</b> so the metaphor moves with the state, and fill the track with the brand accent when "on" (dark) so it matches the rest of the UI. Trade-off: an icon-in-thumb switch is a little wider than a glyph, so it stays in the same header utility cluster and the mobile menu carries the rest of the controls.</p></div>
+    </details>
   </section>
 
   <!-- ===== HERO ===== -->
@@ -1079,6 +1135,29 @@
         <div><h5>Company</h5><a>Organisations</a><a>Trust &amp; privacy</a><a>Contact</a></div>
         <div><h5>Legal</h5><a>Privacy policy</a><a>Cookie policy</a><a>Terms</a></div>
       </div></div>
+    </div>
+  </section>
+
+  <!-- ===== CAPABILITY MAP (WORKS WITH) ===== -->
+  <section class="element" id="workswith">
+    <div class="element-head"><h2>Capability map ("Works with")</h2><span class="badge production">Production</span><span class="where">foot of every product page</span></div>
+    <p class="edesc">The cross-links at the foot of each capability page. It shows the full product, all six capabilities in top-nav order, with the current page's card highlighted (accent border + "· you're here") and non-clickable, so the map is complete and consistent across every product page.</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">NOW</span><h3>Full six-capability map</h3><span class="chosen">✓ live</span></div>
+      <div class="estage">
+        <div class="pvww">
+          <div class="pvww-card cur">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></span>
+            <b>The overview <span class="pvww-here">· you're here</span></b>
+            <span class="d">Your day, next steps and what needs you now.</span>
+          </div>
+          <div class="pvww-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4.5" height="16" rx="1"/><rect x="9.75" y="4" width="4.5" height="11" rx="1"/><rect x="16.5" y="4" width="4.5" height="7" rx="1"/></svg></span><b>Pipeline</b><span class="d">Every parallel process and its stage on one board.</span></div>
+          <div class="pvww-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg></span><b>Profile</b><span class="d">Your career written once, tailored per role.</span></div>
+          <div class="pvww-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17" r="2.4"/><path d="M7.7 8.6l2.6 6.8M16.3 8.6l-2.6 6.8M8.4 7h7.2"/></svg></span><b>Relationships</b><span class="d">Recruiters, sponsors, board contacts and referees.</span></div>
+          <div class="pvww-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5l1.5 1.5L8 5.5"/><path d="M4 12.5l1.5 1.5L8 11.5"/><path d="M4 18.5l1.5 1.5L8 17.5"/><path d="M11 7h9M11 13h9M11 19h9"/></svg></span><b>Tasks</b><span class="d">Every next step across your processes in one list.</span></div>
+          <div class="pvww-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.8 4.8 1.7-4.8 1.7L12 16l-1.7-4.8L5.5 9.5l4.8-1.7z"/><path d="M18.5 15l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z"/></svg></span><b>Intelligence</b><span class="d">Grounded analysis over your own record, not generic advice.</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
