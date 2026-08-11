@@ -85,24 +85,28 @@
     min-height:120px;display:flex;align-items:center;justify-content:center;padding:30px 24px}
   .estage.now{border-style:dashed}
   .estage.tall{min-height:200px}
-  /* theme toggle (pill switch) + side-by-side light/dark preview */
-  .theme-toggle{--tt-w:56px;--tt-h:30px;--tt-pad:3px;position:relative;width:var(--tt-w);height:var(--tt-h);
-    flex:0 0 auto;padding:0;border-radius:999px;border:1px solid var(--border);background:var(--surface);
-    cursor:pointer;transition:background .2s ease,border-color .2s ease}
+  /* theme toggle (subtle neutral pill switch) + side-by-side light/dark preview */
+  .theme-toggle{--tt-w:48px;--tt-h:26px;--tt-pad:3px;position:relative;width:var(--tt-w);height:var(--tt-h);
+    flex:0 0 auto;padding:0;border-radius:999px;border:1px solid var(--border);background:var(--elevated);
+    cursor:pointer;transition:border-color .2s ease}
   .theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .theme-toggle .tt-thumb{position:absolute;top:var(--tt-pad);left:var(--tt-pad);
     width:calc(var(--tt-h) - var(--tt-pad)*2);height:calc(var(--tt-h) - var(--tt-pad)*2);
-    border-radius:50%;background:#fff;color:var(--accent);display:grid;place-items:center;
-    box-shadow:0 1px 3px rgba(0,0,0,.28);transition:transform .22s cubic-bezier(.4,.15,.2,1)}
-  .theme-toggle .tt-thumb svg{width:15px;height:15px;display:block}
-  .theme-toggle[aria-checked="true"]{background:var(--accent);border-color:var(--accent)}
+    border-radius:50%;background:var(--muted);color:var(--surface);display:grid;place-items:center;
+    transition:transform .22s cubic-bezier(.4,.15,.2,1),background .2s ease}
+  .theme-toggle .tt-thumb svg{width:13px;height:13px;display:block}
   .theme-toggle[aria-checked="true"] .tt-thumb{transform:translateX(calc(var(--tt-w) - var(--tt-h)))}
+  /* previous iteration kept for the record: accent-filled pill (too loud next to the CTA) */
+  .theme-toggle.loud{--tt-w:56px;--tt-h:30px;background:var(--surface)}
+  .theme-toggle.loud .tt-thumb{background:#fff;color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.28)}
+  .theme-toggle.loud .tt-thumb svg{width:15px;height:15px}
+  .theme-toggle.loud[aria-checked="true"]{background:var(--accent);border-color:var(--accent)}
   .tt-demos{display:flex;gap:18px;flex-wrap:wrap;width:100%}
   .tt-demo{flex:1 1 200px;min-width:180px;border-radius:14px;border:1px solid var(--border);
     padding:24px;display:flex;flex-direction:column;align-items:center;gap:15px}
   .tt-demo .tt-cap{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-  .tt-demo--light{--surface:#ffffff;--border:#e7e8ee;--muted:#6b6e78;--accent:#5662f2;background:#fbfbfd}
-  .tt-demo--dark{--surface:#0e0f12;--border:#25262a;--muted:#979a9f;--accent:#5662f2;background:#08090c}
+  .tt-demo--light{--surface:#ffffff;--elevated:#f4f5f8;--border:#e7e8ee;--muted:#6b6e78;--accent:#5662f2;background:#fbfbfd}
+  .tt-demo--dark{--surface:#0e0f12;--elevated:#1b1c1f;--border:#25262a;--muted:#979a9f;--accent:#5662f2;background:#08090c}
 
   /* ---- Built-for variations ---- */
   .bf-base{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;justify-content:center;color:var(--muted);font-size:.95rem}
@@ -434,25 +438,35 @@
   <!-- ===== THEME TOGGLE ===== -->
   <section class="element" id="theme-toggle">
     <div class="element-head"><h2>Theme toggle</h2><span class="badge production">Production</span><span class="where">header utility cluster · every page</span></div>
-    <p class="edesc">The light/dark switch in the header. Replaces the single-glyph icon button with a pill switch: the track fills with the brand accent in dark mode, and a sliding thumb carries a sun (light) or moon (dark) icon, so the control shows both its current state and what tapping it will do. Built with <code>role="switch"</code> and <code>aria-checked</code>; the thumb icon and label update on toggle and on OS theme change.</p>
+    <p class="edesc">The light/dark switch in the header. A compact, deliberately quiet pill switch: a <b>neutral track</b> with a sliding thumb that carries a sun (light) or moon (dark) icon, so the control shows both its current state and what tapping it will do, without competing with the primary CTA. Built with <code>role="switch"</code> and <code>aria-checked</code>; the thumb icon and label update on toggle and on OS theme change.</p>
     <div class="opt">
       <div class="opt-label"><span class="tag">NOW</span><h3>Pill switch (sun / moon)</h3><span class="chosen">✓ live</span></div>
       <div class="estage">
         <div class="tt-demos">
           <div class="tt-demo tt-demo--light"><span class="tt-cap">Light</span><span class="theme-toggle" role="img" aria-checked="false" aria-label="Light mode: thumb left, sun icon, neutral track"><span class="tt-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span></div>
-          <div class="tt-demo tt-demo--dark"><span class="tt-cap">Dark</span><span class="theme-toggle" role="img" aria-checked="true" aria-label="Dark mode: thumb right, moon icon, accent-filled track"><span class="tt-thumb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></span></span></div>
+          <div class="tt-demo tt-demo--dark"><span class="tt-cap">Dark</span><span class="theme-toggle" role="img" aria-checked="true" aria-label="Dark mode: thumb right, moon icon, neutral track"><span class="tt-thumb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></span></span></div>
         </div>
       </div>
-      <div class="caps two"><div class="cap"><h4>The idea</h4><p>A switch reads as a two-state control at a glance, unlike a lone glyph where the icon can mean either "current mode" or "what you'll get". The moving thumb and the accent fill make the state unambiguous.</p></div><div class="cap"><h4>Behaviour</h4><p>Thumb sits left with a sun in light mode and slides right with a moon in dark mode. Respects <code>prefers-reduced-motion</code> (no slide), is keyboard-focusable, and re-syncs if the OS theme changes.</p></div></div>
+      <div class="caps two"><div class="cap"><h4>The idea</h4><p>A switch reads as a two-state control at a glance, unlike a lone glyph where the icon can mean either "current mode" or "what you'll get". The moving thumb and the sun/moon icon make the state unambiguous, while a neutral track keeps it from reading as a call to action.</p></div><div class="cap"><h4>Behaviour</h4><p>Thumb sits left with a sun in light mode and slides right with a moon in dark mode. Respects <code>prefers-reduced-motion</code> (no slide), is keyboard-focusable, and re-syncs if the OS theme changes.</p></div></div>
     </div>
     <details class="research">
       <summary>Research · alternatives explored <span class="hint"></span></summary>
+      <div class="opt">
+        <div class="opt-label"><span class="tag">PREV</span><h3>Accent-filled pill</h3><span class="k">An earlier take on the switch: the track filled with the brand accent in dark mode. Toned down because a solid indigo pill sat at nearly the same visual weight as the "Start free" CTA beside it.</span></div>
+        <div class="estage">
+          <div class="tt-demos">
+            <div class="tt-demo tt-demo--light"><span class="tt-cap">Light</span><span class="theme-toggle loud" role="img" aria-checked="false" aria-label="Accent-filled pill, light mode"><span class="tt-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span></div>
+            <div class="tt-demo tt-demo--dark"><span class="tt-cap">Dark</span><span class="theme-toggle loud" role="img" aria-checked="true" aria-label="Accent-filled pill, dark mode"><span class="tt-thumb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></span></span></div>
+          </div>
+        </div>
+        <div class="caps two"><div class="cap"><h4>Why we toned it down</h4><p>The filled indigo track competed with the primary "Start free" button for attention. A theme toggle is a utility control, so it should recede, not read as a call to action.</p></div><div class="cap"><h4>Kept from it</h4><p>The pill-switch shape, the sliding sun/moon thumb and the accessibility wiring; only the colour weight changed to a neutral track and a muted thumb.</p></div></div>
+      </div>
       <div class="opt">
         <div class="opt-label"><span class="tag">ORIG</span><h3>Glyph icon button</h3><span class="k">The original: a 34px button showing ☾ or ☀. Superseded; a single glyph is ambiguous about state vs. action.</span></div>
         <div class="estage"><span class="iconbtn" role="img" aria-label="Original icon-button toggle" style="width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);display:grid;place-items:center;font-size:.95rem">☾</span></div>
         <div class="caps two"><div class="cap"><h4>Why we moved on</h4><p>Users cannot tell whether the moon means "you are in dark mode" or "switch to dark". There is no visible on/off affordance, and it looks like the other icon buttons rather than a control.</p></div><div class="cap"><h4>Kept from it</h4><p>The sun/moon metaphor and the single-tap behaviour; only the shape changed.</p></div></div>
       </div>
-      <div class="cap" style="margin-top:6px"><h4>Best practice this follows</h4><p>A pill switch (or segmented control) rather than a bare icon is the common pattern across executive-grade SaaS (Linear, Vercel, Notion, GitHub settings), because it signals a binary state. We keep it compact for the header, use <code>role="switch"</code> and <code>aria-checked</code> for assistive tech, place the icon <b>on the thumb</b> so the metaphor moves with the state, and fill the track with the brand accent when "on" (dark) so it matches the rest of the UI. Trade-off: an icon-in-thumb switch is a little wider than a glyph, so it stays in the same header utility cluster and the mobile menu carries the rest of the controls.</p></div>
+      <div class="cap" style="margin-top:6px"><h4>Best practice this follows</h4><p>A pill switch (or segmented control) rather than a bare icon is the common pattern across executive-grade SaaS (Linear, Vercel, Notion, GitHub settings), because it signals a binary state. We keep it compact for the header, use <code>role="switch"</code> and <code>aria-checked</code> for assistive tech, place the icon <b>on the thumb</b> so the metaphor moves with the state, and keep the track <b>neutral</b> so the control stays a quiet utility rather than competing with the primary CTA. Trade-off: an icon-in-thumb switch is a little wider than a glyph, so it stays in the same header utility cluster and the mobile menu carries the rest of the controls.</p></div>
     </details>
   </section>
 
