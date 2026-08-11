@@ -347,7 +347,7 @@
         var name = sw.getAttribute('data-token');
         var val = cs.getPropertyValue(name).trim();
         var out = sw.querySelector('.sw-hex');
-        if (out) out.textContent = val || '—';
+        if (out) out.textContent = val || '-';
       });
     }
     function sync(){ tb.textContent = eff()==='dark' ? '☾' : '☀'; paintHexes(); }
