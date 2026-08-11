@@ -5,21 +5,404 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guides &amp; playbooks · Stormpine</title>
-<meta name="description" content="Executive-grade playbooks for the relationship-driven work behind a director, board or advisory move.">
+<meta name="description" content="Executive-grade playbooks for the relationship-driven work behind a director, board or advisory move. Written for leaders, never career hacks.">
 <link rel="stylesheet" href="styles.css?v=3">
+<style>
+  /* Page-scoped styles for the Guides & playbooks prototype (kept out of shared styles.css) */
+  .gd-hero{text-align:center}
+  .gd-hero .pill-tag{margin-bottom:18px}
+
+  /* Format legend under the hero */
+  .gd-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin:26px auto 0}
+  .gd-legend .lg{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted)}
+  .gd-legend .d{width:8px;height:8px;border-radius:2px;flex:none}
+
+  /* Format token (mono label + colored dot), reused on every card */
+  .gd-fmt{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--faint)}
+  .gd-fmt .d{width:7px;height:7px;border-radius:2px;flex:none}
+  /* Format colors: Playbook=accent, Guide=lilac, Template=good, Checklist=amber */
+  .f-play .d{background:var(--accent)}   .f-play{color:color-mix(in srgb,var(--accent) 82%,var(--text))}
+  .f-guide .d{background:var(--lilac)}   .f-guide{color:color-mix(in srgb,var(--lilac) 72%,var(--text))}
+  .f-tmpl .d{background:var(--good)}     .f-tmpl{color:color-mix(in srgb,var(--good) 78%,var(--text))}
+  .f-check .d{background:var(--amber)}   .f-check{color:color-mix(in srgb,var(--amber) 82%,var(--text))}
+
+  /* Featured flagship playbook */
+  .gd-feature{display:grid;grid-template-columns:1.25fr .9fr;gap:0;border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm)}
+  @media (max-width:820px){.gd-feature{grid-template-columns:1fr}}
+  .gd-feature-copy{padding:clamp(24px,3.4vw,40px)}
+  .gd-feature-copy .gd-fmt{margin-bottom:16px}
+  .gd-feature-copy h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;margin:0}
+  .gd-feature-copy p{color:var(--muted);line-height:1.6;margin:14px 0 0;max-width:52ch}
+  .gd-inside{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
+  .gd-inside li{display:flex;gap:10px;font-size:.92rem;color:var(--muted);line-height:1.5}
+  .gd-inside .ck{color:var(--accent);font-weight:700;flex:none}
+  .gd-feature-copy .hero-cta{margin-top:26px}
+  /* Featured "spread" panel: a mocked table-of-contents, illustrative */
+  .gd-feature-aside{padding:clamp(24px,3vw,34px);border-left:1px solid var(--border);
+    background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface))}
+  @media (max-width:820px){.gd-feature-aside{border-left:0;border-top:1px solid var(--border)}}
+  .gd-feature-aside .lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+    color:var(--faint);margin-bottom:14px}
+  .gd-toc{list-style:none;padding:0;margin:0;counter-reset:toc;display:flex;flex-direction:column;gap:2px}
+  .gd-toc li{display:flex;gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid var(--border);
+    font-size:.9rem;color:var(--text);line-height:1.4}
+  .gd-toc li:first-child{border-top:0}
+  .gd-toc li::before{counter-increment:toc;content:counter(toc,decimal-leading-zero);
+    font-family:var(--mono);font-size:.74rem;color:var(--accent);flex:none}
+  .gd-toc small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+
+  /* Card grid + card */
+  .gd-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .gd-card{display:flex;flex-direction:column;gap:11px;padding:20px;border:1px solid var(--border);
+    border-radius:var(--radius);background:var(--surface);text-decoration:none;color:var(--text);
+    position:relative;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+  .gd-card:hover{border-color:color-mix(in srgb,var(--gd-accent,var(--accent)) 42%,var(--border));
+    transform:translateY(-3px);box-shadow:var(--shadow-sm)}
+  .gd-card h3{font-size:1.02rem;letter-spacing:-.01em;line-height:1.3;margin:0}
+  .gd-card .dek{color:var(--muted);font-size:.88rem;line-height:1.5;margin:0}
+  .gd-card .meta{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:6px;
+    font-size:.78rem;color:var(--faint)}
+  .gd-card .meta .dotsep{opacity:.5}
+  .gd-card .go{color:var(--gd-accent,var(--accent));font-weight:600}
+  /* Soft "coming soon" state for unpublished entries */
+  .gd-card.soon{background:color-mix(in srgb,var(--elevated) 50%,var(--surface))}
+  .gd-tag{position:absolute;top:16px;right:16px;font-size:.66rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;padding:3px 8px;border-radius:999px}
+  .gd-tag.new{color:var(--good);background:color-mix(in srgb,var(--good) 13%,transparent);
+    border:1px solid color-mix(in srgb,var(--good) 32%,transparent)}
+  .gd-tag.wip{color:var(--faint);background:var(--elevated);border:1px solid var(--border)}
+
+  /* Newsletter signup */
+  .gd-sub{display:flex;gap:12px;flex-wrap:wrap;max-width:440px;margin:22px auto 0}
+  .gd-sub input{flex:1;min-width:200px;padding:12px 14px;border:1px solid var(--border);
+    border-radius:10px;background:var(--surface);color:var(--text);font:inherit;font-size:.94rem}
+  .gd-sub input::placeholder{color:var(--faint)}
+  .gd-sub input:focus{outline:none;border-color:color-mix(in srgb,var(--accent) 55%,var(--border));
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+
+  /* Sticky filter / overview bar for the library */
+  #library{scroll-margin-top:calc(var(--nav-h) + 40px)}
+  .gd-filterwrap{position:sticky;top:calc(var(--nav-h) + 33px);z-index:40;margin:0 0 30px;
+    background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border)}
+  .gd-filter{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:12px 0;scrollbar-width:none}
+  .gd-filter::-webkit-scrollbar{display:none}
+  .gd-filter-lbl{flex:none;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;
+    font-weight:600;color:var(--faint);margin-right:4px}
+  .gd-tab{flex:none;display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:.86rem;
+    font-weight:600;color:var(--muted);background:var(--surface);border:1px solid var(--border);
+    border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap;
+    transition:color .15s,border-color .15s,background .15s}
+  .gd-tab:hover{color:var(--text);border-color:color-mix(in srgb,var(--accent) 40%,var(--border))}
+  .gd-tab.is-active{color:var(--text);background:var(--elevated);
+    border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+  .gd-tab .dot{width:9px;height:9px;border-radius:3px;background:var(--gd-accent,var(--accent));flex:none}
+  .gd-tab .c{font-family:var(--mono);font-size:.74rem;color:var(--faint)}
+  .gd-tab.is-active .c{color:var(--muted)}
+  .gd-card[hidden]{display:none}
+  .gd-empty{text-align:center;color:var(--muted);font-size:.95rem;margin-top:24px}
+  .gd-empty a{color:var(--accent);font-weight:600}
+</style>
 </head>
 <body>
 <div id="site-header" data-active="resources"></div>
+
 <main>
-  <section class="stub">
+
+  <!-- HERO -->
+  <section class="gd-hero">
     <div class="wrap narrow">
-      <span class="pill-tag tag"><span class="dot"></span> Planned page · Resources</span>
-      <h1 style="margin-top:8px">Guides &amp; playbooks</h1>
-      <p class="lead" style="margin-top:16px">Executive-grade craft for the moves that matter: running parallel board and advisory processes, working with executive search consultants, and staying quietly open without signalling. Practical, discreet, and written for leaders, never career hacks.</p>
-      <div class="hero-cta"><a class="btn" href="index.html">← Back to home</a></div>
+      <span class="pill-tag reveal"><span class="dot"></span> Resources · Guides &amp; playbooks</span>
+      <h1 class="reveal" style="max-width:18ch;margin-inline:auto">The craft behind the moves that shape a career.</h1>
+      <p class="lead reveal" style="max-width:60ch;margin:20px auto 0">
+        Practical playbooks for the relationship-driven work most leaders navigate on instinct: running
+        parallel searches, working with executive search consultants, building toward a board seat, and
+        staying quietly open without signalling. Written for experienced leaders, never career hacks.
+      </p>
+      <div class="gd-legend reveal">
+        <span class="lg gd-fmt f-play"><span class="d"></span> Playbook</span>
+        <span class="lg gd-fmt f-guide"><span class="d"></span> Guide</span>
+        <span class="lg gd-fmt f-check"><span class="d"></span> Checklist</span>
+        <span class="lg gd-fmt f-tmpl"><span class="d"></span> Template</span>
+      </div>
+      <p class="hero-note reveal" style="margin-top:18px">A preview of the library we are building · New pieces added each season</p>
     </div>
   </section>
+
+  <!-- FEATURED FLAGSHIP PLAYBOOK -->
+  <section class="divider">
+    <div class="wrap">
+      <div class="gd-feature reveal">
+        <div class="gd-feature-copy">
+          <span class="gd-fmt f-play"><span class="d"></span> Flagship playbook</span>
+          <h2>Running three searches at once without dropping a thread.</h2>
+          <p>
+            The hardest part of a senior move is rarely any single conversation. It is holding four or five
+            of them at different stages, across different firms, without letting the promising one quietly
+            stall while you chase the loud one. This is the method: how to keep every process visible, know
+            what each one is waiting on, and walk into every call with the whole thread in your head.
+          </p>
+          <ul class="gd-inside">
+            <li><span class="ck">✓</span> A single view of every live process and the exact stage it sits at</li>
+            <li><span class="ck">✓</span> How to tell a stall from a soft no, and what to do about each</li>
+            <li><span class="ck">✓</span> The five-minute pre-call brief that replaces re-reading a thread</li>
+            <li><span class="ck">✓</span> Keeping momentum without ever looking anxious to a search consultant</li>
+          </ul>
+          <div class="hero-cta">
+            <a class="btn pri" href="https://app.stormpine.com">Read the playbook</a>
+            <a class="jny-deeplink" href="product.html">See how Stormpine runs this for you →</a>
+          </div>
+        </div>
+        <aside class="gd-feature-aside">
+          <div class="lbl">What's inside</div>
+          <ul class="gd-toc">
+            <li>The parallel-process board<small>One place for every opportunity and stage</small></li>
+            <li>Reading momentum<small>Moving, waiting on you, or gone quiet</small></li>
+            <li>The pre-call brief<small>Walk in with the full history, every time</small></li>
+            <li>Managing the search consultant<small>Cadence, candour and what to hold back</small></li>
+            <li>When to press, when to wait<small>Timing the follow-up without signalling</small></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LIBRARY -->
+  <section class="divider" id="library">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:26px">
+      <span class="eyebrow">The library</span>
+      <h2 style="max-width:24ch;margin:12px auto 0">Playbooks, guides and templates in one place.</h2>
+      <p class="section-sub" style="margin:14px auto 0">
+        Every piece is practical and specific to senior, relationship-led moves in a Nordic context.
+        Browse by format, or take them all.
+      </p>
+    </div>
+
+    <!-- STICKY OVERVIEW / FILTER BAR (by content type) -->
+    <div class="gd-filterwrap">
+      <div class="wrap">
+        <div class="gd-filter" role="tablist" aria-label="Browse by format">
+          <span class="gd-filter-lbl">Browse</span>
+          <button class="gd-tab is-active" type="button" role="tab" aria-selected="true" data-filter="all">All <span class="c">17</span></button>
+          <button class="gd-tab" type="button" role="tab" aria-selected="false" data-filter="play"><span class="dot" style="--gd-accent:var(--accent)"></span> Playbooks <span class="c">4</span></button>
+          <button class="gd-tab" type="button" role="tab" aria-selected="false" data-filter="guide"><span class="dot" style="--gd-accent:var(--lilac)"></span> Guides <span class="c">11</span></button>
+          <button class="gd-tab" type="button" role="tab" aria-selected="false" data-filter="check"><span class="dot" style="--gd-accent:var(--amber)"></span> Checklists <span class="c">1</span></button>
+          <button class="gd-tab" type="button" role="tab" aria-selected="false" data-filter="tmpl"><span class="dot" style="--gd-accent:var(--good)"></span> Templates <span class="c">1</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="gd-cards reveal">
+
+        <a class="gd-card" data-fmt="play" href="https://app.stormpine.com">
+          <span class="gd-fmt f-play"><span class="d"></span> Playbook</span>
+          <h3>Running three searches at once</h3>
+          <p class="dek">The method for holding several processes at different stages without one going quiet.</p>
+          <span class="meta">12 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>The pre-interview brief</h3>
+          <p class="dek">Walk into any conversation with the whole relationship and history already in your head.</p>
+          <span class="meta">7 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="play" href="https://app.stormpine.com">
+          <span class="gd-fmt f-play"><span class="d"></span> Playbook</span>
+          <h3>The first call with a search consultant</h3>
+          <p class="dek">What to ask, what to share, and what to hold back on an exploratory first conversation.</p>
+          <span class="meta">9 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>Be the candidate a headhunter remembers</h3>
+          <p class="dek">How to stay top of mind with a search consultant long after a single role closes.</p>
+          <span class="meta">8 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>When a process goes quiet</h3>
+          <p class="dek">Reading the difference between a genuine stall and a polite no, and what to do about each.</p>
+          <span class="meta">6 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>Retained, contingency, in-house</h3>
+          <p class="dek">Who each recruiter actually works for, and what that means for how you engage them.</p>
+          <span class="meta">6 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="play" href="https://app.stormpine.com">
+          <span class="gd-fmt f-play"><span class="d"></span> Playbook</span>
+          <h3>The two-year runway to a board seat</h3>
+          <p class="dek">How seats actually get filled, and the relationships to build long before one opens.</p>
+          <span class="meta">11 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>A board CV is not your executive CV</h3>
+          <p class="dek">What a nominations committee reads for, and how to write for governance rather than operating.</p>
+          <span class="meta">8 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="play" href="https://app.stormpine.com">
+          <span class="gd-fmt f-play"><span class="d"></span> Playbook</span>
+          <h3>Open without signalling</h3>
+          <p class="dek">Running a discreet, low-tempo search while fully employed, without tipping your hand.</p>
+          <span class="meta">10 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>Warm across a six-month gap</h3>
+          <p class="dek">Keeping a relationship alive so a long silence never reads as a cold restart.</p>
+          <span class="meta">5 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>Turning signals into a shortlist</h3>
+          <p class="dek">Reading market moves, a role that opened, a peer who shifted, into a considered set of options.</p>
+          <span class="meta">7 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>Negotiating beyond base</h3>
+          <p class="dek">Variable pay, equity, notice and terms: the levers that matter in a senior Nordic package.</p>
+          <span class="meta">9 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>The debrief that pays off in three years</h3>
+          <p class="dek">After you land: what to capture while it is fresh, so the next move never starts from cold.</p>
+          <span class="meta">6 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card" data-fmt="guide" href="https://app.stormpine.com">
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>Your career, owned</h3>
+          <p class="dek">What to keep between searches, and why it should live with you, not a recruiter or an employer.</p>
+          <span class="meta">5 min read <span class="dotsep">·</span> <span class="go">Read →</span></span>
+        </a>
+        <a class="gd-card soon" data-fmt="guide" href="#subscribe">
+          <span class="gd-tag wip">In progress</span>
+          <span class="gd-fmt f-guide"><span class="d"></span> Guide</span>
+          <h3>Advisory terms worth settling early</h3>
+          <p class="dek">Equity, scope and time: the conversations to have before an advisory role starts drifting.</p>
+          <span class="meta">Coming soon <span class="dotsep">·</span> <span class="go">Notify me →</span></span>
+        </a>
+        <a class="gd-card soon" data-fmt="check" href="#subscribe">
+          <span class="gd-tag wip">In progress</span>
+          <span class="gd-fmt f-check"><span class="d"></span> Checklist</span>
+          <h3>Reference-ready before you need it</h3>
+          <p class="dek">Lining up referees early, so a fast final round never catches you flat-footed.</p>
+          <span class="meta">Coming soon <span class="dotsep">·</span> <span class="go">Notify me →</span></span>
+        </a>
+        <a class="gd-card soon" data-fmt="tmpl" href="#subscribe">
+          <span class="gd-tag wip">In progress</span>
+          <span class="gd-fmt f-tmpl"><span class="d"></span> Template</span>
+          <h3>Leadership comp benchmark worksheet</h3>
+          <p class="dek">A simple frame for comparing offers on more than headline base salary.</p>
+          <span class="meta">Coming soon <span class="dotsep">·</span> <span class="go">Notify me →</span></span>
+        </a>
+
+      </div>
+      <p class="gd-empty" hidden>No pieces in that format yet. <a href="#subscribe">Get notified when they land →</a></p>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SIGNUP -->
+  <section id="subscribe" class="divider">
+    <div class="wrap narrow">
+      <div class="band reveal" style="text-align:center">
+        <span class="eyebrow">Newsletter</span>
+        <h2 style="max-width:22ch;margin:12px auto 0">Stay in the loop.</h2>
+        <p class="section-sub" style="margin:14px auto 0;max-width:56ch">
+          One considered email, roughly monthly: new guides and playbooks, product updates as Stormpine
+          grows, and the occasional read on the executive, board and advisory market. No noise, and you can
+          unsubscribe in one click.
+        </p>
+        <form class="gd-sub" onsubmit="return false" aria-label="Subscribe to the Stormpine newsletter">
+          <input type="email" placeholder="you@company.com" aria-label="Your email address" autocomplete="email">
+          <button class="btn pri" type="submit">Subscribe</button>
+        </form>
+        <p class="hero-note" style="margin-top:14px">Prototype form · Roughly monthly · Your address is never shared</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY BAND (condensed → full journey on product.html) -->
+  <section class="divider">
+    <div class="wrap">
+      <div class="jny-band reveal">
+        <div class="jny-band-head">
+          <div style="max-width:48ch">
+            <span class="eyebrow">The move behind every guide</span>
+            <h2 style="margin-top:12px">Each piece maps to a stage of the real process.</h2>
+            <p class="section-sub" style="margin-top:12px">These are not standalone tips. Every guide belongs to a months-long, relationship-led move, the same journey Stormpine is built to carry you through, stage by stage.</p>
+          </div>
+          <a class="jny-deeplink" href="product.html">See the full journey →</a>
+        </div>
+        <div class="jny-rail" aria-hidden="true">
+          <span class="jny-node"><span class="jny-dot">0</span><span class="jny-lbl">Positioning</span></span>
+          <span class="jny-node"><span class="jny-dot">1</span><span class="jny-lbl">Sourcing</span></span>
+          <span class="jny-node"><span class="jny-dot">2</span><span class="jny-lbl">Screening</span></span>
+          <span class="jny-node"><span class="jny-dot">3</span><span class="jny-lbl">Interviews</span></span>
+          <span class="jny-node"><span class="jny-dot">4</span><span class="jny-lbl">Assessment</span></span>
+          <span class="jny-node"><span class="jny-dot">5</span><span class="jny-lbl">References</span></span>
+          <span class="jny-node" data-amber><span class="jny-dot">6</span><span class="jny-lbl">Offer</span></span>
+          <span class="jny-node"><span class="jny-dot">7</span><span class="jny-lbl">Contract &amp; notice</span></span>
+          <span class="jny-node"><span class="jny-dot">8</span><span class="jny-lbl">Onboarding</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="divider cta">
+    <div class="wrap narrow reveal">
+      <h2>The playbooks help. The system makes them stick.</h2>
+      <p class="lead">Every guide here describes work Stormpine is built to hold: the relationships, context and momentum behind a senior move, in one private place you own.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="product.html">See how it works</a>
+      </div>
+      <p class="hero-note">Free while in beta · No card required</p>
+    </div>
+  </section>
+
+  <!-- Library filter by content type (page-scoped) -->
+  <script>
+  (function(){
+    var tabs = [].slice.call(document.querySelectorAll('.gd-tab'));
+    var cards = [].slice.call(document.querySelectorAll('.gd-card[data-fmt]'));
+    var libTop = document.getElementById('library');
+    var empty = document.querySelector('.gd-empty');
+    if (!tabs.length || !cards.length) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+    function setActive(tab){
+      tabs.forEach(function(t){ var on = t === tab;
+        t.classList.toggle('is-active', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    }
+    function apply(filter){
+      var shown = 0;
+      cards.forEach(function(c){
+        var match = (filter === 'all' || c.getAttribute('data-fmt') === filter);
+        c.hidden = !match; if (match) shown++;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    }
+
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        setActive(tab);
+        apply(tab.getAttribute('data-filter'));
+        if (libTop) libTop.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+      });
+    });
+  })();
+  </script>
+
 </main>
+
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
 </body>

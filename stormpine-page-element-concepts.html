@@ -148,6 +148,66 @@
   .pvband .eyebrow{display:block;margin-bottom:8px}
   .pvband h3{font-size:1.3rem;margin:0 0 8px}
   .pvband p{color:var(--muted);margin:0;font-size:.95rem}
+
+  /* ── Guides page elements: featured playbook, library + filter, newsletter ── */
+  /* Shared format token (matches the guides page colour coding) */
+  .pvfmt{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.68rem;
+    text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .pvfmt .d{width:7px;height:7px;border-radius:2px;flex:none}
+  .pvfmt.play{color:var(--accent)} .pvfmt.play .d{background:var(--accent)}
+  .pvfmt.guide{color:var(--lilac)} .pvfmt.guide .d{background:var(--lilac)}
+  .pvfmt.check{color:var(--amber)} .pvfmt.check .d{background:var(--amber)}
+  .pvfmt.tmpl{color:var(--green)} .pvfmt.tmpl .d{background:var(--green)}
+  /* Featured playbook */
+  .pvplay{display:grid;grid-template-columns:1.3fr .9fr;border:1px solid var(--border);border-radius:14px;
+    overflow:hidden;background:var(--surface);width:100%;text-align:left}
+  @media (max-width:640px){.pvplay{grid-template-columns:1fr}}
+  .pvplay-copy{padding:22px}
+  .pvplay-copy h3{font-size:1.15rem;margin:10px 0 0;letter-spacing:-.02em;line-height:1.25}
+  .pvplay-copy p{color:var(--muted);font-size:.88rem;margin:10px 0 0;line-height:1.5}
+  .pvplay-inside{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:7px}
+  .pvplay-inside li{display:flex;gap:9px;font-size:.84rem;color:var(--muted)}
+  .pvplay-inside .ck{color:var(--accent);font-weight:700;flex:none}
+  .pvplay-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
+  .pvplay-link{color:var(--accent);font-weight:600;font-size:.84rem}
+  .pvplay-aside{padding:22px;border-left:1px solid var(--border);
+    background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 8%,var(--surface)),var(--surface))}
+  @media (max-width:640px){.pvplay-aside{border-left:0;border-top:1px solid var(--border)}}
+  .pvplay-aside .lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+    color:var(--faint);margin-bottom:12px}
+  .pvtoc{list-style:none;padding:0;margin:0;counter-reset:t}
+  .pvtoc li{display:flex;gap:11px;padding:9px 0;border-top:1px solid var(--border);font-size:.84rem}
+  .pvtoc li:first-child{border-top:0}
+  .pvtoc li::before{counter-increment:t;content:counter(t,decimal-leading-zero);
+    font-family:var(--mono);font-size:.7rem;color:var(--accent)}
+  /* Library + filter bar */
+  .pvlib{width:100%}
+  .pvlib-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;
+    border:1px solid var(--border);border-radius:12px;background:var(--panel);margin-bottom:14px}
+  .pvlib-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+    color:var(--faint);margin-right:2px}
+  .pvtab{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:var(--muted);
+    background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 12px}
+  .pvtab.on{color:var(--text);background:color-mix(in srgb,var(--accent) 12%,var(--surface));
+    border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+  .pvtab .d{width:8px;height:8px;border-radius:2px;flex:none}
+  .pvtab .c{font-family:var(--mono);font-size:.7rem;color:var(--faint)}
+  .pvlib-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media (max-width:640px){.pvlib-cards{grid-template-columns:1fr}}
+  .pvcard{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:15px;
+    display:flex;flex-direction:column;gap:8px}
+  .pvcard h4{font-size:.92rem;margin:0;letter-spacing:-.01em}
+  .pvcard p{color:var(--muted);font-size:.8rem;margin:0;line-height:1.45}
+  .pvcard .meta{margin-top:auto;font-size:.72rem;color:var(--faint)}
+  /* Newsletter */
+  .pvnews{text-align:center;max-width:60ch}
+  .pvnews .eyebrow{display:block;margin-bottom:8px}
+  .pvnews h3{font-size:1.3rem;margin:0 0 8px}
+  .pvnews p{color:var(--muted);margin:0 auto;font-size:.92rem;max-width:52ch}
+  .pvnews-form{display:flex;gap:10px;justify-content:center;margin:16px auto 0;max-width:400px}
+  .pvnews-form input{flex:1;min-width:0;padding:9px 12px;border:1px solid var(--border);border-radius:9px;
+    background:var(--surface);color:var(--text);font:inherit;font-size:.85rem}
+  .pvnews-note{font-size:.72rem;color:var(--faint);margin-top:12px}
   .pvfeat{list-style:none;margin:14px auto 0;padding:0;max-width:460px;text-align:left}
   .pvfeat li{display:flex;gap:10px;padding:4px 0;font-size:.9rem;color:var(--muted)}
   .pvfeat .ck{color:var(--accent);font-weight:700}
@@ -484,6 +544,9 @@
       <li><a href="#igrow">Integration connection row</a><span class="badge production">Production</span></li>
       <li><a href="#igsplit">Do / never split</a><span class="badge production">Production</span></li>
       <li><a href="#igteaser">Integrations teaser</a><span class="badge production">Production</span></li>
+      <li><a href="#playbook">Featured playbook</a><span class="badge production">Production</span></li>
+      <li><a href="#library-filter">Guides library + filter</a><span class="badge production">Production</span></li>
+      <li><a href="#newsletter">Newsletter signup</a><span class="badge production">Production</span></li>
     </ul>
   </section>
 
@@ -1366,6 +1429,84 @@
         <span class="tx">Works with <b>Gmail</b>, <b>Google Calendar</b> and <b>LinkedIn</b>.</span>
         <a class="pvig-link" href="integrations.html">See integrations →</a>
       </div></div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED PLAYBOOK ===== -->
+  <section class="element" id="playbook">
+    <div class="element-head"><h2>Featured playbook</h2><span class="badge production">Production</span><span class="where">guides page · flagship, above the library</span></div>
+    <p class="edesc">The flagship piece at the top of the Guides page: a two-column feature with a <b>format tag</b>, headline, summary and a "what's inside" checklist on the left, and a numbered <b>table-of-contents panel</b> on the right. Gives the strongest single piece its own billing and anchors the whole library.</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">NOW</span><h3>Two-column feature</h3><span class="chosen">✓ live</span></div>
+      <div class="estage">
+        <div class="pvplay">
+          <div class="pvplay-copy">
+            <span class="pvfmt play"><span class="d"></span> Flagship playbook</span>
+            <h3>Running three searches at once without dropping a thread.</h3>
+            <p>How to keep every process visible, know what each one is waiting on, and walk into every call with the whole thread in your head.</p>
+            <ul class="pvplay-inside">
+              <li><span class="ck">✓</span> A single view of every live process and its stage</li>
+              <li><span class="ck">✓</span> How to tell a stall from a soft no</li>
+              <li><span class="ck">✓</span> The five-minute pre-call brief</li>
+            </ul>
+            <div class="pvplay-cta"><button class="btn pri">Read the playbook</button><span class="pvplay-link">See how Stormpine runs this →</span></div>
+          </div>
+          <div class="pvplay-aside">
+            <div class="lbl">What's inside</div>
+            <ul class="pvtoc">
+              <li>The parallel-process board</li>
+              <li>Reading momentum</li>
+              <li>The pre-call brief</li>
+              <li>Managing the search consultant</li>
+              <li>When to press, when to wait</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GUIDES LIBRARY + FILTER ===== -->
+  <section class="element" id="library-filter">
+    <div class="element-head"><h2>Guides library + filter</h2><span class="badge production">Production</span><span class="where">guides page · the library</span></div>
+    <p class="edesc">The full library as one flat grid with a <b>sticky "browse by format" bar</b> that filters the cards to Playbooks, Guides, Checklists or Templates, each with a live count and colour-coded dot. Cards carry a format tag, title, one-line summary and read time; unpublished pieces show an "In progress · Notify me" state that scrolls to the newsletter.</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">NOW</span><h3>Flat grid + format filter</h3><span class="chosen">✓ live</span></div>
+      <div class="estage tall">
+        <div class="pvlib">
+          <div class="pvlib-bar">
+            <span class="pvlib-lbl">Browse</span>
+            <span class="pvtab on">All <span class="c">17</span></span>
+            <span class="pvtab"><span class="d" style="background:var(--accent)"></span> Playbooks <span class="c">4</span></span>
+            <span class="pvtab"><span class="d" style="background:var(--lilac)"></span> Guides <span class="c">11</span></span>
+            <span class="pvtab"><span class="d" style="background:var(--amber)"></span> Checklists <span class="c">1</span></span>
+            <span class="pvtab"><span class="d" style="background:var(--green)"></span> Templates <span class="c">1</span></span>
+          </div>
+          <div class="pvlib-cards">
+            <div class="pvcard"><span class="pvfmt play"><span class="d"></span> Playbook</span><h4>Running three searches at once</h4><p>Holding several processes at different stages without one going quiet.</p><span class="meta">12 min read · Read →</span></div>
+            <div class="pvcard"><span class="pvfmt guide"><span class="d"></span> Guide</span><h4>The pre-interview brief</h4><p>Walk in with the whole relationship and history already in your head.</p><span class="meta">7 min read · Read →</span></div>
+            <div class="pvcard"><span class="pvfmt tmpl"><span class="d"></span> Template</span><h4>Comp benchmark worksheet</h4><p>Compare offers on more than headline base salary.</p><span class="meta">In progress · Notify me →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER SIGNUP ===== -->
+  <section class="element" id="newsletter">
+    <div class="element-head"><h2>Newsletter signup</h2><span class="badge production">Production</span><span class="where">guides page · before the journey band</span></div>
+    <p class="edesc">A general newsletter opt-in: one considered email, roughly monthly, covering new guides and playbooks, product updates and the occasional read on the executive market. Centered band with an email field and Subscribe button. The "Notify me" links on unpublished library cards scroll here.</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">NOW</span><h3>Centered signup band</h3><span class="chosen">✓ live</span></div>
+      <div class="estage">
+        <div class="pvnews">
+          <span class="eyebrow">Newsletter</span>
+          <h3>Stay in the loop.</h3>
+          <p>New guides and playbooks, product updates as Stormpine grows, and the occasional read on the executive, board and advisory market. No noise.</p>
+          <div class="pvnews-form"><input type="email" placeholder="you@company.com" aria-label="Email address"><button class="btn pri">Subscribe</button></div>
+          <p class="pvnews-note">Roughly monthly · Your address is never shared</p>
+        </div>
+      </div>
     </div>
   </section>
 
