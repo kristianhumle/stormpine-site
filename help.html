@@ -5,22 +5,414 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Help &amp; support · Stormpine</title>
-<meta name="description" content="Getting started, answers to common questions, and how to reach the Stormpine team.">
+<meta name="description" content="Getting started with your first pursuit, importing your network, answers to common questions, and a direct line to the Stormpine team.">
 <link rel="stylesheet" href="styles.css?v=3">
+<style>
+  /* Page-scoped styles for the Help & support prototype (kept out of shared styles.css) */
+
+  /* Hero: friendly question + prototype search + popular chips */
+  .hlp-hero{text-align:center;padding-top:clamp(40px,6vw,72px);padding-bottom:clamp(28px,4vw,44px)}
+  .hlp-hero .pill-tag{margin-bottom:18px}
+  .hlp-search{position:relative;max-width:560px;margin:26px auto 0}
+  .hlp-search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:19px;height:19px;
+    color:var(--faint);pointer-events:none}
+  .hlp-search input{width:100%;font:inherit;font-size:1rem;color:var(--text);
+    padding:14px 16px 14px 44px;border:1px solid var(--border);border-radius:12px;
+    background:var(--surface);box-shadow:var(--shadow-sm);transition:border-color .18s ease,box-shadow .18s ease}
+  .hlp-search input::placeholder{color:var(--faint)}
+  .hlp-search input:focus{outline:none;border-color:color-mix(in srgb,var(--accent) 55%,var(--border));
+    box-shadow:0 0 0 4px var(--accent-weak)}
+  .hlp-pop{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:16px}
+  .hlp-pop span{color:var(--faint);font-size:.82rem;align-self:center}
+  .hlp-chip{font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;
+    padding:5px 12px;border:1px solid var(--border);border-radius:999px;background:var(--surface);
+    transition:border-color .16s ease,color .16s ease}
+  .hlp-chip:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));color:var(--text)}
+
+  /* Browse by topic: goal-oriented category cards */
+  .hlp-topics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:900px){.hlp-topics{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.hlp-topics{grid-template-columns:1fr}}
+  .hlp-topic{display:flex;flex-direction:column;gap:8px;padding:22px;border:1px solid var(--border);
+    border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm)}
+  .hlp-topic .ic{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;color:#fff;
+    background:var(--tc,var(--accent));margin-bottom:4px}
+  .hlp-topic .ic svg{width:20px;height:20px}
+  .hlp-topic h3{font-size:1.04rem;letter-spacing:-.01em;margin:0}
+  .hlp-topic p{color:var(--muted);font-size:.88rem;line-height:1.5;margin:0}
+  .hlp-links{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:2px}
+  .hlp-links a{display:inline-flex;align-items:center;gap:7px;color:var(--text);text-decoration:none;
+    font-size:.9rem;padding:6px 0;border-top:1px solid var(--border);transition:color .15s ease}
+  .hlp-links li:first-child a{border-top:0}
+  .hlp-links a::before{content:"";width:5px;height:5px;border-radius:1px;flex:none;
+    background:var(--tc,var(--accent));opacity:.85}
+  .hlp-links a:hover{color:var(--tc,var(--accent))}
+  .hlp-more{margin-top:auto;padding-top:14px;display:inline-flex;align-items:center;gap:6px;
+    color:var(--tc,var(--accent));font-size:.85rem;font-weight:600;text-decoration:none}
+  .hlp-more svg{width:14px;height:14px;transition:transform .16s ease}
+  .hlp-more:hover svg{transform:translateX(3px)}
+
+  /* Getting started: numbered path */
+  .hlp-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:step}
+  @media (max-width:820px){.hlp-steps{grid-template-columns:1fr 1fr}}
+  @media (max-width:480px){.hlp-steps{grid-template-columns:1fr}}
+  .hlp-step{position:relative;padding:20px;border:1px solid var(--border);border-radius:var(--radius);
+    background:var(--surface)}
+  .hlp-step .n{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:700;
+    font-size:.86rem;color:var(--accent);background:var(--accent-weak);margin-bottom:12px}
+  .hlp-step h4{font-size:.98rem;letter-spacing:-.01em;margin:0 0 6px}
+  .hlp-step p{color:var(--muted);font-size:.87rem;line-height:1.5;margin:0}
+
+  /* FAQ accordion (native details/summary) */
+  .hlp-faq{max-width:760px;margin-inline:auto}
+  .hlp-faq details{border-bottom:1px solid var(--border)}
+  .hlp-faq details:first-of-type{border-top:1px solid var(--border)}
+  .hlp-faq summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:14px;
+    padding:18px 4px;font-weight:600;font-size:1rem;color:var(--text)}
+  .hlp-faq summary::-webkit-details-marker{display:none}
+  .hlp-faq summary .pm{margin-left:auto;flex:none;width:20px;height:20px;color:var(--faint);
+    transition:transform .2s ease}
+  .hlp-faq details[open] summary .pm{transform:rotate(45deg);color:var(--accent)}
+  .hlp-faq summary:hover{color:var(--accent)}
+  .hlp-faq .ans{padding:0 4px 20px 4px;color:var(--muted);font-size:.94rem;line-height:1.6;max-width:64ch}
+  .hlp-faq .ans a{color:var(--accent);font-weight:500}
+  .hlp-noresult{display:none;text-align:center;color:var(--muted);padding:28px 0}
+  .hlp-noresult.show{display:block}
+
+  /* Contact / escalation band */
+  .hlp-contact{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:stretch}
+  @media (max-width:760px){.hlp-contact{grid-template-columns:1fr}}
+  .hlp-cc{padding:26px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+  .hlp-cc.pri{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface))}
+  .hlp-cc h3{font-size:1.12rem;letter-spacing:-.01em;margin:0 0 8px}
+  .hlp-cc p{color:var(--muted);font-size:.92rem;line-height:1.55;margin:0 0 16px}
+  .hlp-meta{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:9px}
+  .hlp-meta li{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.86rem}
+  .hlp-meta svg{width:16px;height:16px;color:var(--accent);flex:none}
+</style>
 </head>
 <body>
 <div id="site-header" data-active="resources"></div>
+
 <main>
-  <section class="stub">
+
+  <!-- HERO: friendly question + search + popular topics -->
+  <section class="hlp-hero">
     <div class="wrap narrow">
-      <span class="pill-tag tag"><span class="dot"></span> Planned page · Resources</span>
-      <h1 style="margin-top:8px">Help &amp; support</h1>
-      <p class="lead" style="margin-top:16px">A calm place to get unstuck: getting started with your first pursuit, importing your network, answers to common questions, and a direct line to the team. Written for people who value their time and their privacy.</p>
-      <div class="hero-cta"><a class="btn" href="index.html">← Back to home</a></div>
+      <span class="pill-tag reveal"><span class="dot"></span> Resources · Help &amp; support</span>
+      <h1 class="reveal" style="max-width:16ch;margin-inline:auto">How can we help?</h1>
+      <p class="lead reveal" style="max-width:56ch;margin:18px auto 0">
+        A calm place to get unstuck: set up your first pursuit, bring in your network, and find clear
+        answers on privacy, the AI copilot and your account. Written for people who value their time
+        and their discretion.
+      </p>
+      <div class="hlp-search reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+        <input id="hlpSearch" type="search" autocomplete="off" spellcheck="false"
+          placeholder="Search help, e.g. &ldquo;import contacts&rdquo; or &ldquo;is my data private&rdquo;"
+          aria-label="Search help articles">
+      </div>
+      <div class="hlp-pop reveal">
+        <span>Popular:</span>
+        <a class="hlp-chip" href="#gs">Getting started</a>
+        <a class="hlp-chip" href="#faq-privacy">Is my data private?</a>
+        <a class="hlp-chip" href="#faq-import">Importing contacts</a>
+        <a class="hlp-chip" href="#faq-ai">How the AI works</a>
+        <a class="hlp-chip" href="#faq-beta">Pricing &amp; beta</a>
+      </div>
     </div>
   </section>
+
+  <!-- BROWSE BY TOPIC: organised by user goal, not internal structure -->
+  <section class="divider" style="padding-top:clamp(40px,6vw,72px)">
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;margin-bottom:28px">
+        <span class="eyebrow" style="display:block;margin-bottom:10px">Browse by topic</span>
+        <h2 style="max-width:20ch;margin-inline:auto">Find the answer, or the person, you need</h2>
+      </div>
+      <div class="hlp-topics">
+
+        <div class="hlp-topic reveal" style="--tc:var(--accent)">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>
+          <h3>Getting started</h3>
+          <p>Set up your account and run your first pursuit end to end.</p>
+          <ul class="hlp-links">
+            <li><a href="#gs">Create your first pursuit</a></li>
+            <li><a href="guides.html">Understand the overview</a></li>
+            <li><a href="guides.html">Build your career profile</a></li>
+          </ul>
+          <a class="hlp-more" href="guides.html">More getting-started support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="hlp-topic reveal" style="--tc:var(--accent)">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4.5" height="16" rx="1"/><rect x="9.75" y="4" width="4.5" height="11" rx="1"/><rect x="16.5" y="4" width="4.5" height="7" rx="1"/></svg></span>
+          <h3>Pipeline &amp; opportunities</h3>
+          <p>Track employment, board and advisory processes across their stages.</p>
+          <ul class="hlp-links">
+            <li><a href="guides.html">Add and stage an opportunity</a></li>
+            <li><a href="guides.html">Work from your next steps</a></li>
+            <li><a href="#faq-types">Board and advisory pursuits</a></li>
+          </ul>
+          <a class="hlp-more" href="guides.html">More pipeline support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="hlp-topic reveal" style="--tc:var(--lilac)">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="17" r="2.4"/><path d="M7.7 8.6l2.6 6.8M16.3 8.6l-2.6 6.8M8.4 7h7.2"/></svg></span>
+          <h3>Relationships &amp; contacts</h3>
+          <p>Keep recruiters, sponsors and referees as living relationships.</p>
+          <ul class="hlp-links">
+            <li><a href="#faq-import">Import your network</a></li>
+            <li><a href="guides.html">Log a conversation</a></li>
+            <li><a href="guides.html">Connect LinkedIn &amp; email</a></li>
+          </ul>
+          <a class="hlp-more" href="guides.html">More relationship support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="hlp-topic reveal" style="--tc:var(--accent)">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.8 4.8 1.7-4.8 1.7L12 16l-1.7-4.8L5.5 9.5l4.8-1.7z"/><path d="M18.5 15l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z"/></svg></span>
+          <h3>Intelligence (the AI copilot)</h3>
+          <p>How Stormpine reasons over your own record, and what it never does.</p>
+          <ul class="hlp-links">
+            <li><a href="#faq-ai">How the copilot works</a></li>
+            <li><a href="#faq-training">Is my data used to train AI?</a></li>
+            <li><a href="guides.html">What the copilot can do for you</a></li>
+          </ul>
+          <a class="hlp-more" href="guides.html">More on Intelligence <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="hlp-topic reveal" style="--tc:var(--lilac)">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.3"/></svg></span>
+          <h3>Privacy, security &amp; your data</h3>
+          <p>Who can see your record, where it lives, and how to export or delete it.</p>
+          <ul class="hlp-links">
+            <li><a href="#faq-privacy">Who can see my data?</a></li>
+            <li><a href="#faq-export">Export or delete everything</a></li>
+            <li><a href="guides.html">Security &amp; data residency</a></li>
+          </ul>
+          <a class="hlp-more" href="guides.html">More privacy support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="hlp-topic reveal" style="--tc:var(--accent)">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg></span>
+          <h3>Account &amp; billing</h3>
+          <p>Your plan, the beta, languages, and managing your subscription.</p>
+          <ul class="hlp-links">
+            <li><a href="#faq-beta">What the beta includes</a></li>
+            <li><a href="#faq-cancel">Cancel or pause your account</a></li>
+            <li><a href="#faq-language">Danish &amp; other languages</a></li>
+          </ul>
+          <a class="hlp-more" href="guides.html">More account support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></svg></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GETTING STARTED: four-step path -->
+  <section class="divider" id="gs" style="scroll-margin-top:96px">
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;margin-bottom:28px">
+        <span class="eyebrow" style="display:block;margin-bottom:10px">Getting started</span>
+        <h2 style="max-width:24ch;margin-inline:auto">From empty account to your first pursuit, in four steps</h2>
+        <p class="section-sub" style="margin:14px auto 0;max-width:52ch">
+          Most people are set up in under fifteen minutes. Nothing here is public, and nothing is shared
+          until you decide to share it.
+        </p>
+      </div>
+      <div class="hlp-steps reveal">
+        <div class="hlp-step">
+          <span class="n">1</span>
+          <h4>Write your profile once</h4>
+          <p>Capture your career, strengths and materials in one place. Tailor a version per role later, without starting over.</p>
+        </div>
+        <div class="hlp-step">
+          <span class="n">2</span>
+          <h4>Add your first opportunity</h4>
+          <p>Create a pursuit, whether an employment, board or advisory move, and place it at the stage it is really at.</p>
+        </div>
+        <div class="hlp-step">
+          <span class="n">3</span>
+          <h4>Bring in the people</h4>
+          <p>Import the recruiters, sponsors and referees around it, then log the last real conversation with each.</p>
+        </div>
+        <div class="hlp-step">
+          <span class="n">4</span>
+          <h4>Let the overview do the watching</h4>
+          <p>See what is moving, what is waiting on you, and what has gone quiet, with grounded prep before each call.</p>
+        </div>
+      </div>
+      <div class="reveal" style="text-align:center;margin-top:24px">
+        <a class="btn pri lg" href="https://app.stormpine.com">Open Stormpine</a>
+        <a class="btn lg" href="guides.html">Read the full setup guide</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="divider" id="faq" style="scroll-margin-top:96px">
+    <div class="wrap narrow">
+      <div class="reveal" style="text-align:center;margin-bottom:26px">
+        <span class="eyebrow" style="display:block;margin-bottom:10px">Frequently asked</span>
+        <h2 style="max-width:22ch;margin-inline:auto">The questions people ask first</h2>
+      </div>
+
+      <div class="hlp-faq reveal" id="faqList">
+
+        <details id="faq-what">
+          <summary>What is Stormpine, and how is it different from a job tracker?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>Stormpine is a Personal Career CRM: a private system for the relationships, conversations, signals and next steps behind your most consequential career moves. A job tracker is built around applications you fire off. Stormpine is built around relationships and long, multi-stage processes, employment, board seats and advisory work alike, and it stays useful between searches, not only during one. <a href="guides.html">Guide: is Stormpine right for me? &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-privacy">
+          <summary>Who can see my data?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>You, and only you, unless you deliberately choose to share something. Stormpine is private by design: there is no public profile, no feed, and no discoverability. Your record is not visible to recruiters, employers or other members. If your organisation offers Stormpine as a benefit, your workspace still stays yours, they never see your pursuits or notes. <a href="trust.html">Read Trust &amp; privacy &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-import">
+          <summary>Can I import my contacts and network?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>Yes. You can add people by hand, bring in a contacts file, or connect LinkedIn and email so the relationships you already have are there from day one. Connections are made on your explicit consent, one source at a time, and you can disconnect any of them whenever you like. <a href="guides.html">Guide: importing your network &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-ai">
+          <summary>How does the AI copilot work?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>The copilot reasons over your own record, not generic career advice. It reads what is in your account to show what is moving versus stalling, flag information that is missing, point to who holds influence in a process, suggest a sensible next step, and prepare a grounded briefing before a conversation. Every suggestion is tied to something already in your account, so you can see why it was made. <a href="guides.html">Guide: working with the copilot &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-training">
+          <summary>Is my data used to train AI models?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>No. Your career record is not used to train models, and it is not shared with other members. The copilot uses your data only to help you, inside your own account. This is a deliberate line: the whole point of a private career system is that it stays private. <a href="trust.html">More on how your data is handled &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-types">
+          <summary>Does it handle board seats and advisory roles, not just jobs?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>Yes, and that is central to the design. An opportunity in Stormpine can be an employment move, a board seat or an advisory assignment, each with its own timeline and stages. Board and advisory pursuits run for months and are almost entirely relationship-led, so they are treated as first-class, not bolted onto a jobs tool. <a href="guides.html">Guide: board &amp; advisory pursuits &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-export">
+          <summary>Can I export or delete everything?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>Yes. Your record is yours: you can export your data, and you can delete your account and its contents. We build Stormpine with European data residency in mind, in keeping with its Nordic-first footing and GDPR. If you ever need a hand with an export or a deletion, the team will help. <a href="privacy.html">Read the privacy policy &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-beta">
+          <summary>What does the beta include, and what does it cost?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>Stormpine is free while in beta, and no card is required to start. You get the full working product, and your feedback genuinely shapes what we build next. When paid plans arrive, we will tell you well in advance, nothing will start charging by surprise. <a href="pricing.html">See plans &amp; pricing &rarr;</a></p>
+          </div>
+        </details>
+
+        <details id="faq-language">
+          <summary>Is Stormpine available in Danish?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>The product is in English today, with Danish coming. Stormpine is Nordic-native by design, built around the way recruiters, a-kasser and board searches actually work here, so a Danish experience is on the near roadmap rather than a distant maybe.</p>
+          </div>
+        </details>
+
+        <details id="faq-cancel">
+          <summary>How do I cancel, and what happens to my record?
+            <svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+          <div class="ans">
+            <p>You can leave at any time from your account settings. Because Stormpine is meant to be durable, a record you keep across a whole career, you can export everything first, and there is no penalty for stepping away and coming back for your next move.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <p class="hlp-noresult" id="faqNoResult">No matches. Try a different word, or <a href="contact.html">ask the team directly</a>.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT / ESCALATION -->
+  <section class="divider">
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;margin-bottom:24px">
+        <span class="eyebrow" style="display:block;margin-bottom:10px">Still stuck?</span>
+        <h2 style="max-width:22ch;margin-inline:auto">Talk to a person, not a queue</h2>
+      </div>
+      <div class="hlp-contact reveal">
+        <div class="hlp-cc pri">
+          <h3>Email the team</h3>
+          <p>A small team that actually knows the product, and treats what you share with the discretion the work deserves. Tell us what you are trying to do and we will help you do it.</p>
+          <a class="btn pri" href="mailto:support@stormpine.com">support@stormpine.com</a>
+          <ul class="hlp-meta">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> We aim to reply within one business day</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Your message is kept private to the team</li>
+          </ul>
+        </div>
+        <div class="hlp-cc">
+          <h3>Other ways in</h3>
+          <p>Prefer to explore first, or here on behalf of an organisation? Start where it suits you.</p>
+          <ul class="hlp-links" style="margin-top:4px">
+            <li><a href="contact.html" style="--tc:var(--accent)">Contact page &amp; enquiries</a></li>
+            <li><a href="guides.html" style="--tc:var(--accent)">Guides &amp; playbooks</a></li>
+            <li><a href="organisations.html" style="--tc:var(--accent)">For organisations &amp; partners</a></li>
+            <li><a href="trust.html" style="--tc:var(--accent)">Trust &amp; privacy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
+
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
+<script>
+  /* Prototype help search: light client-side filter over the FAQ.
+     Real search (in-app command palette + indexed articles) is deferred to the production build. */
+  (function(){
+    var input = document.getElementById('hlpSearch');
+    var list  = document.getElementById('faqList');
+    var none  = document.getElementById('faqNoResult');
+    if(!input || !list) return;
+    var items = [].slice.call(list.querySelectorAll('details'));
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      var terms = q ? q.split(/\s+/) : [];
+      var shown = 0;
+      items.forEach(function(d){
+        var hay = d.textContent.toLowerCase();
+        /* match every term (AND), so "is my data private" finds the privacy answer */
+        var hit = !q || terms.every(function(t){ return hay.indexOf(t) !== -1; });
+        d.style.display = hit ? '' : 'none';
+        if(hit && q) d.open = true;
+        if(!q) d.open = false;
+        if(hit) shown++;
+      });
+      if(none) none.classList.toggle('show', shown === 0);
+    });
+    /* Opening a FAQ from a popular chip or topic link should expand it and clear any filter. */
+    function openFromHash(){
+      var id = location.hash.slice(1);
+      if(!id) return;
+      var el = document.getElementById(id);
+      if(el && el.tagName === 'DETAILS'){ el.open = true; }
+    }
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
+  })();
+</script>
 </body>
 </html>
