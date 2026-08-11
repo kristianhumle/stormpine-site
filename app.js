@@ -118,7 +118,7 @@
         '</div>' +
         '<a class="nav-top" href="pricing.html"'+cur('pricing')+'>Pricing</a>' +
         '<div class="has-mega">' +
-          '<a class="nav-top" href="guides.html"'+cur('resources')+'>Resources <span class="caret">'+icon('caret')+'</span></a>' +
+          '<a class="nav-top" href="resources.html"'+cur('resources')+'>Resources <span class="caret">'+icon('caret')+'</span></a>' +
           '<div class="mega product"><div class="mega-inner">' +
             mItem('guide','Guides &amp; playbooks','Executive-grade craft for board, advisory and recruiter work.','guides.html') +
             mItem('link','Integrations','How Stormpine connects to LinkedIn and email, on your consent.','integrations.html') +
@@ -158,6 +158,7 @@
           '<li><a href="organisations.html">Outplacement</a></li>' +
           '<li><a href="organisations.html">Coaches</a></li></ul></div>' +
         '<div><h4>Resources</h4><ul>' +
+          '<li><a href="resources.html">Resources overview</a></li>' +
           '<li><a href="guides.html">Guides &amp; playbooks</a></li>' +
           '<li><a href="integrations.html">Integrations</a></li>' +
           '<li><a href="help.html">Help &amp; support</a></li></ul></div>' +
