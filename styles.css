@@ -493,3 +493,94 @@ section{padding:clamp(56px,8vw,104px) 0}
   .jny-rail::before{display:none}
   .jny-node{flex:0 0 74px}
 }
+
+/* ==========================================================================
+   Article / content pages (Guides examples: playbook, guide, checklist, template)
+   Per-page accent set via --art-accent (playbook=accent, guide=lilac,
+   checklist=amber, template=good). Uses shared tokens, flips with theme.
+   ========================================================================== */
+.article{padding-top:clamp(30px,5vw,52px)}
+.art-back{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:.86rem;font-weight:600}
+.art-back:hover{color:var(--accent)}
+.art-head{padding-bottom:clamp(24px,4vw,36px);border-bottom:1px solid var(--border)}
+.art-kicker{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-family:var(--mono);
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--art-accent,var(--accent))}
+.art-kicker .d{width:8px;height:8px;border-radius:2px;background:var(--art-accent,var(--accent));flex:none}
+.article h1{font-size:clamp(1.9rem,4vw,2.7rem);margin:14px 0 0;max-width:22ch}
+.art-lead{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--muted);line-height:1.55;margin-top:16px;max-width:60ch}
+.art-meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:.82rem;color:var(--faint)}
+.art-meta b{color:var(--text);font-weight:600}
+.art-body{max-width:720px;margin:0 auto}
+.art-body > p{color:var(--muted);line-height:1.75;margin-top:16px}
+.art-body h2{font-size:1.4rem;margin:40px 0 0;letter-spacing:-.02em}
+.art-body h3{font-size:1.08rem;margin:28px 0 0}
+.art-body h2 + p,.art-body h3 + p{margin-top:12px}
+.art-body ul,.art-body ol{color:var(--muted);line-height:1.7;margin-top:14px;padding-left:20px}
+.art-body li{margin-top:7px}
+.art-body strong{color:var(--text);font-weight:640}
+
+/* two-column layout with a sticky, scroll-synced table of contents */
+.art-layout{display:grid;grid-template-columns:230px minmax(0,720px);gap:clamp(30px,5vw,64px);
+  justify-content:center;align-items:start}
+@media (max-width:940px){.art-layout{grid-template-columns:minmax(0,720px);justify-content:center}}
+.art-toc{position:sticky;top:calc(var(--nav-h) + 40px)}
+@media (max-width:940px){.art-toc{display:none}}
+.art-toc .lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+  color:var(--faint);margin-bottom:14px}
+.art-toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;display:flex;flex-direction:column;gap:1px}
+.art-toc a{display:flex;gap:10px;align-items:baseline;padding:9px 0 9px 15px;border-left:2px solid var(--border);
+  color:var(--faint);font-size:.9rem;line-height:1.35;transition:color .15s ease,border-color .15s ease}
+.art-toc a::before{counter-increment:toc;content:counter(toc,decimal-leading-zero);
+  font-family:var(--mono);font-size:.72rem;color:inherit;flex:none}
+.art-toc a:hover{color:var(--muted)}
+.art-toc a.active{color:var(--text);border-left-color:var(--art-accent,var(--accent))}
+
+/* summary / callout box */
+.art-box{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);
+  box-shadow:var(--shadow-sm);padding:22px 24px;margin-top:28px}
+.art-box .lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+  color:var(--faint);margin-bottom:12px}
+.art-box.accent{background:linear-gradient(180deg,
+  color-mix(in srgb,var(--art-accent,var(--accent)) 8%,var(--surface)),var(--surface));
+  border-color:color-mix(in srgb,var(--art-accent,var(--accent)) 30%,var(--border))}
+.art-box ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.art-box li{display:flex;gap:11px;color:var(--muted);line-height:1.5;margin:0}
+.art-box .ck{color:var(--art-accent,var(--accent));font-weight:700;flex:none}
+.art-box p{color:var(--muted);line-height:1.65;margin:0}
+
+/* numbered step */
+.art-step{display:flex;gap:16px;margin-top:36px;scroll-margin-top:calc(var(--nav-h) + 44px)}
+.art-step .n{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-family:var(--mono);font-weight:600;color:var(--art-accent,var(--accent));
+  border:1px solid color-mix(in srgb,var(--art-accent,var(--accent)) 40%,var(--border));
+  background:color-mix(in srgb,var(--art-accent,var(--accent)) 10%,transparent)}
+.art-step .stx{min-width:0}
+.art-step h2{margin:3px 0 0;font-size:1.2rem}
+.art-step p{color:var(--muted);line-height:1.7;margin-top:10px}
+
+/* pull quote */
+.art-quote{border-left:3px solid var(--art-accent,var(--accent));padding:4px 0 4px 20px;margin-top:30px;
+  font-size:1.15rem;line-height:1.5;color:var(--text);font-style:italic}
+
+/* interactive checklist */
+.art-check{list-style:none;padding:0;margin-top:14px;display:flex;flex-direction:column;gap:0}
+.art-check li{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border);
+  color:var(--text);cursor:pointer;line-height:1.45}
+.art-check .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border);flex:none;
+  margin-top:1px;display:grid;place-items:center;color:#fff;font-size:.7rem;transition:.15s}
+.art-check li.done .box{background:var(--good);border-color:var(--good)}
+.art-check li.done .tx{color:var(--muted);text-decoration:line-through}
+.art-check .tx small{display:block;color:var(--muted);font-size:.85rem;margin-top:3px;text-decoration:none}
+
+/* template field */
+.art-field{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:16px 18px;margin-top:14px}
+.art-field .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;
+  color:var(--art-accent,var(--accent));margin-bottom:9px}
+.art-field .hint{color:var(--muted);font-size:.86rem;line-height:1.5;margin-bottom:11px}
+.art-field .fill{border:1px dashed color-mix(in srgb,var(--art-accent,var(--accent)) 40%,var(--border));
+  border-radius:8px;padding:11px 13px;color:var(--faint);font-size:.9rem;background:var(--elevated)}
+
+/* end nav */
+.art-end{margin-top:46px;padding-top:30px;border-top:1px solid var(--border);text-align:center}
+.art-end h3{font-size:1.2rem}
+.art-end p{color:var(--muted);margin-top:10px}

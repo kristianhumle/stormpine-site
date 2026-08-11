@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference-ready before you need it · Checklist · Stormpine</title>
+<meta name="description" content="A checklist for lining up referees early, so a fast final round never catches you flat-footed.">
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+<div id="site-header" data-active="resources"></div>
+
+<main class="article" style="--art-accent:var(--amber)">
+  <section style="padding-bottom:0">
+    <div class="wrap narrow art-head">
+      <a class="art-back" href="guides.html">← Guides &amp; playbooks</a>
+      <span class="art-kicker"><span class="d"></span> Checklist</span>
+      <h1>Reference-ready before you need it.</h1>
+      <p class="art-lead">Executive references are asked for late and needed fast. Line them up while things are calm, so a final round that moves quickly never catches you flat-footed.</p>
+      <div class="art-meta"><span><b>9</b> checks</span><span>Updated <b>Aug 2026</b></span><span>Tick as you go</span></div>
+    </div>
+  </section>
+
+  <section style="padding-top:clamp(28px,4vw,44px)">
+    <div class="wrap">
+      <div class="art-body">
+
+        <p>The reference stage is where a strong process can wobble. It arrives at the end, when you are busy and the timeline is tight, and a scramble to find the right people, or a referee caught off guard, undoes weeks of good impressions. The fix is simple: prepare before you need it. Work through the list below and tick each item off.</p>
+
+        <h3>Choose your referees</h3>
+        <ul class="art-check" id="checklist">
+          <li><span class="box">✓</span><span class="tx">Map three to five potential referees across different chapters of your career<small>A former chair or board member, a CEO you reported to, a peer, a direct report.</small></span></li>
+          <li><span class="box">✓</span><span class="tx">Cover the competencies this role will probe<small>Make sure between them they can speak to strategy, delivery, and how you lead people.</small></span></li>
+          <li><span class="box">✓</span><span class="tx">Check for any conflicts or discretion issues<small>Avoid referees still inside a current employer if your search is confidential.</small></span></li>
+        </ul>
+
+        <h3>Prepare them</h3>
+        <ul class="art-check">
+          <li><span class="box">✓</span><span class="tx">Ask each one, properly, and confirm they are willing<small>A quick call, not a surprise. Willing referees speak with warmth; ambushed ones sound flat.</small></span></li>
+          <li><span class="box">✓</span><span class="tx">Brief them on the role and what matters<small>A short note on the position and the two or three themes you would love them to reinforce.</small></span></li>
+          <li><span class="box">✓</span><span class="tx">Confirm current contact details and best way to reach them<small>Direct line or personal email, and the times they are reachable.</small></span></li>
+        </ul>
+
+        <h3>Keep it current</h3>
+        <ul class="art-check">
+          <li><span class="box">✓</span><span class="tx">Note when you last spoke to each referee<small>A referee you have not contacted in two years needs a warm-up before you need the reference.</small></span></li>
+          <li><span class="box">✓</span><span class="tx">Give the search consultant a clean, ready list when asked<small>Names, roles, relationship to you, and contact details, in one place, on request.</small></span></li>
+          <li><span class="box">✓</span><span class="tx">Thank them afterwards, and keep the relationship warm<small>Today's referee is tomorrow's sponsor. Close the loop and stay in touch.</small></span></li>
+        </ul>
+
+        <div class="art-box">
+          <div class="lbl">How this lives in Stormpine</div>
+          <p>Stormpine keeps your referees as first-class relationships, tracks when you last spoke to each, and lets you produce a clean, briefed list the moment a search consultant asks, without hunting through your contacts.</p>
+        </div>
+
+        <div class="art-end">
+          <h3>This is an example checklist.</h3>
+          <p>A preview of the craft in the Stormpine library. Explore the rest, or keep your own relationships ready in one private system.</p>
+          <div class="hero-cta" style="justify-content:center;margin-top:18px">
+            <a class="btn pri" href="https://app.stormpine.com">Start free</a>
+            <a class="btn" href="guides.html">Back to all guides</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="app.js" defer></script>
+<script>
+  /* Illustrative check-off: toggle .done on click. Nothing persists. */
+  (function(){
+    var items = [].slice.call(document.querySelectorAll('.art-check li'));
+    if (!items.length) return;
+    items.forEach(function(li){
+      li.setAttribute('role','button'); li.setAttribute('tabindex','0');
+      function toggle(){ li.classList.toggle('done'); }
+      li.addEventListener('click', toggle);
+      li.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
+    });
+  })();
+</script>
+</body>
+</html>
