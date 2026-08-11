@@ -12,10 +12,22 @@
   .wf-intro{text-align:center}
   .wf-intro .pill-tag{margin-bottom:18px}
 
-  /* Self-selection strip */
-  .wf-select{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  @media (max-width:860px){.wf-select{grid-template-columns:repeat(2,1fr)}}
+  /* Self-selection: two audience tracks (individual situations + organisations) */
+  .wf-audiences{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);gap:18px;align-items:stretch}
+  @media (max-width:900px){.wf-audiences{grid-template-columns:1fr}}
+  .wf-track{display:flex;flex-direction:column}
+  .wf-track-label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;
+    font-weight:600;color:var(--muted);margin-bottom:12px}
+  .wf-track-label.alt{color:var(--accent)}
+  .wf-select{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;flex:1}
   @media (max-width:520px){.wf-select{grid-template-columns:1fr}}
+  /* Organisations card: label sits outside (like "For you"); box fills the column */
+  .wf-orgcard{display:flex;flex-direction:column;gap:10px;flex:1;padding:22px;
+    border:1px solid var(--border);border-radius:var(--radius);
+    background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 6%,var(--surface)),var(--surface))}
+  .wf-orgcard h3{font-size:1.12rem;letter-spacing:-.01em;margin:0}
+  .wf-orgcard p{color:var(--muted);font-size:.9rem;line-height:1.5;margin:0}
+  .wf-orgcard .btn{align-self:flex-start;margin-top:auto}
   .wf-pick{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--border);
     border-radius:var(--radius);background:var(--surface);text-decoration:none;color:var(--text);
     transition:border-color .18s ease,transform .18s ease}
@@ -50,13 +62,16 @@
     font-size:.82rem;color:var(--faint);font-style:italic;line-height:1.55}
 
   /* "Not built for" list */
-  .wf-not{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px 26px}
-  @media (max-width:640px){.wf-not{grid-template-columns:1fr}}
-  .wf-not li{display:flex;gap:11px;color:var(--muted);font-size:.95rem;line-height:1.45}
-  .wf-not .x{color:var(--faint);font-weight:700;flex:none}
-
-  .wf-orgs{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
-  @media (max-width:640px){.wf-orgs{flex-direction:column;align-items:flex-start}}
+  /* Built-for / not-built-for split (green "do", red "don't") */
+  .wf-rails{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:720px){.wf-rails{grid-template-columns:1fr}}
+  .wf-rail{border:1px solid var(--border);border-radius:var(--radius);padding:22px;background:var(--surface)}
+  .wf-rail h3{display:flex;align-items:center;gap:9px;margin-bottom:14px;font-size:1rem}
+  .wf-rail ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+  .wf-rail li{font-size:.92rem;color:var(--muted);line-height:1.45;display:flex;gap:11px;align-items:flex-start}
+  .mk{flex:none;font-weight:700;line-height:1.45}
+  .mk.y{color:var(--good)}
+  .mk.n{color:var(--coral)}
 </style>
 </head>
 <body>
@@ -78,34 +93,47 @@
     </div>
   </section>
 
-  <!-- SELF-SELECTION STRIP -->
+  <!-- SELF-SELECTION: individual situations + organisations, side by side -->
   <section style="padding-top:clamp(28px,4vw,44px)">
     <div class="wrap">
-      <div class="wf-select reveal">
-        <a class="wf-pick wf-anchor" href="#transition" style="--wf-accent:var(--accent)">
-          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h13.5M12 6.5l6 5.5-6 5.5"/></svg></span>
-          <b>Active transition</b>
-          <span class="sub">Several live leadership opportunities at once.</span>
-          <span class="go">This is me ↓</span>
-        </a>
-        <a class="wf-pick wf-anchor" href="#board" style="--wf-accent:var(--lilac)">
-          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="7" height="7" rx="1.2"/><rect x="13.5" y="4" width="7" height="7" rx="1.2"/><rect x="3.5" y="13" width="7" height="7" rx="1.2"/><rect x="13.5" y="13" width="7" height="7" rx="1.2"/></svg></span>
-          <b>Board &amp; advisory</b>
-          <span class="sub">Long, relationship-led board and advisory pursuits.</span>
-          <span class="go">This is me ↓</span>
-        </a>
-        <a class="wf-pick wf-anchor" href="#open" style="--wf-accent:var(--amber)">
-          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
-          <b>Quietly open</b>
-          <span class="sub">Keeping relationships warm, not yet searching.</span>
-          <span class="go">This is me ↓</span>
-        </a>
-        <a class="wf-pick wf-anchor" href="#placed" style="--wf-accent:var(--lilac)">
-          <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 21V4.5M5.5 5h11l-2 3 2 3h-11"/></svg></span>
-          <b>Recently placed</b>
-          <span class="sub">Preserve the context you just built.</span>
-          <span class="go">This is me ↓</span>
-        </a>
+      <div class="wf-audiences reveal">
+        <div class="wf-track">
+          <span class="wf-track-label">For you</span>
+          <div class="wf-select">
+            <a class="wf-pick wf-anchor" href="#transition" style="--wf-accent:var(--accent)">
+              <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h13.5M12 6.5l6 5.5-6 5.5"/></svg></span>
+              <b>Active transition</b>
+              <span class="sub">Several live leadership opportunities at once.</span>
+              <span class="go">This is me ↓</span>
+            </a>
+            <a class="wf-pick wf-anchor" href="#board" style="--wf-accent:var(--lilac)">
+              <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.6"/><circle cx="12" cy="4.6" r="1.7"/><circle cx="19" cy="15.6" r="1.7"/><circle cx="5" cy="15.6" r="1.7"/><path d="M12 7.2v2.2"/><path d="M13.9 13.4 17.3 15"/><path d="M10.1 13.4 6.7 15"/></svg></span>
+              <b>Board &amp; advisory</b>
+              <span class="sub">Long, relationship-led board and advisory pursuits.</span>
+              <span class="go">This is me ↓</span>
+            </a>
+            <a class="wf-pick wf-anchor" href="#open" style="--wf-accent:var(--amber)">
+              <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+              <b>Quietly open</b>
+              <span class="sub">Keeping relationships warm, not yet searching.</span>
+              <span class="go">This is me ↓</span>
+            </a>
+            <a class="wf-pick wf-anchor" href="#placed" style="--wf-accent:var(--good)">
+              <span class="pm"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.5h10a1 1 0 0 1 1 1V20l-6-3.8L6 20V5.5a1 1 0 0 1 1-1z"/></svg></span>
+              <b>Recently placed</b>
+              <span class="sub">Preserve the context you just built.</span>
+              <span class="go">This is me ↓</span>
+            </a>
+          </div>
+        </div>
+        <div class="wf-track">
+          <span class="wf-track-label alt">For organisations</span>
+          <aside class="wf-orgcard">
+            <h3>Supporting leaders through a transition?</h3>
+            <p>A-kasser and associations, outplacement providers and coaches can offer Stormpine to the people they support, as a private career benefit or a digital backbone between sessions.</p>
+            <a class="btn" href="organisations.html">For organisations →</a>
+          </aside>
+        </div>
       </div>
     </div>
   </section>
@@ -190,7 +218,7 @@
       </div>
 
       <!-- 4 · Recently placed -->
-      <div class="wf-block wf-anchor" id="placed" style="--wf-accent:var(--lilac)">
+      <div class="wf-block wf-anchor" id="placed" style="--wf-accent:var(--good)">
         <div class="feature flip reveal">
           <div class="feature-copy">
             <span class="wf-tag"><span class="d"></span> Recently placed</span>
@@ -233,38 +261,69 @@
     </div>
   </section>
 
-  <!-- NOT BUILT FOR (honesty) -->
+  <!-- BUILT FOR / NOT BUILT FOR (honesty split) -->
   <section class="divider">
-    <div class="wrap narrow">
-      <div class="band reveal">
-        <span class="eyebrow" style="display:block;margin-bottom:12px">Where Stormpine is the wrong tool</span>
-        <h2 style="max-width:22ch">A focused instrument for a few high-stakes moves, not a volume machine.</h2>
-        <p class="section-sub" style="margin-top:14px">Being clear about what this is not is part of the point. Stormpine is deliberately not built for:</p>
-        <ul class="wf-not">
-          <li><span class="x">✕</span> High-volume applying: hundreds of roles, autofilled and fired off</li>
-          <li><span class="x">✕</span> Entry-level or early-career job hunting</li>
-          <li><span class="x">✕</span> Recruiters managing candidates: this is built from the leader's side of the table</li>
-          <li><span class="x">✕</span> Anyone who wants a public profile: Stormpine is private by design</li>
-        </ul>
-        <p class="section-sub" style="margin-top:18px">
-          If that is what you need, an application tracker will serve you better. Stormpine is for the handful of moves that actually shape a career.
-        </p>
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;margin-bottom:30px">
+        <span class="eyebrow" style="display:block;margin-bottom:12px">Where Stormpine fits, and where it doesn&#39;t</span>
+        <h2 style="max-width:24ch;margin:0 auto">A focused instrument for a few high-stakes moves, not a volume machine.</h2>
+        <p class="section-sub" style="margin:14px auto 0;max-width:56ch">Being clear about what this is, and isn&#39;t, is part of the point.</p>
       </div>
+      <div class="wf-rails reveal">
+        <div class="wf-rail">
+          <h3><span class="mk y">✓</span> Built for</h3>
+          <ul>
+            <li><span class="mk y">✓</span> A handful of high-stakes moves: a director role, a board seat, an advisory brief</li>
+            <li><span class="mk y">✓</span> The leader running their own search, from their side of the table</li>
+            <li><span class="mk y">✓</span> Long, relationship-led pursuits that unfold over months</li>
+            <li><span class="mk y">✓</span> A private, durable career record you own and keep between moves</li>
+          </ul>
+        </div>
+        <div class="wf-rail">
+          <h3><span class="mk n">✕</span> Not built for</h3>
+          <ul>
+            <li><span class="mk n">✕</span> High-volume applying: hundreds of roles, autofilled and fired off</li>
+            <li><span class="mk n">✕</span> Entry-level or early-career job hunting</li>
+            <li><span class="mk n">✕</span> Recruiters managing candidates and their pipeline</li>
+            <li><span class="mk n">✕</span> Anyone who wants a public profile: Stormpine is private by design</li>
+          </ul>
+        </div>
+      </div>
+      <p class="section-sub reveal" style="margin:24px auto 0;max-width:60ch;text-align:center">
+        If that is what you need, an application tracker will serve you better. Stormpine is for the handful of moves that actually shape a career.
+      </p>
     </div>
   </section>
 
-  <!-- FOR ORGANISATIONS POINTER -->
+  <!-- JOURNEY BAND (condensed → full interactive journey on product.html) -->
   <section class="divider">
-    <div class="wrap narrow">
-      <div class="band wf-orgs reveal">
-        <div>
-          <span class="eyebrow">For organisations</span>
-          <h3 style="margin:12px 0 6px">Supporting leaders through a transition?</h3>
-          <p class="section-sub" style="margin-top:0">
-            A-kasser and associations, outplacement providers and coaches can offer Stormpine to the people they support, as a private career benefit or a digital backbone between sessions.
-          </p>
+    <div class="wrap">
+      <div class="jny-band reveal">
+        <div class="jny-band-head">
+          <div style="max-width:46ch">
+            <span class="eyebrow">The arc of a move</span>
+            <h2 style="margin-top:12px">From first conversation to your next move.</h2>
+            <p class="section-sub" style="margin-top:12px">A director, board or advisory move runs for months: parallel processes, a web of stakeholders, materials and high-stakes decisions, all riding on relationships and momentum. Stormpine supports each stage.</p>
+          </div>
+          <div class="jny-switch" aria-label="Pursuit type (New role shown)">
+            <button class="on" type="button">New role</button>
+            <button class="soon" type="button" aria-disabled="true" title="Coming soon">Board seat</button>
+            <button class="soon" type="button" aria-disabled="true" title="Coming soon">Advisory</button>
+          </div>
         </div>
-        <a class="btn" href="organisations.html" style="flex:none">For organisations →</a>
+        <div class="jny-rail" aria-hidden="true">
+          <span class="jny-node"><span class="jny-dot">0</span><span class="jny-lbl">Positioning</span></span>
+          <span class="jny-node"><span class="jny-dot">1</span><span class="jny-lbl">Sourcing</span></span>
+          <span class="jny-node"><span class="jny-dot">2</span><span class="jny-lbl">Screening</span></span>
+          <span class="jny-node"><span class="jny-dot">3</span><span class="jny-lbl">Interviews</span></span>
+          <span class="jny-node"><span class="jny-dot">4</span><span class="jny-lbl">Assessment</span></span>
+          <span class="jny-node"><span class="jny-dot">5</span><span class="jny-lbl">References</span></span>
+          <span class="jny-node" data-amber><span class="jny-dot">6</span><span class="jny-lbl">Offer &amp; contract</span></span>
+          <span class="jny-node"><span class="jny-dot">7</span><span class="jny-lbl">Staying connected</span></span>
+        </div>
+        <div class="jny-band-cta" style="display:flex;justify-content:center;margin-top:28px">
+          <a class="btn lg" href="product.html">See how each stage works →</a>
+        </div>
       </div>
     </div>
   </section>
