@@ -235,6 +235,42 @@
   @media(max-width:720px){.pvww{grid-template-columns:1fr}}
   @media(max-width:720px){.pvws-cols{grid-template-columns:1fr;gap:16px}.pvjny-rail{overflow-x:auto;justify-content:flex-start;gap:20px}.pvjny-rail::before{display:none}.pvjny-node{flex:0 0 64px}}
 
+  /* ---- integration connection rows (integrations page) ---- */
+  .pvig-list{display:flex;flex-direction:column;gap:12px;width:100%}
+  .pvig-row{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start;
+    border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:16px}
+  .pvig-row.soon{background:color-mix(in srgb,var(--panel) 55%,var(--surface))}
+  .pvig-logo{width:44px;height:44px;border-radius:11px;flex:none;display:grid;place-items:center;background:#fff;border:1px solid var(--border)}
+  .pvig-logo svg{width:26px;height:26px;display:block}
+  .pvig-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .pvig-name{font-size:1rem;font-weight:640;letter-spacing:-.02em}
+  .pvig-cat{font-family:var(--mono);font-size:.62rem;color:var(--faint);text-transform:uppercase;letter-spacing:.1em}
+  .pvig-desc{color:var(--muted);font-size:.82rem;line-height:1.5;margin:8px 0 0}
+  .pvig-brings{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
+  .pvig-brings li{display:flex;gap:8px;font-size:.8rem;color:var(--muted);line-height:1.45}
+  .pvig-brings .bk{color:var(--accent);font-weight:700;flex:none}
+  .pvig-flag{display:inline-flex;gap:7px;margin-top:11px;padding:8px 10px;border-radius:9px;font-size:.76rem;line-height:1.4;color:var(--muted);background:var(--panel);border:1px solid var(--border)}
+  .pvig-flag b{color:var(--text);font-weight:600}
+  .pvig-side{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex:none}
+  .pvstatus{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+  .pvstatus .sd{width:6px;height:6px;border-radius:50%}
+  .pvstatus.on{color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent);border-color:color-mix(in srgb,var(--green) 32%,transparent)}
+  .pvstatus.on .sd{background:var(--green)}
+  .pvstatus.beta{color:var(--amber);background:color-mix(in srgb,var(--amber) 13%,transparent);border-color:color-mix(in srgb,var(--amber) 34%,transparent)}
+  .pvstatus.beta .sd{background:var(--amber)}
+  .pvstatus.soon{color:var(--faint);background:var(--panel);border-color:var(--border)}
+  .pvstatus.soon .sd{background:var(--faint)}
+  .pvstatus-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .pvig-split{display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%;max-width:620px}
+  .pvig-split h4{margin:0 0 10px;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+  .pvig-split .yes h4{color:var(--green)}
+  .pvig-split .never h4{color:var(--coral)}
+  .pvig-ylist,.pvig-nlist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .pvig-ylist li,.pvig-nlist li{display:flex;gap:9px;font-size:.82rem;color:var(--muted);line-height:1.45}
+  .pvig-ylist .ck{color:var(--green);font-weight:700;flex:none}
+  .pvig-nlist .nx{color:var(--coral);font-weight:700;flex:none}
+  @media(max-width:640px){.pvig-row{grid-template-columns:auto 1fr}.pvig-side{grid-column:1 / -1;flex-direction:row;align-items:center}.pvig-split{grid-template-columns:1fr;gap:16px}}
+
   /* ============ hero-concept stages (moved in from Hero concepts) ============ */
   .stage{position:relative;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
     background:radial-gradient(90% 70% at 50% -8%,var(--glow),transparent 62%),var(--surface);
@@ -414,6 +450,8 @@
       <li><a href="#doclinks">Document links grid</a><span class="badge proposed">Proposed</span></li>
       <li><a href="#footer">Footer</a><span class="badge production">Production</span></li>
       <li><a href="#workswith">Capability map ("Works with")</a><span class="badge production">Production</span></li>
+      <li><a href="#igrow">Integration connection row</a><span class="badge proposed">Proposed</span></li>
+      <li><a href="#igsplit">Do / never split</a><span class="badge proposed">Proposed</span></li>
     </ul>
   </section>
 
@@ -1172,6 +1210,94 @@
           <div class="pvww-card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.8 4.8 1.7-4.8 1.7L12 16l-1.7-4.8L5.5 9.5l4.8-1.7z"/><path d="M18.5 15l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z"/></svg></span><b>Intelligence</b><span class="d">Grounded analysis over your own record, not generic advice.</span></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== INTEGRATION CONNECTION ROWS ===== -->
+  <section class="element" id="igrow">
+    <div class="element-head"><h2>Integration connection row</h2><span class="badge proposed">Proposed</span><span class="where">integrations · connection directory</span></div>
+    <p class="edesc">A curated directory row for each external connection: brand logo tile, name and category, a short description, a "what it brings in" list, a privacy callout, and a state pill. There is no per-row CTA (the connection is made in-app, not from the marketing page). Used on the Integrations page in place of a searchable marketplace, because Stormpine connects a deliberately small set of tools and goes deep on each.</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">PROPOSED</span><h3>Directory rows</h3><span class="k">Live on the Integrations prototype; needs an <code>integrationsSection</code> type for the production renderer.</span></div>
+      <div class="estage tall"><div class="pvig-list">
+
+        <div class="pvig-row">
+          <span class="pvig-logo" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#4285F4" d="M3.6 47h7.9V27.9L0 19.4v24C0 45.4 1.6 47 3.6 47z"/>
+              <path fill="#34A853" d="M40.5 47h7.9c2 0 3.6-1.6 3.6-3.6v-24l-11.5 8.5z"/>
+              <path fill="#FBBC04" d="M40.5 8.6v19.3L52 19.4v-9.1c0-5.1-5.8-8-9.9-4.9z"/>
+              <path fill="#EA4335" d="M11.5 27.9V8.6L26 19.4 40.5 8.6v19.3L26 38.7z"/>
+              <path fill="#C5221F" d="M0 10.3v9.1l11.5 8.5V8.6L9.9 5.4C5.8 2.3 0 5.2 0 10.3z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="pvig-head"><span class="pvig-name">Gmail</span><span class="pvig-cat">Email</span></div>
+            <p class="pvig-desc">Match email activity to the right contact and opportunity, so your relationships stay current without you logging a thing.</p>
+            <ul class="pvig-brings">
+              <li><span class="bk">+</span> Contact activity, who you spoke to and when</li>
+              <li><span class="bk">+</span> Momentum signals that flag which processes have gone quiet</li>
+            </ul>
+            <div class="pvig-flag"><span aria-hidden="true">🔒</span><span><b>Metadata, not messages.</b> Message bodies stay in your inbox.</span></div>
+          </div>
+          <div class="pvig-side"><span class="pvstatus on"><span class="sd"></span> Available</span></div>
+        </div>
+
+        <div class="pvig-row soon">
+          <span class="pvig-logo" aria-hidden="true">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="48" rx="9" fill="#0A66C2"/>
+              <path fill="#fff" d="M14 19.5h4.9V34H14zM16.5 12a2.85 2.85 0 1 1 0 5.7 2.85 2.85 0 0 1 0-5.7zM21.6 19.5h4.7v2h.1c.66-1.2 2.27-2.5 4.67-2.5 5 0 5.93 3.15 5.93 7.25V34h-4.9v-6.6c0-1.57-.03-3.6-2.2-3.6s-2.53 1.7-2.53 3.48V34h-4.9z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="pvig-head"><span class="pvig-name">LinkedIn</span><span class="pvig-cat">Network &amp; Profile</span></div>
+            <p class="pvig-desc">Bring your own LinkedIn in, on your terms. Import your profile, history and first-degree connections to seed your CRM from day one. Brought in by you, not scraped from the network.</p>
+            <ul class="pvig-brings">
+              <li><span class="bk">+</span> Your history and network, imported by you as a portability right</li>
+              <li><span class="bk">+</span> A baseline CV and bio, built from your own work history</li>
+            </ul>
+            <div class="pvig-flag"><span aria-hidden="true">🇪🇺</span><span><b>Your data, your right.</b> Built on EU data-portability, into a system you own.</span></div>
+          </div>
+          <div class="pvig-side"><span class="pvstatus soon"><span class="sd"></span> Coming soon</span></div>
+        </div>
+
+      </div></div>
+    </div>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">PROPOSED</span><h3>Connection state pills</h3><span class="k">Three states carry availability without a personal "connected" claim on a marketing page.</span></div>
+      <div class="estage"><div class="pvstatus-row">
+        <span class="pvstatus on"><span class="sd"></span> Available</span>
+        <span class="pvstatus beta"><span class="sd"></span> Limited test</span>
+        <span class="pvstatus soon"><span class="sd"></span> Coming soon</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== DO / NEVER SPLIT ===== -->
+  <section class="element" id="igsplit">
+    <div class="element-head"><h2>Do / never split</h2><span class="badge proposed">Proposed</span><span class="where">integrations · LinkedIn boundary</span></div>
+    <p class="edesc">A two-column boundary statement: what a feature will do (green checks) beside what it will never do (coral crosses). It draws an explicit data boundary in the reader's eye, used for the LinkedIn self-import concept, and reusable anywhere a capability needs a clear "and not this" line.</p>
+    <div class="opt">
+      <div class="opt-label"><span class="tag">PROPOSED</span><h3>Will / will never</h3><span class="k">A framing pattern, not a new renderer type: two feature lists inside a band.</span></div>
+      <div class="estage"><div class="pvig-split">
+        <div class="yes">
+          <h4>What it will do</h4>
+          <ul class="pvig-ylist">
+            <li><span class="ck">✓</span> Seed your profile on day one with your existing data.</li>
+            <li><span class="ck">✓</span> Import your first-degree connections as contacts you already know.</li>
+            <li><span class="ck">✓</span> Keep your own posts and activity as private signals.</li>
+          </ul>
+        </div>
+        <div class="never">
+          <h4>What it will never do</h4>
+          <ul class="pvig-nlist">
+            <li><span class="nx">✕</span> Look up or enrich other people from a LinkedIn URL.</li>
+            <li><span class="nx">✕</span> Monitor anyone else's job changes, posts or moves.</li>
+            <li><span class="nx">✕</span> Scrape the network or buy scraped data from a broker.</li>
+          </ul>
+        </div>
+      </div></div>
     </div>
   </section>
 

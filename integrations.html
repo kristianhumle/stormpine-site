@@ -5,21 +5,360 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Integrations · Stormpine</title>
-<meta name="description" content="How Stormpine connects to the tools your career already lives in, LinkedIn and email, always on your consent, always your own data.">
+<meta name="description" content="How Stormpine connects to the tools your career already lives in, email, calendar and LinkedIn, always on your explicit consent and only your own data.">
 <link rel="stylesheet" href="styles.css?v=3">
+<style>
+  /* Page-scoped styles for the Integrations prototype */
+  .intg-hero{text-align:center}
+  .intg-hero .pill-tag{margin-bottom:18px}
+
+  /* Connection rows (curated directory, not a searchable marketplace) */
+  .intg-list{display:flex;flex-direction:column;gap:16px}
+  .intg-row{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:start;
+    padding:24px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);
+    transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+  .intg-row:hover{border-color:color-mix(in srgb,var(--accent) 34%,var(--border));
+    transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+  .intg-row.soon{background:color-mix(in srgb,var(--elevated) 55%,var(--surface))}
+  @media (max-width:760px){
+    .intg-row{grid-template-columns:auto 1fr;gap:16px}
+    .intg-side{grid-column:1 / -1;flex-direction:row;align-items:center;justify-content:space-between}
+  }
+  @media (max-width:460px){.intg-row{grid-template-columns:1fr}}
+
+  /* Brand logo tile (logos need a light plate in both themes) */
+  .intg-logo{width:56px;height:56px;border-radius:13px;flex:none;display:grid;place-items:center;
+    background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+  .intg-logo svg{width:32px;height:32px;display:block}
+
+  .intg-main{min-width:0}
+  .intg-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .intg-name{font-size:1.14rem;font-weight:640;letter-spacing:-.02em}
+  .intg-cat{font-family:var(--mono);font-size:.72rem;color:var(--faint);
+    text-transform:uppercase;letter-spacing:.1em}
+  .intg-desc{color:var(--muted);font-size:.95rem;line-height:1.6;margin-top:10px;max-width:62ch}
+  .intg-brings{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:8px}
+  .intg-brings li{display:flex;gap:9px;font-size:.9rem;color:var(--muted);line-height:1.5}
+  .intg-brings .bk{color:var(--accent);font-weight:700;flex:none}
+  .intg-flag{display:inline-flex;gap:8px;margin-top:14px;padding:9px 12px;border-radius:10px;
+    font-size:.85rem;line-height:1.45;color:var(--muted);
+    background:var(--elevated);border:1px solid var(--border)}
+  .intg-flag b{color:var(--text);font-weight:600}
+
+  /* Status pill + side action */
+  .intg-side{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex:none}
+  @media (max-width:460px){.intg-side{align-items:flex-start}}
+  .status{display:inline-flex;align-items:center;gap:7px;font-size:.76rem;font-weight:600;
+    padding:5px 11px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+  .status .sd{width:6px;height:6px;border-radius:50%}
+  .status.on{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent);
+    border-color:color-mix(in srgb,var(--good) 32%,transparent)}
+  .status.on .sd{background:var(--good)}
+  .status.beta{color:var(--amber);background:color-mix(in srgb,var(--amber) 13%,transparent);
+    border-color:color-mix(in srgb,var(--amber) 34%,transparent)}
+  .status.beta .sd{background:var(--amber)}
+  .status.soon{color:var(--faint);background:var(--elevated);border-color:var(--border)}
+  .status.soon .sd{background:var(--faint)}
+
+  /* Non-goal marker (used in the LinkedIn boundary columns) */
+  .no-list{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:12px}
+  .no-list li{display:flex;gap:11px;color:var(--muted);font-size:.96rem;line-height:1.5}
+  .no-list .nx{color:var(--coral);font-weight:700;flex:none}
+
+  /* Two-column do / never grid inside a band */
+  .intg-split{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}
+  @media (max-width:640px){.intg-split{grid-template-columns:1fr;gap:18px}}
+  .intg-split h4{margin:0;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;font-weight:640}
+  .intg-split .yes h4{color:var(--good)}
+  .intg-split .never h4{color:var(--coral)}
+
+  /* Step numerals */
+  .st-n{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);
+    font-weight:640;font-size:.9rem;color:var(--accent);margin-bottom:14px;
+    border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));
+    background:color-mix(in srgb,var(--accent) 10%,transparent)}
+</style>
 </head>
 <body>
 <div id="site-header" data-active="resources"></div>
+
 <main>
-  <section class="stub">
+
+  <!-- HERO -->
+  <section class="intg-hero">
     <div class="wrap narrow">
-      <span class="pill-tag tag"><span class="dot"></span> Planned page · Resources</span>
-      <h1 style="margin-top:8px">Integrations</h1>
-      <p class="lead" style="margin-top:16px">Where Stormpine connects to the tools your career already lives in, LinkedIn and email, always on your explicit consent and only your own data. This page will cover what each integration brings in, how to connect or disconnect it, and the privacy boundary behind it.</p>
-      <div class="hero-cta"><a class="btn" href="index.html">← Back to home</a></div>
+      <span class="pill-tag reveal"><span class="dot"></span> Resources · Integrations</span>
+      <h1 class="reveal" style="max-width:17ch;margin-inline:auto">Connect the tools your career already runs on.</h1>
+      <p class="lead reveal" style="max-width:60ch;margin:20px auto 0">
+        Stormpine plugs into your email, calendar and LinkedIn so your record stays current on its own,
+        with none of the copy-paste. Every connection is made by you, touches only your own data,
+        and can be switched off in a click.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="#boundary">See the privacy boundary</a>
+      </div>
+      <p class="hero-note reveal">On your explicit consent · Only your own data · Disconnect anytime</p>
     </div>
   </section>
+
+  <!-- THE CONNECTIONS -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:32px">
+      <span class="eyebrow">Available connections</span>
+      <h2 style="max-width:24ch;margin:12px auto 0">Connections that earn their keep.</h2>
+      <p class="section-sub" style="margin:14px auto 0">
+        We connect the few tools where a leader's career actually lives, and go deep on each,
+        rather than list a hundred logos.
+      </p>
+    </div>
+
+    <div class="wrap">
+      <div class="intg-list">
+
+        <!-- GMAIL -->
+        <div class="intg-row reveal">
+          <span class="intg-logo" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#4285F4" d="M3.6 47h7.9V27.9L0 19.4v24C0 45.4 1.6 47 3.6 47z"/>
+              <path fill="#34A853" d="M40.5 47h7.9c2 0 3.6-1.6 3.6-3.6v-24l-11.5 8.5z"/>
+              <path fill="#FBBC04" d="M40.5 8.6v19.3L52 19.4v-9.1c0-5.1-5.8-8-9.9-4.9z"/>
+              <path fill="#EA4335" d="M11.5 27.9V8.6L26 19.4 40.5 8.6v19.3L26 38.7z"/>
+              <path fill="#C5221F" d="M0 10.3v9.1l11.5 8.5V8.6L9.9 5.4C5.8 2.3 0 5.2 0 10.3z"/>
+            </svg>
+          </span>
+          <div class="intg-main">
+            <div class="intg-head">
+              <span class="intg-name">Gmail</span>
+              <span class="intg-cat">Email</span>
+            </div>
+            <p class="intg-desc">
+              Match email activity to the right contact and opportunity, so your relationships and
+              processes stay current without you logging a thing. Stormpine sees who you corresponded
+              with and when, never what you wrote.
+            </p>
+            <ul class="intg-brings">
+              <li><span class="bk">+</span> Contact activity, who you spoke to and when, matched to each relationship</li>
+              <li><span class="bk">+</span> Momentum signals that flag which processes have gone quiet</li>
+              <li><span class="bk">+</span> Metadata only, so the contents of your messages are never read</li>
+            </ul>
+            <div class="intg-flag">
+              <span aria-hidden="true">🔒</span>
+              <span><b>Metadata, not messages.</b> Stormpine reads envelope details to match contacts. Message bodies stay in your inbox.</span>
+            </div>
+          </div>
+          <div class="intg-side">
+            <span class="status on"><span class="sd"></span> Available</span>
+          </div>
+        </div>
+
+        <!-- GOOGLE CALENDAR -->
+        <div class="intg-row reveal">
+          <span class="intg-logo" aria-hidden="true">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect x="9" y="9" width="30" height="30" rx="3" fill="#fff"/>
+              <path fill="#4285F4" d="M9 12a3 3 0 0 1 3-3h4v7H9z"/>
+              <path fill="#EA4335" d="M32 9h4a3 3 0 0 1 3 3v4h-7z"/>
+              <path fill="#FBBC04" d="M32 32h7v4a3 3 0 0 1-3 3h-4z"/>
+              <path fill="#34A853" d="M9 32h7v7h-4a3 3 0 0 1-3-3z"/>
+              <path fill="#4285F4" d="M16 16h16v16H16z" opacity="0"/>
+              <text x="24" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#4285F4">31</text>
+            </svg>
+          </span>
+          <div class="intg-main">
+            <div class="intg-head">
+              <span class="intg-name">Google Calendar</span>
+              <span class="intg-cat">Calendar</span>
+            </div>
+            <p class="intg-desc">
+              Match meetings to the contacts and opportunities they belong to, so prep lands before a
+              conversation and follow-ups line up with your pipeline afterwards.
+            </p>
+            <ul class="intg-brings">
+              <li><span class="bk">+</span> Meeting history matched to each relationship and process</li>
+              <li><span class="bk">+</span> Upcoming conversations surfaced next to the record they touch</li>
+              <li><span class="bk">+</span> Same Google account as Gmail, so it is one consent, not two</li>
+            </ul>
+            <div class="intg-flag">
+              <span aria-hidden="true">🔗</span>
+              <span><b>One Google connection.</b> Calendar shares the same consent as Gmail, so connecting one covers both.</span>
+            </div>
+          </div>
+          <div class="intg-side">
+            <span class="status on"><span class="sd"></span> Available</span>
+          </div>
+        </div>
+
+        <!-- LINKEDIN (coming soon) -->
+        <div class="intg-row soon reveal">
+          <span class="intg-logo" aria-hidden="true">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="48" rx="9" fill="#0A66C2"/>
+              <path fill="#fff" d="M14 19.5h4.9V34H14zM16.5 12a2.85 2.85 0 1 1 0 5.7 2.85 2.85 0 0 1 0-5.7zM21.6 19.5h4.7v2h.1c.66-1.2 2.27-2.5 4.67-2.5 5 0 5.93 3.15 5.93 7.25V34h-4.9v-6.6c0-1.57-.03-3.6-2.2-3.6s-2.53 1.7-2.53 3.48V34h-4.9z"/>
+            </svg>
+          </span>
+          <div class="intg-main">
+            <div class="intg-head">
+              <span class="intg-name">LinkedIn</span>
+              <span class="intg-cat">Network & Profile</span>
+            </div>
+            <p class="intg-desc">
+              Bring your own LinkedIn in, on your terms. Import your profile, career history and
+              first-degree connections to seed your CRM from day one, so you never start from a blank
+              slate. Brought in by you, not scraped from the network.
+            </p>
+            <ul class="intg-brings">
+              <li><span class="bk">+</span> Your history and network, imported by you as a portability right</li>
+              <li><span class="bk">+</span> A baseline CV and bio, built from your own work history to tailor per role</li>
+              <li><span class="bk">+</span> Your own activity kept as private signals, never anyone else's</li>
+            </ul>
+            <div class="intg-flag">
+              <span aria-hidden="true">🇪🇺</span>
+              <span><b>Your data, your right.</b> Built on EU data-portability, so your own LinkedIn record ports cleanly into a system you own.</span>
+            </div>
+          </div>
+          <div class="intg-side">
+            <span class="status soon"><span class="sd"></span> Coming soon</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="section-sub reveal" style="text-align:center;margin:22px auto 0;font-size:.88rem;color:var(--faint)">
+        Every connection is optional. Stormpine is fully usable with nothing connected at all.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW CONNECTING WORKS -->
+  <section class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:34px">
+      <span class="eyebrow">How connecting works</span>
+      <h2 style="max-width:22ch;margin:12px auto 0">You are in control at every step.</h2>
+    </div>
+    <div class="wrap">
+      <div class="grid-3">
+        <div class="card reveal">
+          <span class="st-n">1</span>
+          <h3>Authorise</h3>
+          <p>Connect a tool through its own consent screen. You see exactly what Stormpine may access, and you approve it yourself.</p>
+        </div>
+        <div class="card reveal">
+          <span class="st-n">2</span>
+          <h3>We match, never harvest</h3>
+          <p>Stormpine links the right signals to the right contacts and opportunities. Your data stays inside your record and goes nowhere else.</p>
+        </div>
+        <div class="card reveal">
+          <span class="st-n">3</span>
+          <h3>Disconnect anytime</h3>
+          <p>Turn any connection off in Settings in one click. What you imported stays yours, to keep or to delete.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY BOUNDARY (centerpiece) -->
+  <section id="boundary" class="divider">
+    <div class="wrap narrow">
+      <div class="band reveal">
+        <span class="eyebrow" style="display:block;margin-bottom:12px">The data boundary</span>
+        <h2 style="max-width:24ch">Integrations that read your world, never other people's.</h2>
+        <p class="section-sub" style="margin-top:14px;max-width:64ch">
+          Stormpine is built from the individual's side of the table. Connections exist to keep your own
+          record current, not to surveil a market or enrich a stranger. That line is deliberate, and it
+          is what makes the whole thing trustworthy.
+        </p>
+        <ul class="feature-list" style="margin:22px 0 0;max-width:640px">
+          <li><span class="ck">✓</span> You connect each integration yourself, and can disconnect it whenever you like.</li>
+          <li><span class="ck">✓</span> Stormpine only ever touches your own data, never other people's profiles or inboxes.</li>
+          <li><span class="ck">✓</span> Email is matched by metadata; the contents of your messages are never read.</li>
+          <li><span class="ck">✓</span> No scraping, no monitoring of third parties, no data brokers in the loop.</li>
+          <li><span class="ck">✓</span> GDPR-first and Nordic by design, your record stays private to you.</li>
+        </ul>
+        <div class="hero-cta" style="margin-top:24px">
+          <a class="btn" href="trust.html">See our trust &amp; privacy approach →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKEDIN SPOTLIGHT -->
+  <section id="linkedin" class="divider">
+    <div class="sec-head reveal" style="text-align:center;margin-bottom:30px">
+      <span class="eyebrow">Coming soon · LinkedIn</span>
+      <h2 style="max-width:24ch;margin:12px auto 0">Your LinkedIn, brought in by you. Not scraped from it.</h2>
+      <p class="section-sub" style="margin:14px auto 0">
+        LinkedIn is where recruiters, headhunters and board networks live, so it is the obvious thing to
+        connect. The compliant, on-brand way to do it is to let you port your own data in, not to mine
+        the network for everyone else's.
+      </p>
+    </div>
+    <div class="wrap narrow">
+      <div class="band reveal">
+        <div class="intg-split">
+          <div class="yes">
+            <h4>What it will do</h4>
+            <ul class="feature-list" style="margin-top:16px">
+              <li><span class="ck">✓</span> Seed your profile on day one with your existing data.</li>
+              <li><span class="ck">✓</span> Import your first-degree connections as contacts you already know.</li>
+              <li><span class="ck">✓</span> Draft a baseline CV and bio from your real history, ready to tailor per role.</li>
+              <li><span class="ck">✓</span> Keep your own posts and activity as private signals for your copilot.</li>
+            </ul>
+          </div>
+          <div class="never">
+            <h4>What it will never do</h4>
+            <ul class="no-list">
+              <li><span class="nx">✕</span> Look up or enrich other people from a LinkedIn URL.</li>
+              <li><span class="nx">✕</span> Monitor anyone else's job changes, posts or moves.</li>
+              <li><span class="nx">✕</span> Scrape the network or buy scraped data from a broker.</li>
+              <li><span class="nx">✕</span> Put your own LinkedIn account at any risk to do it.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="intg-flag" style="margin-top:24px">
+          <span aria-hidden="true">🇪🇺</span>
+          <span><b>Why a Nordic launch has the edge.</b> EU data-portability rules give members a real, sanctioned route to move their own LinkedIn data into an app they choose. Stormpine is built to use exactly that route.</span>
+        </div>
+        <div class="hero-cta" style="margin-top:22px">
+          <a class="btn pri" href="contact.html">Get notified when LinkedIn lands</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP / REQUEST -->
+  <section class="divider">
+    <div class="wrap narrow">
+      <div class="band reveal" style="text-align:center">
+        <span class="eyebrow">On the roadmap</span>
+        <h2 style="max-width:24ch;margin:12px auto 0">We add connections that serve your record.</h2>
+        <p class="section-sub" style="margin:14px auto 0;max-width:58ch">
+          Every integration has to pass one test: does it keep the leader's own career record richer and
+          more current, without crossing the data boundary above? If there is a tool you would connect,
+          we want to hear it.
+        </p>
+        <div class="hero-cta" style="justify-content:center;margin-top:22px">
+          <a class="btn" href="contact.html">Request an integration</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="divider cta">
+    <div class="wrap narrow reveal">
+      <h2>Let your record keep itself.</h2>
+      <p class="lead">Connect email and calendar today, bring your LinkedIn in soon, and let the copilot work from context you never had to type.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn pri lg" href="https://app.stormpine.com">Start free</a>
+        <a class="btn lg" href="product.html">See how it works</a>
+      </div>
+      <p class="hero-note">On your consent · Only your own data · Nordic-native</p>
+    </div>
+  </section>
+
 </main>
+
 <div id="site-footer"></div>
 <script src="app.js" defer></script>
 </body>
