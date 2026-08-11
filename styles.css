@@ -1,11 +1,11 @@
 /* ==========================================================================
-   Stormpine — marketing site prototype
+   Stormpine: marketing site prototype
    Shared design system. Tokens sampled from the live app (app.stormpine.com).
    Dark is the primary/brand mode; light is the system-toggle variant.
    ========================================================================== */
 
 :root{
-  /* LIGHT (variant) — base tokens */
+  /* LIGHT (variant): base tokens */
   --bg:#fbfbfd; --surface:#ffffff; --elevated:#f4f5f8; --border:#e7e8ee;
   --text:#16171b; --muted:#6b6e78; --faint:#9a9da6;
   --accent:#5662f2; --accent-weak:#ecebfb; --lilac:#7c5cf0;
@@ -302,7 +302,7 @@ section{padding:clamp(56px,8vw,104px) 0}
 .langhint{font-size:.8rem}
 
 /* ==========================================================================
-   App-frame mock — recreates the real product UI in the exact tokens.
+   App-frame mock: recreates the real product UI in the exact tokens.
    Hard-coded per theme so both always read correctly regardless of page theme.
    ========================================================================== */
 /* The frame consumes the page's theme tokens, so it flips with light/dark.
@@ -360,7 +360,7 @@ section{padding:clamp(56px,8vw,104px) 0}
 .app .trow b{font-weight:600}
 
 /* ==========================================================================
-   Value-prop walkthrough — sticky scrollspy (Attio-style)
+   Value-prop walkthrough: sticky scrollspy (Attio-style)
    ========================================================================== */
 .walk2{display:grid;grid-template-columns:210px 1fr;gap:clamp(30px,5vw,64px);align-items:start;margin-top:40px}
 .walk2-nav{position:sticky;top:calc(var(--nav-h) + 26px);display:flex;flex-direction:column;gap:1px}
@@ -422,7 +422,7 @@ section{padding:clamp(56px,8vw,104px) 0}
 }
 
 /* ==========================================================================
-   Journey module — "How a move unfolds" (process / stage view)
+   Journey module: "How a move unfolds" (process / stage view)
    Interactive on product.html; static condensed band elsewhere.
    Uses shared tokens, so it flips with light/dark automatically.
    ========================================================================== */

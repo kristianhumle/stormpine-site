@@ -1,4 +1,4 @@
-/* Stormpine site — shared header/footer injection + behaviour
+/* Stormpine site: shared header/footer injection + behaviour
    (theme toggle, mega-menu nav, mobile nav, scroll reveal, value-prop walkthrough) */
 (function () {
   var root = document.documentElement;
